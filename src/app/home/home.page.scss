@@ -1,27 +1,74 @@
-#container {
+#frontPage{
+  // background-image: url('');
+  ion-toolbar{
+      height: 90px;
+      padding: 5%;
+      text-align: center;
+      --background: white;
+      img{
+          // margin: 0 auto;
+          height: 60px;
+          // margin-top: -30px;
+      }
+  }
+}
+.frontscreen{
+  height: 100%;
+  width: 100%;
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  // background: url('/assets/HomePage/ShopDoorLock.jpg');
+  // background: url('/assets/HomePage/smartxhome2.jpeg');
+  background: url('/assets/HomePage/tandthome2.jpg');
+  // background: url('/assets/HomePage/sara_background3.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  ion-grid{
+      height: 100%;
+      ion-row{
+          height: 25%;
+          ion-col{
+              height: 100%;
+          }
+      }
+  }
+}
+.regi_btn{
+  margin: 0 auto;
+  width: 70%;
+  --background: #3b3c3e;
+  border: 1px solid white;
+}
+.signin{
+  --background: #3b3c3e;
+  
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+
+.top{
+  // background-image: url("/assets/front.jpg");
+  // background-attachment: fixed;
+  // background-size: 100%;
+  // background-repeat: no-repeat;
+  // opacity: 0.9;
+  height: 350px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.bottom{
+ // background-color: rgba(19, 113, 126, 0.884);
+  padding: 20px 15px;
 }
-
-#container a {
-  text-decoration: none;
+// .l-r-div{
+//     background-color: rgba(169, 225, 233, 0.884);
+// }
+a{
+  background-color: white;
+}
+.register, .login{
+  background-color: rgb(225, 245, 247);
+  border-radius: 20px;
+  text-align: center;
+  padding: 8px;
+  margin-top: 8px;
+  box-shadow: 2px 2px rgb(205, 170, 238);
 }

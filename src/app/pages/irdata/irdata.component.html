@@ -1,0 +1,89 @@
+<!-- <ion-header>
+  <ion-toolbar style="--background: rgb(245, 248, 248); ">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/ir-remote"  style="color: black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;font-size: 15px;text-transform: uppercase;">
+      ir data collection
+    </ion-title>   
+  </ion-toolbar>
+</ion-header> -->
+<ion-header translucent >
+  <ion-toolbar style="--background: #f7f4fae6;">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/ir-remote" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
+      </ion-buttons>
+    <ion-title style="color: rgba(0, 0, 0, 0.568);" class="ion-text-center">Tam data collection</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-card class="opCard">
+  <ion-grid>
+    <ion-row>
+      <ion-col style="width: 70px;"><ion-button (click)='tvpowerClick()' class="tvpower"><ion-icon name="desktop"></ion-icon></ion-button><br> <ion-label class="tvpower">Tv_Power</ion-label></ion-col>
+      <ion-col style="width: 70px;"> <ion-button (click)='powerClick()' class="power"><ion-icon name="power"></ion-icon></ion-button><br> <ion-label class="power">Power</ion-label> </ion-col>
+      <ion-col style="width: 70px;"> <ion-button (click)='menuClick()' class="menu"><ion-icon name="menu"></ion-icon></ion-button><br> <ion-label class="menu">Menu</ion-label> </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size='4'><div style="display: inline-grid;
+        border: 2px solid #dad2d2;
+        border-radius: 29px;
+        height: 161px;  
+        width: 68px;text-align: center;
+    align-items: center;"><ion-icon style="padding-left: 19px;
+    font-size: 32px;
+    padding-top: 3px;" name='add' (click)='voiceplus()' class="voiceplus"></ion-icon><label>Voice</label><ion-icon style="padding-left: 19px;
+    font-size: 32px;
+    padding-top: 3px;" name='remove' (click)='voiceminus()' class="voiceminus"></ion-icon></div></ion-col>
+
+<ion-col size='4'><div><ion-button ><ion-icon name="undo" src="assets/iconi5/arrow-undo-sharp.svg" ></ion-icon></ion-button> <br><ion-button ><ion-icon name="md-arrow-up" src="assets/iconi5/arrow-up-outline.svg" ></ion-icon></ion-button> </div></ion-col>
+<ion-col size='4'><div style="display: inline-grid;
+  border: 2px solid #dad2d2;
+  border-radius: 29px;
+  height: 161px;  
+  width: 68px;text-align: center;
+align-items: center;"><ion-icon style="padding-left: 19px;
+font-size: 32px;
+padding-top: 3px;" name='add' (click)='channelplus()' class="channelplus"></ion-icon><label>Channel</label><ion-icon style="padding-left: 19px;
+font-size: 32px;
+padding-top: 3px;" name='remove' (click)='channelminus()' class="channelminus"></ion-icon></div></ion-col>
+    </ion-row>
+    
+     <ion-row >
+       <ion-col>
+      <div id="div_center" style="
+      height: 161px;
+      border-radius: 50%; 
+      border: 2px solid #dad2d2;
+      
+      width: 161px;"> 
+      <div style="display: inline-grid;" > <ion-col><ion-icon style="margin-top:5px;font-size: 20px;" (click)='caretup()' class="caretup" src="assets/iconi5/caret-up-outline.svg" ></ion-icon></ion-col>
+        <ion-col style="margin-top: 28px;" (click)='okclick()'><ion-label>OK</ion-label></ion-col> 
+        <ion-col><ion-icon (click)='caretdown()' class="caretdown" style="margin-top: 35px;font-size: 20px;" src="assets/iconi5/caret-down-outline.svg"></ion-icon></ion-col>
+        
+      </div>
+        <div style="margin-top: -86px;"> <ion-col><ion-icon style="margin-right: 86px;font-size: 20px;" (click)='caretback()' class="caretback" src="assets/iconi5/caret-back-outline.svg" name='caret-back-outline'></ion-icon></ion-col>
+         <!-- <ion-col><ion-label>ok</ion-label></ion-col>  -->
+          <ion-col><ion-icon  style="font-size: 20px;" (click)='caretforward()' class="caretforward" src="assets/iconi5/caret-forward-outline.svg"></ion-icon></ion-col></div>  
+      </div>
+    </ion-col>
+     </ion-row>
+     <ion-row>
+      <ion-col style="width: 70px;" (click)='irunmber()'><ion-button ><ion-label>123</ion-label></ion-button><br> <ion-label>Number</ion-label></ion-col>
+      <ion-col  style="width: 70px;"> </ion-col>
+      <ion-col  style="width: 70px;" (click)='irextra()'> <ion-button ><ion-icon name="more" src="assets/iconi5/ellipsis-vertical-sharp.svg" ></ion-icon></ion-button><br> <ion-label>More</ion-label> </ion-col>
+    </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- <ion-card *ngIf='user.acshow'>
+    <ion-list>
+      <ion-item>
+        <ion-label>AC data not available for data collection</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card> -->
+  </ion-content>
+   
+  

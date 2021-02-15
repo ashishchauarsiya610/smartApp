@@ -1,0 +1,191 @@
+ion-slide.swiper-slide-active #p{
+    background-color:#80b3ff;
+    height:28px;
+    text-align: center;
+    border-radius: 10px;
+    margin:0 5px;
+    padding: 4px;
+    color:white;
+   }
+   
+
+
+   .swiper-slide #p{
+       background-color: rgb(216, 215, 215);
+       height:24px;
+       width:20px;
+       padding: 0px 5px;
+      text-overflow:ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      border-radius:12px;
+   }
+   .swiper-slide img{
+       border-radius:12px;
+    height: 90%;
+    width: 100%;
+}
+
+   .deviceeditback{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90, 90, 90, 0.8);
+    z-index: 9999;
+   }
+//    assets/images/homePage.jpeg
+ion-header{
+    #homeback{
+    --background: linear-gradient(162deg, rgba(56, 70, 108, .8) 20%, rgba(56, 70, 108, .8) 100%), url('../../../assets/images/homePage.jpeg')top no-repeat;
+}
+}   
+   .editdevicecross{
+    font-size: 21px;
+    margin-left: 95%;
+    color: red;
+    background: #e3caca;
+    border-radius: 50%;
+    margin-top: -3%;
+   }
+   .cardfooter{
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+#textdevice{
+    text-align: center;
+    background: #529ddf;
+    border-radius: 28px;
+    height: 34px;
+    padding: 7px 0px;
+    color: white;
+}
+ion-button.editdevicebtn2{
+    width: 90%;
+}
+
+.showDevice{
+    height: 100%;
+    width: 100%;
+    padding: 9px;
+
+    .devCard{
+        width: 41%;
+        height: 20%;
+        float: left;
+        border-radius: 8px;
+        div{
+            height: 56%; padding: 13%; font-size: 13px;
+        }
+    }
+    @media all and (max-width: 720px) and (min-width: 10px){
+        #devimg{
+            width:38px; 
+            margin: 5px; 
+            display: inline;
+        }
+        #ionbtn{
+            float: right; 
+            display: inline; 
+            font-size: 0px; 
+            margin: 5px; 
+            --border-radius: 74px;
+             width: 35px; height: 35px; 
+             padding: 0;  
+             --background: transparent;
+        }
+    }
+   
+    @media all and (max-width: 1960px) and (min-width: 720px){
+        .devCard{
+            width: 46%;
+            height: 36%;
+            float: left;
+            border-radius: 10px;
+            div{
+                height: 76%; padding: 13%; font-size: 13px;
+            }
+            img{
+                margin: 22px 0 0 22px;
+                width:38px; 
+               
+                display: inline;
+            }
+            ion-button{
+                margin: 22px;
+                float: right; 
+                display: inline; 
+                font-size: 0px; 
+                --border-radius: 74px;
+                 width: 35px; height: 35px; 
+                 padding: 0;  
+                 --background: transparent;
+            }
+        }
+    }
+}
+.on{
+    color: rgb(110, 232, 60);
+    --box-shadow: 0px 1px 2px 2px rgba(16, 175, 65, 0.46)
+}
+.off{
+    color: gray;
+}
+.online{
+    color: rgb(163, 60, 232);
+    background-color: green;
+}
+.offline{
+    color: rgb(207, 11, 54);
+    background-color: red;
+}
+// .nameSize{font-size: 15px;}
+@media screen and (max-width:320px){
+    .devCard{
+        width: 39%;
+        height: 20%;
+        float: left;
+        // div{
+        //     font-size: 16px;
+        // }
+    }
+}
+.guestpopup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90,90,90,0.8);
+    z-index: 9999;
+}
+
+.frontscreen{
+    .shadow-red{
+        // box-shadow: 0px 14px 25px rgb(47 37 37);
+        box-shadow: 0px 14px 25px rgb(47, 37, 37);
+        border-radius: 50%;
+        --background: black;
+        height: 81px;
+        width: 81px;
+        text-align: center;
+        margin-top: 19%;
+    }
+  }
+
+
+  @media all and (max-width: 699px) and (min-width: 520px){
+      .devCard{
+        #img devimg{
+            margin: 22px 0 0 22px;
+        }
+        #ion-button ionbtn{
+            margin: 22px;
+        }
+      }
+   
+  }
+

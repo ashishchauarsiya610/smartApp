@@ -1,0 +1,110 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #f7f4fae6;" >
+    <ion-buttons slot="start" *ngIf="button1">
+      <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="text-align: center; color: rgb(71, 71, 71);"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="button2">
+      <ion-back-button defaultHref="/newschedule" style="text-align: center; color: rgb(71, 71, 71);"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="button1" style="text-align: center; color: rgb(71, 71, 71);">Scheduled Device</ion-title>
+    <ion-title *ngIf="button2" style="text-align: center; color: rgb(71, 71, 71);">Select Device</ion-title>
+  </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" style="--background: #f7f4fae6;">
+   <div *ngIf="maincardscheduler" >
+    <ion-card id="maincard" *ngFor="let sd of sdevices1" (click)="setReSchedulertime(sd[0].id,sd[0].name,sd[0].device)">
+      <ion-item >
+        <ion-label>
+      <p>{{sd[0].id}}</p>   
+      <p>{{sd[0].name}}</p>  
+    </ion-label>
+    <ion-label>    
+      <p id="ontime">ON Time: &nbsp;&nbsp;{{sd[0].on_time}}</p>
+      <p id="offtime">OFF Time: &nbsp;{{sd[0].off_time}} </p>
+    </ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button color="success" (click)="getAlldeviceforschedule()">
+        <ion-icon name="alarm"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <!------- All devices show here , only device  -->
+  <div *ngIf="showdevicescheduler">   
+    <ion-card id="maincard"  *ngFor="let sdevice of maindevices">
+      <ion-item (click)="setSchedulertime(sdevice[0].id,sdevice[0].name,sdevice[0].device_type)">
+    <ion-avatar slot="start">
+      <img src="{{sdevice[0].type}}">
+    </ion-avatar>
+    <ion-label>
+      <p >{{sdevice[0].device_type}}</p>     
+    </ion-label>
+    <ion-label>
+      <p>{{sdevice[0].name}}</p>
+    </ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+         <!--------- submit device first time Schedule  -->
+  <div class="deviceeditback" *ngIf="editSchedulerDevice">
+    <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;"> 
+    <ion-card-content > 
+    <div class="editashishdevice" >
+    <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editSchedulerDevice=!editSchedulerDevice"></ion-icon>
+    <h2 id="textdevice">Update Scheduler Timing details</h2> 
+    </div>
+    <div >
+    <ion-item>
+      <ion-label>Start Time</ion-label>
+          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Time</ion-label>
+          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Daily</ion-label>
+      <ion-checkbox color="primary" slot="start" [(ngModel)]="tstatus"></ion-checkbox>
+    </ion-item> 
+    </div>
+    </ion-card-content>
+    <div style="text-align: center;">
+      <ion-button size="small" slot="end" color="success"  type="submit" (click)="submitScheduledDevice()">&nbsp;SUBMIT&nbsp;</ion-button>
+    </div>
+    </ion-card>
+   </div>
+
+     <!---------------- update time to RESCHEDULE TIME  -->
+   <div class="deviceeditback" *ngIf="editScheduledDevice">
+    <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;"> 
+    <ion-card-content > 
+    <div class="editashishdevice" >
+    <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editScheduledDevice=!editScheduledDevice"></ion-icon>
+    <h2 id="textdevice">Schedule Device </h2> 
+    </div>
+    <div >
+    <ion-item>
+      <ion-label>Start Time</ion-label>
+          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Time</ion-label>
+          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Daily</ion-label>
+      <ion-checkbox color="primary" slot="start" [(ngModel)]="tstatus"></ion-checkbox>
+    </ion-item> 
+    </div>
+    </ion-card-content>
+    <div style="text-align: center;">
+       <ion-button size="small" slot="start" color="danger" (click)="deleteScheduledDevice()">&nbsp;&nbsp;DELETE&nbsp;&nbsp;</ion-button>&nbsp;&nbsp;&nbsp;
+      <ion-button size="small" slot="end" color="success"  type="submit" (click)="submitReScheduled()">&nbsp;RESCHEDULE&nbsp;</ion-button>
+    </div>
+    </ion-card>
+   </div>
+  </ion-content>
+  

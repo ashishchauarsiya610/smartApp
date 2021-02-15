@@ -1,5 +1,7 @@
 {
   "name": "dyfosmart",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

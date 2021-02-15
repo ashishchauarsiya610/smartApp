@@ -1,0 +1,28 @@
+.img  {
+    opacity: 0.5;
+    max-width: 95%;
+    max-height: calc(50% - 100px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+  ion-avatar{
+    margin: auto;
+    width: 60px;
+    height: 60px;
+  }
+ion-label p{
+  margin-left: 11px;
+}
+
+.adddevice{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(90,90,90,0.8);
+  z-index: 9999;
+}

@@ -1,0 +1,53 @@
+<ion-header >
+  <ion-toolbar style="--background: #f7f4fae6;height: 70px;">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/mainpage" style="color: black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;text-transform: uppercase;padding-top: 9px;font-size: 17px;">
+      select room
+    </ion-title>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-radio-group (click)="selectOne($event)">  
+        <ion-button expand="full" color="light">YOU MUST CHOOSE ONE OF THEM</ion-button>
+      <ion-item style="margin-top: 13px;">
+        <ion-label>Open Existing Room</ion-label>
+        <ion-radio slot="start" color="success" value="existroom"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Create New Room</ion-label>
+        <ion-radio slot="start" color="success" value="newroom"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <div *ngIf="existroom">
+    <ion-grid style="padding: 5px 0; height: 100%;">
+      <ion-row *ngFor='let r of myRooms' style="height: 25%;" class="container-fluid">
+        <ion-col style="padding: 5px 0; height: 21vh;" >
+          <span style="position: absolute; top: 25px; left: 15px; color: white; font-size: 20px; font-weight: bold; z-index: 2;background-color: #0a0a0a6b; padding: 0px 6px; border-radius: 5px;">
+            {{r.name}}</span>
+          <img (click)='selectexistroom(r.id)' [src]="showRoomType(r.room_type)" height="100%" width="100%" style="filter: blur(0.8px); -webkit-filter: blur(1.0px); border: 1px solid black;">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="newroom">
+    <ion-grid style="padding: 5px 0; height: 100%;">
+      <ion-row *ngFor='let r of rooms' style="height: 25%;" class="container-fluid">
+        <ion-col style="padding: 5px 0; height: 21vh;" >
+          <span style="position: absolute; top: 25px; left: 15px; color: white; font-size: 20px; font-weight: bold; z-index: 2;background-color: #0a0a0a6b; padding: 0px 6px; border-radius: 5px;">
+            {{r.name}}</span>
+          <img  (click)='selectnewroom1(r.name)' src="{{r.imgPath}}" height="100%" width="100%" style="filter: blur(0.8px); -webkit-filter: blur(1.0px); border: 1px solid black;">
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

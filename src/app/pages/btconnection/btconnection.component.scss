@@ -1,0 +1,56 @@
+.operationBox{
+    // padding-top: 30px;
+    padding-top: 97px;
+}
+.statusCard{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.opCard{
+    text-align: center;
+   ion-button{
+    --border-radius: 50%;
+    --background: transparent;
+    // --margin: 0 auto;
+    --color: red;
+    width: 90%;
+    height: 60px;
+    ion-icon{
+        --color: red;
+        font-size: 24px;
+    }
+   }
+
+}
+@media screen and (max-width: 350px){
+    .operationBox{
+        padding-top: 15px;
+    }
+    .opCard{
+        ion-button{
+            height: 50px;
+        }
+    }
+}
+
+.del_lock{
+    font-size: 40px;
+    color: red;
+}
+.tabmenu{
+    ion-row{
+        // border: 1px solid black;
+    }
+    ion-col{
+        padding: 0;
+        // border: 1px solid black;
+        ion-button{
+            margin: 2px;
+            --background: grey;
+            border-radius: 0;
+        }
+    }
+    
+}

@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(245, 248, 248); ">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/favlist"  style="color: black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;text-transform: uppercase;">
+      {{d_name}} Status
+    </ion-title>  
+    <ion-buttons slot="end" >
+      <ion-button (click)="delete_dev(user.moodDevice_id,dd_id)">
+        <ion-icon slot="icon-only" name='trash'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+ 
+<ion-card class="statusCard" *ngFor="let l of lock_response" >
+
+  <img style="width: 100%; height: 100%;" id={{l.id}}  src="{{l.img}}"  (click)="changeStatus($event,l.id,l.status)">
+  
+  
+
+</ion-card>
+<div *ngFor="let m of lock_response">
+    <div *ngIf="(m.status=='1' || m.status=='true') && (m.is_dimmer=='true' || m.is_dimmer=='1') " style="margin-top: 67px;" >
+    <ion-range color="dark" min="{{m.minimum}}" max="{{m.maximum}}" pin="true" id="dimmervalue" (click)="setDimmer(m.device)" value="{{m.dimmer}}"></ion-range>
+  </div>
+</div>
+
+    
+    
+
+</ion-content>

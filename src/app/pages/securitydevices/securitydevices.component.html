@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: rgb(245, 248, 248); ">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/mcategory" style="color: black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;">
+      Security Devices
+    </ion-title>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style=" --background: #d7d8da4a;">
+
+  <ion-card  >
+    <ion-item (click)='addmodule()' detail>
+  <ion-avatar slot="start">
+    <img src="../../../assets/product_image/‌indoorCamera2.png">
+  </ion-avatar>
+  <ion-label >
+    <p >Camera Indoor</p>    
+  </ion-label>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-card  >
+    <ion-item (click)='addmodule()' detail>
+  <ion-avatar slot="start">
+    <img src="../../../assets/product_image/OutdoorCamera1.png">
+  </ion-avatar>
+  <ion-label >
+    <p >Camera Out Door </p>    
+  </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card >
+    <ion-item (click)='clicklockModule()' detail>
+  <ion-avatar slot="start">
+    <img src="../../../assets/product_image/doorlock.png">
+  </ion-avatar>
+  <ion-label>
+    <p >Lock QSL-1</p>    
+  </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card >
+    <ion-item (click)='clickDyfolockModule()' detail>
+  <ion-avatar slot="start">
+    <img src="../../../assets/product_image/doorlock.png">
+  </ion-avatar>
+  <ion-label>
+    <p >Lock DSL-2</p>    
+  </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card >
+    <ion-item  detail (click)="addTTlock()">
+      <ion-avatar slot="start">
+        <img src="../../../assets/product_image/doorlock.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Lock SmartLock-3</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card >
+    <ion-item  detail (click)="addTTlockGateway()">
+      <ion-avatar slot="start">
+        <img src="../../../assets/product_image/doorlock.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Lock Gateway-4</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="light" >
+    <ion-avatar >
+      <!-- <img  src="../../../assets/HomePage/dyfo.png"> -->
+      <!-- <img src="../../../assets/HomePage/smartx.png"> -->
+      <img  src="../../../assets/HomePage/tandt.jpg">
+       <!-- <img  src="../../../assets/dyfo.png"> -->
+      <!-- <img class="profile-set" src="assets/HomePage/sara.jpg"> -->
+      <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->
+      <!-- <img class="profile-set" src="assets/HomePage/"> -->
+    </ion-avatar>
+  </ion-toolbar>
+</ion-footer>

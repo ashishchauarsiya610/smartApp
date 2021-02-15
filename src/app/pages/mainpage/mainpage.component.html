@@ -1,0 +1,414 @@
+<ion-header class="row" class="ion-no-border">
+    <ion-toolbar style="--background: #d7d8da4a;" id="homeback" *ngIf='!user.showDevice' style="--background: url('../../../assets/images/tandthome3.jpg') 0 0/100% 100% no-repeat; ">
+        <ion-buttons slot="start" (click)="openMenu()" ion-button menuToggle slot="start" style=" background-color: transparent; color: gray;">
+          <ion-menu-button style="color: white;font-size: 2.8em;margin-left: 5px;margin-top: 2px;"></ion-menu-button>
+        </ion-buttons>
+      <ion-title style="color: white;font-size: 15px;">Welcome,{{user.username}}</ion-title>
+    </ion-toolbar>
+ 
+  <ion-toolbar style="--background: #f7f4fae6;" id="dev_head" *ngIf='user.showDevice'>
+    <ion-buttons slot="start" (click)='user.showDevice= !user.showDevice;user.showRoom = !user.showRoom;' >
+      <ion-button>
+       
+        <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+   
+    <ion-buttons slot="end" style="width: 40px;">
+      <ion-button (click)="refresh_room(devPageRoomId,user.roomnm)"   >
+        <ion-icon slot="icon-only" name='refresh' ></ion-icon>      
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" >
+      <ion-button (click)="roomedit_Delete(show,devPageRoomId,user.roomnm)"  (click)="$event.stopPropagation()" >
+        <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical" (click)="roomedit_Delete(show,devPageRoomId,user.roomnm)"  (click)="$event.stopPropagation()" ></ion-icon>      
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title style="color: rgba(0, 0, 0, 0.568);font-size: 15px;" class="ion-text-center">{{user.roomnm}}</ion-title>
+   
+  </ion-toolbar>
+  
+
+</ion-header>
+<app-side-menu></app-side-menu>
+
+<ion-content style="margin-top: 15px;">
+
+  <div class="frontscreen container-fluid" style="text-align: center;overflow: hidden;height: 100%;" *ngIf="nodevice">
+    <div style="margin-top: 125px;height: 100%;" ion-fixed>
+      <span style="font-size: 20px;">Welcome to T&amp;T</span>
+      <p style="color: #4c4a48;">Start a smarter life with T&amp;T Home Automation </p>
+      <ion-button expand="round" class="shadow-red" (click)="gotomodulepage()"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+      <h6 style="color: #4c4a48;">add device</h6>
+    </div>
+   
+    
+  </div>
+<!-- ..........TO SHOW ROOMS................... -->
+  <ion-grid *ngIf="user.showRoom" style="padding: 5px 0; height: 100%;">
+    <ion-row style="height: 22%;" class="container-fluid">
+      <ion-col *ngFor='let r of myRooms'  style="padding: 2px 0; height: 100%;border: 3px solid white;" size="6" class="ion-align-self-start" >
+        <span style="position: absolute; top: 10px; left: 4px; color: white; font-size: 15px; font-weight: bold; z-index: 2;background-color: #0a0a0a6b; padding: 0px 6px; border-radius: 5px;">
+          {{r.name}}</span>
+        <img (click)='openDevices(r.id,r.name)' [src]="showRoomType(r.room_type)" height="100%" width="100%" style="border-radius: 8px;background-size: cover;object-fit: resize;">
+        <!-- <img src="../../../assets/images/festival.jpg">  -->
+      </ion-col>
+    </ion-row>
+    
+  </ion-grid>
+
+
+
+  
+  
+
+<!-- ................................................. -->
+  <div *ngIf='user.showDevice' class="container-fluid showDevice">
+    <!--....NORMAL DEVICES....... if {{r.is_online}} value is show true then card will be enabled and if value will show false then card will be Disabled..for checking value show in card not in console   ....true will show with offline text also...in false condition offline text will not show  .-->
+    <!-- user.device_inRoom  -->
+    <ion-card class="devCard" *ngFor="let r of user.device_inRoom;let d of normalDevs"  id='deviceid'  >
+      <img id="devimg" src="{{this.showIcon(r.device_type)}}" style="">
+      <!-- <ion-button *ngIf="!r.is_online" id='ion-btn' (click)="changeStatus($event, r.device, r.status);" [ngClass]="r.status == 'True' ? 'on':'off'" style="float: right; display: inline; font-size: 0px; margin: 5px; --border-radius: 74px; width: 35px; height: 35px; padding: 0;  --background: transparent;">
+        <ion-icon style="font-size: 33px;" name='power' ></ion-icon>
+      </ion-button> -->
+      <ion-button  id='ionbtn' (click)="changeStatus($event, r.device, r.status);" [ngClass]="r.status == 'True' ? 'on':'off'" style="">
+        <ion-icon style="font-size: 33px;" name='power' ></ion-icon>
+      </ion-button>
+      <!-- <p *ngIf='r.is_online' style="float: right; display: inline; width: 65px; height: 35px; padding: 0; font-size: 16px;">offline</p> -->
+      <div (click)="clickdeviceforstatus(r.device,r.status,r.device_name,d.id)">
+        <span >{{r.device_name}}</span>
+      </div>     
+    </ion-card>
+  
+
+    
+  
+     <!-- ---Lock device  -->
+    <ion-card class="devCard" *ngFor="let l of lockDevs">     
+        <img src="../../../assets/icon/lock.png" style="width:38px; margin: 5px; display: inline;">  
+        <ion-button (click)="deleteblelockdevicefromroom(l.id)"  style="float: right; display: inline; font-size: 0px; margin: 5px; --border-radius: 74px; width: 35px; height: 35px; padding: 0;  --background: transparent;color: black;">
+          <ion-icon   style="font-size: 33px;" name='trash' ></ion-icon>
+        </ion-button>
+        <!-- <div *ngFor="let l of lockDevs"> -->
+        <div (click)="lockclick(l.serial_number,l.serial_info)">
+          <span style="text-transform: uppercase;" >{{l.serial_number}}<br>(door lock) </span>     
+        </div> 
+      <!-- </div>        -->
+    </ion-card>
+    <!--....MOOD DEVICES..........................-->
+    <ion-card class="devCard" *ngFor="let md of moodDevices1" (click)="togetmoodColor(md[0].id)">
+      <img src="{{md[0].type}}" style="width:38px; margin: 5px; display: inline;">
+      <ion-button (click)="deletemooddevicefromroom(md[0].id)"  style="float: right; display: inline; font-size: 0px; margin: 5px; --border-radius: 74px; width: 35px; height: 35px; padding: 0;  --background: transparent;color: black;">
+        <ion-icon style="font-size: 33px;" name='trash' ></ion-icon>
+      </ion-button>
+      <div >
+        <span style="text-transform: uppercase;">{{md[0].name}}</span>
+      </div>
+    </ion-card>
+    <!--....IR DEVICES............................-->
+    <ion-card class="devCard" *ngFor="let rem of value" >
+      <img src="{{rem[0].type}}" style="width:38px; margin: 5px; display: inline;">
+      <ion-button (click)="deleteIRDevice(rem[0].id)" style="float: right; display: inline; font-size: 0px; margin: 5px; --border-radius: 74px; width: 35px; height: 35px; padding: 0;  --background: transparent;color: black;">
+        <ion-icon   style="font-size: 33px;" name='trash' ></ion-icon>
+      </ion-button>
+      <div>
+        <span style="text-transform: uppercase;" (click)="showRemote(rem[0].product_name,rem[0].remote,rem[0].pi_id,rem[0].company_name)">{{rem[0].product_name}} <br> ({{rem[0].company_name}})</span>     
+      </div>     
+    </ion-card>
+  </div>
+
+
+
+
+  <!-- richa and ashish ka code............. -->
+  <!-- <div *ngIf="myRooms && room1.length!=0 ">
+    <div class="row" fullscreen scroll-y="false" class="ion-padding">
+      <ion-slides #slider pager="false" [options]="slideOpt" (ionSlideDidChange)="slideChanged()" pager="true">
+        <ion-slide class="slide" style="text-align: center; width: 328px;" *ngFor="let r of room1">
+          <ion-grid>
+            <ion-row>
+              <ion-col id="p">
+                {{r.name}}
+              </ion-col>
+            </ion-row>
+            <ion-row style="margin-top: -4.8px;">
+              <ion-col>
+                <img [src]="r.type">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div> -->
+  
+  
+  <!-- <div *ngIf="deviceInformation">
+    <div *ngFor="let r of name">
+      <ion-card style="text-align: center; border-radius: 20px;height:83px;">
+        <div style="float: initial;margin-left:13px;margin-top: 24px;">
+          {{r[0].name}}
+          <img src="{{r[0].type}}" style="width:38px;margin-top: -30px;">
+          <ion-icon ios="ios-more" md="md-more" (click)="editDevice(r[0].id,r[0].roomId)"
+            style="float:right;font-size:2.2em;margin-top:-8.5%;margin-left:-38%;"></ion-icon>
+          <ion-toggle slot="end" style="float: right;margin-top: -35px;zoom: 0.8;right:9%" [(ngModel)]="r[0].status"
+            checked="{{r[0].status}}" (ionChange)="changeStatus(r[0].id)"></ion-toggle>
+        </div>
+        <div *ngIf="r[0].show && r[0].status" style="margin-top: -32px; margin-left: 6px;">
+          <ion-range style="margin-top: 7px;" min="{{r[0].min}}" max="{{r[0].max}}" value="{{r[0].value}}" pin
+            color="secondary" id="dimmervalue" (ionChange)="setDimmer(r[0].id)">
+          </ion-range>
+        </div>
+      </ion-card>
+    </div> -->
+    <!-- <div *ngFor="let r of value">
+      <ion-card style="text-align: center; border-radius: 20px;height:83px;">
+        <div style="float: initial;margin-left:13px;margin-top: 24px;"
+          (click)="showRemote(r[0].product_name,r[0].remote,r[0].pi_id)">
+          {{r[0].product_name}}({{r[0].company_name}})
+          <img src="{{r[0].type}}" style="width:38px;margin-top: -30px;">
+          
+        </div>
+      
+        <div>
+          <ion-icon ios="ios-more" md="md-more" (click)="editirDevice(r[0].id)"
+            style="float:right;font-size:2.2em;margin-top: -7%;margin-left:-38%;">
+          </ion-icon>
+        </div>
+      </ion-card>
+    </div> -->
+   
+  
+  
+    <!----------------- MOOD LIGJING started here -->
+    <!-- <div *ngFor="let md of moodDevices1">
+      <ion-card style="text-align: center; border-radius: 20px;height:83px;">
+        <div style="float: initial;margin-left:13px;margin-top: 24px;" (click)="togetmoodColor(md[0].id)">
+          {{md[0].name}}
+          <img src="{{md[0].type}}" style="width:38px;margin-top: -30px;">
+        </div>
+        <div>
+          <ion-icon ios="ios-more" md="md-more" (click)="editmoodDevice(md[0].id)"
+            style="float:right;font-size:2.2em;margin-top: -7%;margin-left:-38%;"></ion-icon>
+        </div>
+
+      </ion-card>
+
+      <div class="deviceeditback" *ngIf="editMoodDevice">
+        <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;">
+          <ion-card-content>
+            <div class="editashishdevice">
+              <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editMoodDevice=!editMoodDevice">
+              </ion-icon>
+              <h2 id="textdevice">Update Mood Device details</h2>
+            </div>
+            <div>
+              <ion-item>
+                <ion-label position="stacked">Select Mood Lighting Type</ion-label>
+                <ion-select (ionChange)="checkCheckedmood($event)" [(ngModel)]="dtype" ok-text="Okay"
+                  cancel-text="Cancel">
+                  <ion-select-option value="Disco_Mood">Disco_Mood</ion-select-option>
+                  <ion-select-option value="Musical_Mood">Musical_Mood</ion-select-option>
+
+                </ion-select>
+              </ion-item>
+
+            </div>
+
+          </ion-card-content>
+          <ion-row class="cardfooter">
+            <ion-col>
+              <ion-button class="editmooddevicebtn2" (click)="deletemooddevicefromrum(md[0].id)">delete</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button class="editmooddevicebtn2" type="submit" (click)="submiteditmooddevice(md[0].id)">submit
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </div> -->
+
+
+    <!--------------- Ended here Mood Lighing Code  -->
+
+  
+  <ion-card *ngIf="show" id="showcard" style="width:45%;top:0;right:0;z-index: 2;position: absolute;">
+    <ion-item (click)="editRoom(devPageRoomId)">Edit Room Name</ion-item>
+    <ion-item (click)="deleteRoomwithDevice(devPageRoomId)">Delete Room</ion-item>
+    <ion-item (click)="shareRoom(devPageRoomId)">Share Room</ion-item>
+    <!-- <ion-item (click)='openDevices(user.roomnm,user.room_refresh_id)'>refresh Devices</ion-item> -->
+  </ion-card>
+  
+
+
+  <div class="deviceeditback" *ngIf="deviceedit">
+    <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;">
+      <ion-card-content>
+        <div class="editashishdevice">
+          <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="deviceedit=!deviceedit"></ion-icon>
+          <h2 id="textdevice">update device details</h2>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="stacked">Device Type</ion-label>
+            <ion-select (ionChange)="checkChecked($event)" [(ngModel)]="dtype" ok-text="Okay" cancel-text="Cancel">
+              <ion-select-option value="Fan">FAN</ion-select-option>
+              <ion-select-option value="Bulb">Bulb</ion-select-option>
+              <ion-select-option value="Tube_Light">TubeLight</ion-select-option>
+              <ion-select-option value="Ac" >AC</ion-select-option>
+              <ion-select-option value="Tv" >TV</ion-select-option>
+              <ion-select-option value="Lamp">Lamp</ion-select-option>
+              <ion-select-option value="Geyser">Geyser</ion-select-option>
+              <ion-select-option value="Table_Lamp">Table Lamp</ion-select-option>
+              <ion-select-option value="Chandelier">Chandelier</ion-select-option>
+              <ion-select-option value="Table_Fan">Table Fan</ion-select-option>
+              <ion-select-option value="Curtain">Curtain</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Device Name</ion-label>
+            <ion-input id="selecttype" type="text" [(ngModel)]="dname" name="{{device1.name}}"></ion-input>
+          </ion-item>
+        </div>
+        <div *ngIf="range!=undefined">
+          <ion-item>
+            <ion-label position="stacked">set min value</ion-label>
+            <ion-input type="tel" id="min" [(ngModel)]="range.minimum" name="devicename"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">set max value</ion-label>
+            <ion-input type="tel" id="max" [(ngModel)]="range.maximum" name="devicename"></ion-input>
+          </ion-item>
+        </div>
+      </ion-card-content>
+      <ion-row class="cardfooter">
+        <ion-col>
+          <ion-button class="editdevicebtn2" (click)="deletedevicefromrum()">delete</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button class="editdevicebtn2" type="submit" (click)="submiteditdevice(sbmtdeviceid)">submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+
+  <!-- <ion-card *ngIf="roomNameChange" style="height:38%;">
+    <ion-card-header>
+      <ion-icon (click)="cancel()" style="font-size: 1.8em;margin-left: 85%;" name="close-circle">
+      </ion-icon>
+    </ion-card-header>
+    <ion-item>
+      <ion-label position="floating" style="margin-bottom: 7%;">Change Room Name:</ion-label>
+      <ion-input id="renameRoom" style="border:1px solid blue; "></ion-input>
+    </ion-item>
+    <ion-button (click)="sendRoomName()" style="margin-left:20%;width:60%;margin-top: 2%;">Save</ion-button>
+  </ion-card> -->
+  <div class="guestpopup" *ngIf='roomNameChange'>
+    <ion-card style="border-radius: 21px;top: 15%;">
+      <ion-list>
+        <ion-item>
+          <ion-label><p>You can put your name also here.</p></ion-label>
+          <ion-icon name='close' slot="end" color="dark" (click)='roomNameChange=!roomNameChange'></ion-icon>
+        </ion-item>
+        <form #userForm='ngForm' (ngSubmit)='sendRoomName(userForm.value)'>
+        <ion-item>
+          <ion-input id='roomname' type='text' placeholder='Enter Room name.' class="form-control" name='roomname' required roomname='ngModel' ngModel maxlength='15'></ion-input>
+        </ion-item>       
+        <div style="text-align: center;text-transform: uppercase;"><ion-button color='dark' size='small' type='submit' style="margin-top: 15px;" [disabled]='userForm.invalid'>&nbsp;&nbsp;Submit&nbsp;&nbsp;</ion-button></div>
+      </form>
+      </ion-list>
+    </ion-card>
+  </div>
+
+
+
+  <ion-card *ngIf="deviceFromApi">
+    <ion-card-header style="font-size:1.6em;text-align: center;" color="primary">Add Devices
+      <ion-icon name="close-circle" (click)="cancel();" style="margin-left: 19%;margin-right: -20%;">
+      </ion-icon>
+    </ion-card-header>
+    <ion-list>
+      <ion-radio-group multiple="false">
+        <ion-card style="padding: 12px 3px; border-radius: 20px;" *ngFor="let d of device4">
+          <ion-item>
+            <ion-label> {{d.name}}</ion-label>
+
+            <ion-radio class="checkedBox" name="{{d.id}}" value="{{d.id}}" (ionSelect)="saveDevice(d)" color="secondary"
+              slot="end"></ion-radio>
+          </ion-item>
+        </ion-card>
+      </ion-radio-group>
+    </ion-list>
+    <ion-card>
+      <ion-button (click)="save()">Submit</ion-button>
+    </ion-card>
+  </ion-card>
+  <div *ngIf="appliances">
+    <ion-icon (click)="cancel()" style="font-size: 1.8em;color:royalblue;margin-left: 87%;" name="close-circle">
+    </ion-icon>
+    <ion-card style="border-radius: 20px; padding: 10px 8px;">
+      <div class="selectdevice" style="margin-top: 10px;">
+        <ion-label>Select Devices Type:</ion-label>
+        <ion-select (ionChange)="checkChecked($event)" [(ngModel)]="deviceToAdd.device_type" ok-text="Okay"
+          cancel-text="Cancel">
+          <ion-select-option value="Fan">FAN</ion-select-option>
+          <ion-select-option value="Bulb">Bulb</ion-select-option>
+          <ion-select-option value="Tube_Light">TubeLight</ion-select-option>
+          <ion-select-option value="Ac">AC</ion-select-option>
+         <ion-select-option value="Tv">TV</ion-select-option>
+          <ion-select-option value="Lamp">Lamp</ion-select-option>
+          <ion-select-option value="Geyser">Geyser</ion-select-option>
+          <ion-select-option value="Table_Lamp">Table Lamp</ion-select-option>
+          <ion-select-option value="Chandelier">Chandelier</ion-select-option>
+          <ion-select-option value="Table_Fan">Table Fan</ion-select-option>
+          <ion-select-option value="Curtain">Curtain</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-card>
+    <ion-card style="border-radius: 20px; padding: 16px 8px;">
+      <ion-label>Your Device Name:</ion-label>
+      <ion-input id="deviceName" value="{{deviceToAdd.name}}"></ion-input>
+    </ion-card>
+    <ion-card *ngIf="range != undefined" style="border-radius: 20px; padding: 20px 8px;">
+      <ion-label>Min Value:</ion-label>
+      <ion-input id="min" value="0"></ion-input>
+      <ion-label>Max Value:</ion-label>
+      <ion-input id="max" value="100"></ion-input>
+    </ion-card>
+    <ion-card>
+      <ion-button style="width:100%" (click)="submit();">
+        Submit
+      </ion-button>
+    </ion-card>
+  </div>
+
+    <!-------- Guest function started here  -->
+    <div class="guestpopup" *ngIf='guestEmail'>
+      <ion-card style="border-radius: 21px;top: 15%;">
+        <ion-list>
+          <ion-item>
+            <ion-label><p>You have to enter your valid email.</p></ion-label>
+            <ion-icon name='close' slot="end" color="dark" (click)='guestEmail=!guestEmail'></ion-icon>
+          </ion-item>
+          <form #userForm='ngForm' (ngSubmit)='onSubmit(userForm.value)'>
+          <ion-item>
+            <ion-input id='guestemail' type='email' placeholder='Enter valid email-id.' class="form-control" required email='ngModel' ngModel  name="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>D MMM YYYY H:mm</ion-label>
+            <ion-datetime displayFormat="D MMM YYYY H:mm" min="2020" max="2050" class="form-control" required enddate='ngModel' ngModel  name="enddate"></ion-datetime>
+          </ion-item>
+          <div style="text-align: center;text-transform: uppercase;"><ion-button color='dark' size='small' type='submit' style="margin-top: 15px;" [disabled]='userForm.invalid'>&nbsp;&nbsp;Submit&nbsp;&nbsp;</ion-button></div>
+        </form>
+     
+        </ion-list>
+      </ion-card>
+    </div>
+    <!------------- Guest function ended Here  -->
+
+
+</ion-content>

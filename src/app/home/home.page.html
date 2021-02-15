@@ -1,20 +1,47 @@
-<ion-header [translucent]="true">
+<ion-header id="frontPage">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <!-- <img src="assets/HomePage/dyfo.png" alt=""> -->
+    <!-- <img src="assets/HomePage/smartx.png"> -->
+    <img  src="../../../assets/HomePage/tandt.jpg">
+    <!-- <img src="assets/HomePage/sara_t.png"  alt="catalert.in"> -->
+    <!-- <img src="assets/HomePage/OmiBanner.png" alt="">  -->
+    <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <div class="frontscreen container-fluid">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+         <div style="color: aliceblue;">
+          <h2 style="margin-bottom: -10px;color: white;">T&amp;T</h2><br>
+          <span style="color: white;">Welcome to a world of simpler and <br>secure life</span>
+         </div>
+        </ion-col>
+      </ion-row>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-row>
+        <ion-col>
+          
+        </ion-col>
+      </ion-row>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <ion-row>
+        <ion-col>
+          
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button class="regi_btn" routerLink="/register" routerDirection="root" style="color:white;border: 1px solid white;">set up my first device</ion-button>
+          <div>
+            <ion-button class="signin" routerLink="/login" routerDirection="root" style="color: white;border: 1px solid white;">sign in</ion-button>
+          </div>
+          <div style="position: fixed; bottom: 3%; left: 30%;width: 40%; height: 1px; border: 3px solid white; border-radius: 3px;"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+   
   </div>
 </ion-content>

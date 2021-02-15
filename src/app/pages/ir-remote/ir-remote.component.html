@@ -1,0 +1,335 @@
+<ion-header>
+  <ion-toolbar class="profile-tool" style="--background: rgb(245, 248, 248);">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mainpage" (click)="backbutton()" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color: black;">{{remote}}</ion-title>
+  </ion-toolbar>
+
+
+  <!-- <ion-toolbar class="profile-tool" style="--background: rgb(245, 248, 248);" *ngIf="remote=='AC' || 'Ac' || 'ac'">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/mainpage" (click)="backbutton()" color="dark"></ion-back-button>
+      </ion-buttons>
+      <ion-title style="color: black;">{{remote}}</ion-title>  
+    </ion-toolbar> -->
+</ion-header>
+<ion-content>
+
+  <!-- <ion-card style="height: auto" class="opCard" *ngIf="remote=='TELEVISION' || 'SETTOP BOX'"> -->
+
+  <!-- <svg viewBox="40 60 270 460" xmlns="http://www.w3.org/2000/svg">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+ <svg:ellipse (click)="keyPress('Power_on_button')" class="st0" data-index="POWER_ON" id="#pow" cx="110.54" cy="121.42" rx="32.9" ry="19.9" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text (click)="keyPress('Power_on_button')" x="83.50" y="125.42" style="font-size:10px;font-weight:bold" fill="BLACK">POWER ON</svg:text>
+  <svg:ellipse (click)="keyPress('mute_button')" class="st0" data-index="MUTE" cx="176.24" cy="117.42" rx="26.4" ry="19.4" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text (click)="keyPress('mute_button')" x="158.54" y="121.42" style="font-size:12px;font-weight:bold" fill="BLACK">MUTE</svg:text>
+ <svg:ellipse class="st0" data-index="POWER_OFF" (click)="keyPress('Power_off_button')" cx="250.54" cy="120.52" rx="32.9" ry="19." stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text x="221.74" y="125.42" (click)="keyPress('Power_off_button')" style="font-size:10px;font-weight:bold" fill="BLACK">POWER OFF</svg:text>
+ <svg:ellipse class="st0" data-index="START" cx="132.94" cy="179.02" rx="36.4" ry="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text x="112.94" y="182.62" style="font-size:12px;font-weight:bold" fill="BLACK">START</svg:text>
+ <svg:ellipse class="st0" data-index="FORWARD" cx="85.54" cy="223.32" rx="36.4" ry="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text x="57.64" y="226.92" style="font-size:11px;font-weight:bold" fill="BLACK">FORWARD</svg:text>
+ <svg:ellipse class="st0" data-index="BACKWARD" cx="266.54" cy="222.32" rx="36.4" ry="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:ellipse>
+ <svg:text x="235.54" y="226.92" style="font-size:11px;font-weight:bold" fill="BLACK">BACKWARD</svg:text>
+ 
+ <svg:circle (click)="keyPress('volume_up_button')" class="st0" data-index="+" cx="74.64" cy="310.52" r="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"/>
+ <svg:text (click)="keyPress('volume_up_button')" x="63.04" y="319.32" style="font-size:35px" fill="BLACK">+</svg:text>
+ <svg:circle (click)="keyPress('volume_down_button')" class="st0" data-index="-" cx="74.64" cy="405.52" r="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"/>
+ <svg:text (click)="keyPress('volume_down_button')" x="65.04" y="418.32" style="font-size:45px" fill="BLACK">-</svg:text>
+ <svg:path (click)="keyPress('up_button')" class="st0" data-index="Arrow keys" d="M649.6,370.8c2.3-6.2,18.9-26.6,36.9-25.6,18,.8,34.2,22.5,34.7,26.1s.8,22.7-25.9,12.9a56.35,56.35,0,0,0-29.1,1.7C651,391,647.3,377,649.6,370.8Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:text (click)="keyPress('up_button')" x="168.04" y="315.32" style="font-size:12px" fill="BLACK">
+ </svg:text>
+ <svg:path (click)="keyPress('right_button')" class="st0" data-index="Arrow keys" d="M743.7,387.7c5.8,4.5,25.7,19.9,24.9,37.9s-22.5,34.7-26.1,35.2-22.7.5-12.9-26.2a56.35,56.35,0,0,0-1.7-29.1C723,390,737.8,383.3,743.7,387.7Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:path (click)="keyPress('down_button')" class="st0" data-index="Arrow keys" d="M649.3,480.5c2.2,7,20.5,26.2,38.9,25.4,17.9-1,34.6-22.5,35.1-26.1s.5-22.7-26.2-12.9a56.35,56.35,0,0,1-29.1-1.7C652.7,460.5,647.1,473.7,649.3,480.5Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:path (click)="keyPress('left_button')" class="st0" data-index="Arrow keys" d="M628.4,387.2c-7,2.2-26.2,20.5-25.4,38.9s22.5,34.7,26.1,35.2,22.7.5,12.9-26.2a56.35,56.35,0,0,1,1.7-29.1C648.8,390.5,635.5,385,628.4,387.2Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:path class="st0" data-index="Organiser" d="M690.7,238c0,11,15.7,19.9,35.1,19.9a66.35,66.35,0,0,0,12.9-1.3,56.93,56.93,0,0,0,11.5-3.7,22.9,22.9,0,0,0,9.5-7.7c3.2-4.3,3-10.4-1-15a22.4,22.4,0,0,0-5-4.3c-6.3-4.7-16.5-7.8-27.9-7.8C706.4,218.2,690.7,227,690.7,238Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:text x="203.80" y="182.62" style="font-size:12px;font-weight:bold" fill="BLACK">STOP</svg:text>
+ <svg:circle (click)="keyPress('select_button')" class="st0" data-index="SELECT" cx="178.34" cy="363.52" r="29.1" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:circle>
+ <svg:text (click)="keyPress('select_button')" x="155.34" y="368.52" style="font-size:12px;font-weight:bold" fill="BLACK">SELECT</svg:text>
+ <svg:circle (click)="keyPress('exit_button')" class="st0" data-index="Fav" cx="96.04" cy="468.42" r="19.9" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill="#0551BF" style="isolation:isolate"></svg:circle>
+ <svg:text (click)="keyPress('exit_button')" x="83.14" y="473.32" style="font-size:12px;font-weight:bold" fill="BLACK">EXIT</svg:text>
+ 
+ <svg:circle class="st0" data-index="HELP" cx="258.54" cy="468.42" r="19.9" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:circle>
+ <svg:text x="244.04" y="473.32" style="font-size:12px;font-weight:bold" fill="BLACK">HELP</svg:text>
+ <svg:circle (click)="keyPress('menu_button')" class="st0" data-index="MENU" cx="139.94" cy="262.32" r="20.7" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:circle>
+ <svg:text (click)="keyPress('menu_button')" x="122.94" y="267.32" style="font-size:12px;font-weight:bold" fill="BLACK">MENU</svg:text>
+ <svg:circle (click)="keyPress('record_button')" class="st0" data-index="REC" cx="215.64" cy="260.52" r="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:circle>
+ <svg:text (click)="keyPress('record_button')" x="204.64" y="265.52" style="font-size:12px;font-weight:bold" fill="BLACK">REC</svg:text>
+ <svg:path (click)="keyPress('exit_button')" class="st0" data-index="BACK" d="M649.8,543.1s7,16.5,55.3,8.5c0,0,19.4-2.2,17.2-22.7s-26.6-12.4-26.6-12.4a25.27,25.27,0,0,1-19,.3c-10.4-4-22.7-1-26.1,7.3C647.3,532.6,645.6,533,649.8,543.1Z" transform="translate(-507.36 -60.68)" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"></svg:path>
+ <svg:text (click)="keyPress('exit_button')" x="161.04" y="478.32" style="font-size:12px;font-weight:bold" fill="BLACK">BACK</svg:text>
+ <svg:circle (click)="keyPress('channel_up_button')" class="st0" data-index="CH+" cx="267.64" cy="314.52" r="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"/>
+ <svg:text (click)="keyPress('channel_up_button')" x="256.64" y="318.52" style="font-size:12px;font-weight:bold" fill="BLACK">CH+</svg:text>
+ <svg:circle (click)="keyPress('channel_down_button')" class="st0" data-index="CH-" cx="280.64" cy="404.52" r="20.2" stroke="#000" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" fill=" #0551BF" style="isolation:isolate"/>
+ <svg:text (click)="keyPress('channel_down_button')" x="269.74" y="408.52" style="font-size:12px;font-weight:bold" fill="BLACK">CH-</svg:text>
+  </svg>  -->
+  <ion-card style="height: auto" class="opCard" *ngIf="remotetv">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="width: 70px;">
+          <ion-button (click)="keyPress('Power_on_button')" class="power">
+            <ion-icon name="power"></ion-icon>
+          </ion-button><br>
+          <ion-label class="tvpower">Power On</ion-label>
+        </ion-col>
+        <ion-col style="width: 70px;">
+          <ion-button (click)="keyPress('mute_button')" class="power">
+            <ion-icon name="md-mic-off" src="assets/iconi5/volume-mute-sharp.svg"></ion-icon>
+          </ion-button><br>
+          <ion-label class="power">Mute</ion-label>
+        </ion-col>
+        <ion-col style="width: 70px;">
+          <ion-button (click)="keyPress('Power_off_button')" class="menu">
+            <ion-icon name="power"></ion-icon>
+          </ion-button><br>
+          <ion-label class="menu">Power Off</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size='4'>
+          <div style="display: inline-grid;
+        border: 2px solid #dad2d2;
+        border-radius: 29px;
+        height: 161px;  
+        width: 68px;text-align: center;
+    align-items: center;">
+            <ion-icon style="padding-left: 19px;
+    font-size: 32px;
+    padding-top: 3px;" name='add' (click)="keyPress('volume_up_button')" class="voiceplus"></ion-icon>
+            <label>Voice</label>
+            <ion-icon style="padding-left: 19px;
+    font-size: 32px;
+    padding-top: 3px;" name='remove' (click)="keyPress('volume_down_button')" class="voiceminus"></ion-icon>
+          </div>
+        </ion-col>
+
+        <ion-col size='4'>
+          <div>
+            <ion-button>
+              <ion-icon name="menu" (click)="keyPress('menu_button')"></ion-icon>
+            </ion-button> <br>
+            <ion-button>
+              <ion-icon name="microphone" src="assets/iconi5/mic-outline.svg" (click)="keyPress('record_button')">
+              </ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+        <ion-col size='4'>
+          <div style="display: inline-grid;
+  border: 2px solid #dad2d2;
+  border-radius: 29px;
+  height: 161px;  
+  width: 68px;text-align: center;
+align-items: center;">
+            <ion-icon style="padding-left: 19px;
+font-size: 32px;
+padding-top: 3px;" name='add' (click)="keyPress('channel_up_button')" class="channelplus"></ion-icon>
+            <label>Channel</label>
+            <ion-icon style="padding-left: 19px;
+font-size: 32px;
+padding-top: 3px;" name='remove' (click)="keyPress('channel_down_button')" class="channelminus"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div id="div_center" style="
+      height: 161px;
+      border-radius: 50%; 
+      border: 2px solid #dad2d2;
+      
+      width: 161px;">
+            <div style="display: inline-grid;">
+              <ion-col>
+                <ion-icon style="margin-top:5px;font-size: 20px;" (click)="keyPress('up_button')" class="caretup"
+                  src="assets/iconi5/caret-up-outline.svg"></ion-icon>
+              </ion-col>
+              <ion-col style="margin-top: 28px;" (click)="keyPress('select_button')">
+                <ion-label>OK</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-icon (click)="keyPress('down_button')" class="caretdown" style="margin-top: 35px;font-size: 20px;"
+                  src="assets/iconi5/caret-down-outline.svg"></ion-icon>
+              </ion-col>
+
+            </div>
+            <div style="margin-top: -86px;">
+              <ion-col>
+                <ion-icon style="margin-right: 86px;font-size: 20px;" (click)="keyPress('left_button')"
+                  class="caretback" src="assets/iconi5/caret-back-outline.svg" name='caret-back-outline'></ion-icon>
+              </ion-col>
+
+              <ion-col>
+                <ion-icon style="font-size: 20px;" (click)="keyPress('right_button')" class="caretforward"
+                  src="assets/iconi5/caret-forward-outline.svg"></ion-icon>
+              </ion-col>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="width: 70px;" (click)='irunmber()'>
+          <ion-button>
+            <ion-label>123</ion-label>
+          </ion-button><br>
+          <ion-label>Number</ion-label>
+        </ion-col>
+        <ion-col style="width: 70px;"> </ion-col>
+        <ion-col style="width: 70px;" (click)='irmore()'>
+          <ion-button>
+            <ion-icon name="more" src="assets/iconi5/ellipsis-vertical-sharp.svg"></ion-icon>
+          </ion-button><br>
+          <ion-label>More</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+  <ion-card style="height: 100%;" *ngIf="remoteac">
+    <!-- <ion-card-header  class="ion-text-center" color="primary" style="margin-bottom:6%;">{{remote}}
+    <ion-button routerLink='/mainpage'>  <ion-icon name="backspace"></ion-icon>    </ion-button>
+  </ion-card-header> -->
+    <svg viewBox="0 0 270 480" xmlns="http://www.w3.org/2000/svg">
+      <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+      <script src='./script1.js'></script>
+
+      <rect width="270" height="100"
+        style="fill:rgba(231, 214, 247,0.36);stroke-width:2;stroke:rgba(31,30,30,0.37);border-radius:2%" />
+      <text id="text" x="120" y="35" style="font-size: 35px;">16</text>
+      <image href="assets/remote-image/temp.png" x="160" y="12" height="38" width="20" />
+      <rect width="3" height="10" x="120" y="83"
+        style="fill:rgba(32, 12, 46, 0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+      <rect width="3" height="13" x="126" y="80"
+        style="fill:rgba(32, 12, 46, 0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" fill="grey" />
+      <rect class="bar1" width="3" height="16" x="132" y="77"
+        style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+      <rect class="bar1" width="3" height="19" x="138" y="74"
+        style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+      <rect class="bar2" width="3" height="22" x="144" y="71"
+        style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+      <rect class="bar2" width="3" height="25" x="150" y="68"
+        style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+      <image href="assets/remote-image/fan.png" x="35" y="75" height="14" width="14" />
+      <image href="assets/remote-image/auto.png" x="75" y="73" height="20" width="20" />
+      <image href="assets/remote-image/swing.png" x="170" y="73" height="20" width="20" />
+      <image href="assets/remote-image/timer.png" x="210" y="73" height="20" width="20" />
+      <image href="assets/remote-image/plus.png" x="191" y="155" height="26" width="24" />
+      <image href="assets/remote-image/minus.png" x="42" y="155" height="26" width="24" />
+      <image href="assets/remote-image/power.png" x="117" y="156" height="26" width="24" />
+      <image href="assets/remote-image/swing.png" x="50" y="287" height="20" width="20" />
+      <image href="assets/remote-image/timer.png" x="185" y="286" height="20" width="20" />
+      <image href="assets/remote-image/fan.png" x="120" y="287" height="20" width="20" />
+      <image href="assets/remote-image/upbutton.png" x="120" y="237" height="20" width="20" />
+      <image href="assets/remote-image/down.png" x="115" y="335" height="20" width="29" />
+      <defs>
+        <filter id="shadow">
+          <feDropShadow dx="1.3" dy="4.5" stdDeviation="0.2" flood-color="#75a3a3" />
+        </filter>
+      </defs>
+      <path (click)="minus($event)"
+        d="M628.4,387.2c-7,2.2-26.2,20.5-25.4,38.9s22.5,34.7,26.1,35.2,22.7.5,12.9-26.2a56.35,56.35,0,0,1,1.7-29.1C648.8,390.5,635.5,385,628.4,387.2Z"
+        transform="translate(-445.36 -171.68) scale(0.8, 0.8)" stroke="#527a7a" stroke-miterlimit="10"
+        stroke-width="0.89" style="filter:url(#shadow);" opacity="0.5" fill="#a3c2c2"></path>
+      <path (click)="plus($event)"
+        d="M743.7,387.7c5.8,4.5,25.7,19.9,24.9,37.9s-22.5,34.7-26.1,35.2-22.7.5-12.9-26.2a56.35,56.35,0,0,0-1.7-29.1C723,390,737.8,383.3,743.7,387.7Z"
+        transform="translate(-395.36 -171.68) scale(0.8, 0.8)" stroke-miterlimit="10" stroke="#527a7a"
+        stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></path>
+      <rect (click)="power($event)" value="93" x="93" y="150" rx="18" ry="18" width="73" height="40" stroke="#527a7a"
+        stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+      <rect (click)='fan($event)' x="102" y="280" rx="13" ry="13" width="52" height="32" stroke="#527a7a"
+        stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+      <path (click)="fanUp($event)"
+        d="M649.6,370.8c2.3-6.2,18.9-26.6,36.9-25.6,18,.8,34.2,22.5,34.7,26.1s.8,22.7-25.9,12.9a56.35,56.35,0,0,0-29.1,1.7C651,391,647.3,377,649.6,370.8Z"
+        transform="translate(-350.36 -10.68) scale(0.7, 0.7) " stroke="#527a7a" stroke-miterlimit="10"
+        stroke-width="0.69" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></path>
+      <path (click)="fanDown($event)"
+        d="M649.3,480.5c2.2,7,20.5,26.2,38.9,25.4,17.9-1,34.6-22.5,35.1-26.1s.5-22.7-26.2-12.9a56.35,56.35,0,0,1-29.1-1.7C652.7,460.5,647.1,473.7,649.3,480.5Z"
+        transform="translate(-337.36 14.68) scale(0.68, 0.68)" stroke="#527a7a" stroke-miterlimit="10"
+        stroke-width="0.69" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></path>
+      <rect (click)="swing($event)" x="40" y="283" rx="13" ry="13" width="45" height="28" stroke="#527a7a"
+        stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+      <rect (click)="timer($event)" x="173" y="283" rx="13" ry="13" width="45" height="28" stroke="#527a7a"
+        stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+    </svg>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-content  >
+  
+</ion-content> -->
+
+<!-- <ion-content *ngIf="remote=='AC' || 'Ac' || 'ac'"> -->
+<!-- <ion-card style="height:auto" class="rem_card">
+    <ion-card-header  class="ion-text-center" color="primary" style="margin-bottom:6%;">{{remote}}
+      <ion-button routerLink='/mainpage'>  <ion-icon name="backspace"></ion-icon>    </ion-button>
+    </ion-card-header>
+  <svg viewBox="0 0 270 480" xmlns="http://www.w3.org/2000/svg">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src='./script1.js'></script>
+   
+    <rect width="270" height="100" style="fill:rgba(231, 214, 247,0.36);stroke-width:2;stroke:rgba(31,30,30,0.37);border-radius:2%" />
+    <text id="text" x="120" y="35" style="font-size: 35px;">16</text>
+    <image href="assets/remote-image/temp.png" x="160" y="12" height="38" width="20"/>
+    <rect width="3" height="10" x="120" y="83" style="fill:rgba(32, 12, 46, 0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+    <rect width="3" height="13" x="126" y="80" style="fill:rgba(32, 12, 46, 0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" fill="grey" />
+    <rect class="bar1" width="3" height="16" x="132" y="77" style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+    <rect class="bar1" width="3" height="19" x="138" y="74" style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+    <rect class="bar2" width="3" height="22" x="144" y="71" style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+    <rect class="bar2" width="3" height="25" x="150" y="68" style="fill:rgba(231, 214, 247,0.36);stroke-width:1;stroke:rgba(31,30,30,0.37)" />
+    <image href="assets/remote-image/fan.png" x="35" y="75" height="14" width="14"/>
+    <image href="assets/remote-image/auto.png" x="75" y="73" height="20" width="20"/>
+    <image href="assets/remote-image/swing.png" x="170" y="73" height="20"  width="20"/>
+    <image href="assets/remote-image/timer.png" x="210" y="73" height="20" width="20"/>
+    <image  href="assets/remote-image/plus.png" x="191" y="155" height="26" width="24"/>
+    <image  href="assets/remote-image/minus.png" x="42" y="155" height="26" width="24"/>
+    <image  href="assets/remote-image/power.png" x="117" y="156" height="26" width="24"/>
+    <image href="assets/remote-image/swing.png" x="50" y="287" height="20"  width="20"/>
+    <image href="assets/remote-image/timer.png" x="185" y="286" height="20" width="20"/>
+    <image href="assets/remote-image/fan.png" x="120" y="287" height="20" width="20"/>
+    <image href="assets/remote-image/upbutton.png" x="120" y="237" height="20" width="20"/>
+    <image href="assets/remote-image/down.png" x="115" y="335" height="20" width="29"/>
+    <defs>
+        <filter id="shadow">
+          <feDropShadow dx="1.3" dy="4.5" stdDeviation="0.2" flood-color="#75a3a3"/>
+        </filter>
+        </defs>
+    <path  (click)="minus($event)" d="M628.4,387.2c-7,2.2-26.2,20.5-25.4,38.9s22.5,34.7,26.1,35.2,22.7.5,12.9-26.2a56.35,56.35,0,0,1,1.7-29.1C648.8,390.5,635.5,385,628.4,387.2Z"   transform="translate(-445.36 -171.68) scale(0.8, 0.8)" stroke="#527a7a" stroke-miterlimit="10" stroke-width="0.89" style="filter:url(#shadow);" opacity="0.5" fill="#a3c2c2" ></path>
+   <path (click)="plus($event)" d="M743.7,387.7c5.8,4.5,25.7,19.9,24.9,37.9s-22.5,34.7-26.1,35.2-22.7.5-12.9-26.2a56.35,56.35,0,0,0-1.7-29.1C723,390,737.8,383.3,743.7,387.7Z" transform="translate(-395.36 -171.68) scale(0.8, 0.8)"  stroke-miterlimit="10" stroke="#527a7a" stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2" ></path>
+ <rect (click)="power($event)" value="93" x="93" y="150" rx="18" ry="18" width="73" height="40" stroke="#527a7a" stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+ <rect (click)='fan($event)' x="102" y="280" rx="13" ry="13" width="52" height="32" stroke="#527a7a" stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+ <path (click)="fanUp($event)"  d="M649.6,370.8c2.3-6.2,18.9-26.6,36.9-25.6,18,.8,34.2,22.5,34.7,26.1s.8,22.7-25.9,12.9a56.35,56.35,0,0,0-29.1,1.7C651,391,647.3,377,649.6,370.8Z" transform="translate(-350.36 -10.68) scale(0.7, 0.7) " stroke="#527a7a" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></path>
+ <path (click)="fanDown($event)" d="M649.3,480.5c2.2,7,20.5,26.2,38.9,25.4,17.9-1,34.6-22.5,35.1-26.1s.5-22.7-26.2-12.9a56.35,56.35,0,0,1-29.1-1.7C652.7,460.5,647.1,473.7,649.3,480.5Z" transform="translate(-337.36 14.68) scale(0.68, 0.68)" stroke="#527a7a" stroke-miterlimit="10" stroke-width="0.69" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></path>
+ <rect (click)="swing($event)" x="40" y="283" rx="13" ry="13" width="45" height="28" stroke="#527a7a" stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+ <rect (click)="timer($event)" x="173" y="283" rx="13" ry="13" width="45" height="28" stroke="#527a7a" stroke-width="0.89" opacity="0.5" style="filter:url(#shadow);" fill="#a3c2c2"></rect>
+</svg>
+</ion-card> -->
+<!-- </ion-content> -->
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab='mainpage'>
+          <ion-icon name="home"></ion-icon>
+          <ion-label>home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="guest">
+          <ion-icon name="md-person-add"></ion-icon>
+          <ion-label>Guest</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="newschedule">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>Schedule</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)='actionsheet()'>
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Setting</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

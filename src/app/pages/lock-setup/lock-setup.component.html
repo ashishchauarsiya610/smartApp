@@ -1,0 +1,33 @@
+<ion-header *ngIf='lockTypeShow'>
+  <ion-toolbar style="--background: rgb(245, 248, 248); ">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color: black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;">
+      SETUP A LOCK
+    </ion-title>   
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf='lockqrscan'>
+  <ion-toolbar style="--background: rgb(245, 248, 248); ">
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-button (click)="stopScan()" style="color: black;"><ion-icon name='arrow-back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;">
+      SCAN LOCK QR
+    </ion-title>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: #d7d8da4a;" *ngIf='lockqrscan'>
+  <img src="assets/images/qrcover.png" alt="">
+</ion-content>
+<ion-content *ngIf='lockTypeShow'>
+  <div >
+    <ion-card (click)='scanLockQr()' id="lock1">
+      
+    </ion-card>
+  </div>
+</ion-content>

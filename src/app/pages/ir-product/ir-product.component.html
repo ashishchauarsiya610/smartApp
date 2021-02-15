@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar style="--background: rgb(245, 248, 248);text-align: center; color: black;">
+   <ion-buttons slot="start" >
+      <ion-back-button defaultHref="/mainpage" style="color:black;"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="showirproduct" class="ion-text-center">Device Remote</ion-title>
+    <ion-title *ngIf="showircopmany" class="ion-text-center">Select Company</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <div > -->
+  <ion-card *ngIf="showirproduct" style="overflow-y: scroll;height:95%" >     
+    <section id="devList"> 
+      <div>   
+       <ion-card style="border-radius: 15px; background-color:#1e66e2;margin: 3% 4%;">
+        <ion-list>  
+          <ion-item id="select_device" class="select_device"> Choose Your  device 
+             <ion-icon  style="float: right; font-size: 30px; color: red; position: absolute; top: 8px; right: 4px;" name="close-circle"></ion-icon>
+          </ion-item>                    
+        </ion-list>              
+       </ion-card>
+      </div>   
+
+    
+       <div class="container hey" *ngFor="let id1 of productImg">       
+          <div   class="newc_dtl" style="width: 50%; height: 150px;" >
+             <ion-card id="devices_id" (click)="allrmotes(id1[0].id,id1[0].product_name)">
+                <img src="{{id1[0].path}}" height="60px">
+                   <p style="padding: 0px;"> <b>  {{id1[0].product_name}}  </b> </p>
+             </ion-card>
+          </div>      
+       </div>       
+    </section>
+ </ion-card>
+
+
+<!-- </div> -->
+
+
+<div *ngIf="showircopmany" class="hey" style="overflow-y: scroll;height: 90%;">
+   <ion-card>
+      <ion-list>  
+        <ion-item class="select_device"> Choose Your  Company 
+           <ion-icon (click)='showircopmany=false;showirproduct=true;'  style="float: right; font-size: 30px; color: rgb(199, 26, 26); position: absolute; top: 6px; right: 4px;" name="close-circle"></ion-icon>
+        </ion-item>                    
+      </ion-list>             
+     </ion-card> 
+      
+      <!-- api company -->
+      <ion-searchbar placeholder="Search Your Company Here :)" [(ngModel)]="searchTerm" (ionChange)="filterItem()">
+
+      </ion-searchbar>
+
+      <div >
+         <!-- <h3> coming From Api company list </h3> -->
+         <div id="company_style" *ngFor="let id2 of filterTerms">
+            <ion-card (click)="showRemote(id2[0].id,id2[0].company_name)">
+                  <img src="{{id2[0].path1}}" height="60px" >
+                  <ion-card-header>
+                     <p style="text-align: center;margin: 4px; 
+                     font-size: 12px;" id="search">                
+                     {{id2[0].company_name}}
+                     </p>
+                  </ion-card-header>
+            </ion-card>
+         </div>
+        
+      </div>
+</div>
+</ion-content>
+

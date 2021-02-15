@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/ttlockfingerlist" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      Fingerprint info
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label slot="start">Fingerprint Number</ion-label>
+      <ion-label>{{number}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label slot="start">Name</ion-label>
+      <ion-label>{{name}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label slot="start">Validity</ion-label>
+      <ion-label>Permanent</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="deleteFing()">Delete</ion-button>
+</ion-content>

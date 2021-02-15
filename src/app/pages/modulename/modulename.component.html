@@ -1,0 +1,15 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="profile-tool" color="primary" >
+    <ion-buttons  slot="start" >
+      <ion-back-button defaultHref="/mainpage" style="color:#fff;"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Added Module</ion-title>
+  </ion-toolbar>
+  </ion-header>
+
+   
+  <ion-content style="--background: #d7d8da4a;">
+  <ion-card *ngFor="let d of modulname" style="text-align: center;height: 65px;border-radius: 20px">
+  <div> {{d.name}}</div>
+  </ion-card>
+</ion-content>

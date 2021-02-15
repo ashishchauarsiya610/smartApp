@@ -1,0 +1,58 @@
+.profile-tool{
+    background-color: #00008b;
+    text-align: center;
+    padding: 0px;
+    // text-transform: uppercase;
+}
+.ion-card-profile{
+    margin-top: 75px;
+    background-color: white;
+    overflow: visible;
+}
+// .profile-img{
+//     margin-left: 50%;
+//     margin-top: -20px;
+// }
+.profile-set{
+
+    //position: absolute; 
+    border-radius: 50%;
+    width: 119px;
+    //height: 126px;
+    height: 58px;
+  //  margin: -64px;
+    //margin-left: 35%;
+    background-color: paleturquoise;
+}
+.input-profile ion-label{
+    width: 90px;
+    color: black;
+   
+}
+
+.input-profile ion-input{
+    border-bottom-color: black;
+    font-size: 15px;
+    word-wrap: break-word;
+    font-weight: 300;
+    
+    padding-bottom: 0px;
+}
+.item-inner-highlight{
+    border-bottom: none;
+}
+.edit-icon{
+    left:266px;
+    color: blue;
+    text-align:right;
+    padding-right: 10px;
+}
+.otpEnter{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90,90,90,0.8);
+    z-index: 9999;
+}

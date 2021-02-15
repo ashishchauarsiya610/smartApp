@@ -1,0 +1,52 @@
+
+#dev_disp{
+}
+#dev_disp ion-card{
+    margin: 8px;
+    border-radius: 10px;
+    --background: rgba(214, 16, 133, 0.81);
+    padding: 10px;
+}
+.delDev{
+    position: absolute;
+    right: 0px;
+    // float: right;
+}
+.toogleBox{
+    color: white;
+    font-size: 18px;
+    span {
+        float: left;
+        padding: 15px;
+    margin-left: 20px;
+    font-size: 26px;
+    }
+    img{
+        float: left;
+        border-radius: 12px;
+    }
+    ion-range{
+        width: 100%;
+    }
+}
+#btnDrawer{
+    font-size: 24px;
+    --background: transparent;
+}
+.activate{
+    padding: 8px;
+    ion-button{
+        --background: rgb(3, 150, 28);
+    }
+    span{
+        font-size: 24px;
+    }
+}
+@media screen and (max-width: 400px){
+    ion-toggle{
+        zoom: 0.6;
+    }
+    ion-range{
+        zoom: 0.7;
+    }
+  }

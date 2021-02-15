@@ -1,0 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/securitymodule" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      TT Lock
+    </ion-title>
+    <ion-icon name="refresh-circle-outline"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-button expand="full" (click)="scanLock()">scan </ion-button>
+<ion-button expand="full" (click)="addLock()">Add </ion-button>
+<ion-button expand="full" (click)="lockInitialize()">Initialize lock</ion-button>
+<ion-card>
+  {{user.lockData}}
+</ion-card>
+</ion-content>

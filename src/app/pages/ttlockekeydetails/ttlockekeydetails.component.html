@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/ttlockekeylist" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      ekey info
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-label slot="start">KeyId</ion-label>
+      <ion-label>{{keyid}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label slot="start">Name</ion-label>
+      <ion-label>{{keyname}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label slot="start">Validity</ion-label>
+      <ion-label>Permanent</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label slot="start">Lock Passcode</ion-label>
+      <ion-label>{{keypass}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="deletekey()">Delete</ion-button>
+</ion-content>

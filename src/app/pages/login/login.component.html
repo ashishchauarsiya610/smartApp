@@ -1,0 +1,63 @@
+
+
+<ion-content  class="loginback" style=" --background: #f7f4fae6;">
+  <div class="container-fluid" style="height: 94%; width:100%; color: rgb(108, 107, 107)">
+   <div style="height: 15%; width: 100%; padding: 10% 3%; position: relative; display: flex;" >
+     
+     <div id="backBtn">
+       <!-- <ion-button id="backBtn" routerLink='/home' class="ion-no-margin">  -->
+         <ion-icon routerLink='/home' src="assets/iconi5/chevron-back.svg"></ion-icon> 
+       <!-- </ion-button> -->
+     </div>
+ 
+     <ion-title style="height: 35px; position: relative;" class="ion-text-center">SIGN IN</ion-title>
+ 
+     <div class="submitBtn">
+       <!-- <ion-button  type="submit" class="ion-no-margin">  -->
+         <ion-icon (click)='login(form)' src="assets/iconi5/chevron-forward-circle.svg"></ion-icon> 
+       <!-- </ion-button> -->
+     </div>
+ 
+   </div>
+   
+               <div  class="loginform">                   
+                   <form #form="ngForm"  (ngSubmit)="login(form)" (keyup.enter)="login(form)" >
+                     <!-- <ion-list lines="full" class="ion-no-margin ion-no-padding" style="border-radius: 21px;padding-bottom: 10px;"> -->
+                       
+                       <ion-card>      
+                         <ion-item *ngIf='phoneLogin' style="--background: rgb(250, 249, 249);">
+                           <select [(ngModel)]="stdcode" [ngModelOptions]="{standalone: true}" style="background: none;">
+                             <option *ngFor="let code of user.countryCode">{{code.dial_code}}&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;{{code.name}}</option>
+                           </select>
+                           <ion-input color="dark" [(ngModel)]="phone" type='text' name="phone" placeholder="Phone" required="true"></ion-input>
+                           <!-- <ion-icon class="person-log" item-start ios="ios-person" md="md-person" color="dark" slot="start"></ion-icon>                            -->
+                         </ion-item>
+ 
+                           <ion-item *ngIf='!phoneLogin' style="--background: rgb(250, 249, 249);">
+                             <ion-input  style="border-left: 1px solid; margin-left: 16%;" color="dark" [(ngModel)]="email" type='email' name="email" placeholder="Enter Username/Email" required="true"></ion-input>
+                             <ion-icon class="person-log" name="person" color="dark" slot="start"></ion-icon>                           
+                           </ion-item>
+                       </ion-card>
+                     
+                         
+                       <ion-card> 
+                           <ion-item style="--background: rgb(250, 249, 249);">  
+                             <ion-icon  name="eye-off" slot="start"  (click)="toggleTextPassword()" ></ion-icon>
+                             <ion-input style="border-left: 1px solid; margin-left: 17%;"  clearInput="false"  color="dark" [type]="getType()" [(ngModel)]="password" type='password' name="password" placeholder="Enter Password" required="true"></ion-input>
+                           </ion-item>  
+                       </ion-card> 
+                   </form> 
+                 </div>
+ 
+                 <div id="loginFooter">
+                   <p *ngIf='phoneLogin' (click)="phoneLogin= !phoneLogin"> SIGN IN WITH EMAIL INSTEAD </p>
+                   <p *ngIf='!phoneLogin' (click)="phoneLogin= !phoneLogin"> SIGN IN WITH PHONE </p>
+                   <p  id="forget"> <span (click)="forget()">FORGOT PASSWORD </span> <span class="separater">|</span> <span (click)="navCtrl.navigateRoot('/register')"> NEW USER </span> </p>
+                   
+                   <div style="position: fixed; bottom: 3%; left: 30%; width: 40%; height: 1px; border: 3px solid; border-radius: 3px; margin: 0 auto; margin-top: 30px;"></div>
+                 </div>
+  </div>
+ 
+   </ion-content>
+   
+ 

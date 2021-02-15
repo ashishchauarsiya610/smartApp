@@ -1,0 +1,248 @@
+<ion-header>
+  <ion-toolbar style="--background: #f7f4fae6; ">
+    <ion-buttons slot="start" >
+      <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color: rgb(71, 71, 71);"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: rgb(71, 71, 71);">
+      Bluetooth Lock
+    </ion-title>   
+    <ion-buttons slot="dark">
+      <ion-button (click)="testLock($event)" color="secondary">
+        <ion-icon name="md-more" style="font-size: 26px; color: rgb(71, 71, 71);"></ion-icon>
+        <!-- <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon> -->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  *ngIf="!infoCard1" style="--background: #f7f4fae6;">
+  <ion-list *ngIf='testlock' class="tabmenu">
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="openInfoCard1()">
+          Test A New Lock
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="del_lock = !del_lock">
+          Delete Lock
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+ 
+  <div  class="operationBox">
+    <ion-card class="statusCard">
+      <img *ngIf='devState == "connecting"' style="width: 100%; height: 100%;" src="assets/images/connecting100_en.gif" alt="">
+      <img *ngIf='devState == "disconnected"' style="width: 100%; height: 100%;" src="assets/images/no_connected.jpg" alt="">
+      <!-- <img *ngIf='devState == "disconnected"' style="width: 100%; height: 100%;" src="assets/images/unlocked.gif" alt=""> -->
+      <img *ngIf='devState == "connected"' style="width: 100%; height: 100%;" src="assets/images/open_connected.jpg" alt="">
+      <!-- <img *ngIf='devState == "connected"' style="width: 100%; height: 100%;" src="assets/images/unlock.gif" alt=""> -->
+      <!-- <img *ngIf='devState == "opened"' style="width: 100%; height: 100%;" src="assets/images/opened.jpg" alt=""> -->
+      <img *ngIf='devState == "opened"' style="width: 100%; height: 100%;" src="assets/images/unlocked.gif" alt="">
+      <img *ngIf='devState == "locked"' style="width: 100%; height: 100%;" src="assets/images/locked.jpg" alt="">
+    </ion-card>
+
+    <!-- <ion-card class="opCard" >
+      <ion-grid>
+
+        <ion-row>
+          <ion-col><ion-button (click)='funClick("unlock")'><ion-icon src="assets/iconi5/lock-open.svg"></ion-icon></ion-button> <ion-label>UnLock</ion-label></ion-col>
+          <ion-col> <ion-button (click)='funClick("lock")'><ion-icon src="assets/iconi5/lock-closed.svg"></ion-icon></ion-button> <ion-label>Lock</ion-label> </ion-col>
+          <ion-col><ion-button (click)='funClick("setlocaltime")'><ion-icon name="timer"></ion-icon></ion-button> <ion-label>Set Time</ion-label></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col><ion-button (click)='funClick("record")'><ion-icon src="assets/iconi5/server.svg"></ion-icon></ion-button> <ion-label>Record</ion-label></ion-col>
+          <ion-col><ion-button (click)='funClick("config")'><ion-icon name="settings"></ion-icon></ion-button><ion-label>Config</ion-label></ion-col>
+          <ion-col><ion-button (click)='upgradePage("upgrade")'><ion-icon name="hammer"></ion-icon></ion-button><ion-label>Upgrade</ion-label></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col><ion-button (click)='funClick("setKey")'><ion-icon name="key"></ion-icon></ion-button> <ion-label>Set Key</ion-label></ion-col>
+          <ion-col><ion-button (click)='funClick("gettime")'><ion-icon name="alarm"></ion-icon></ion-button> <ion-label>Get Time</ion-label></ion-col>
+          <ion-col>
+            
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col> <ion-button expand='black' (click)='funClick("connect")'>connect</ion-button> </ion-col>
+          <ion-col> <ion-button expand='black' (click)='funClick("disconnect")'>disconnect</ion-button> </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card> -->
+  </div>
+
+  <div *ngIf="configCard" class="operationBox">
+    <ion-card class="configCard" style="position: relative;">
+      
+      <ion-card-header color='secondary'>
+        <ion-card-title>Lock Configuration</ion-card-title>
+        <ion-button (click)='configCard= false; op_Card= true' style="position: absolute; right:10px; top: 8px;">back</ion-button>
+      </ion-card-header>
+      
+      <ion-card-content>
+       
+        <ion-item *ngIf='aux_rot'>
+          <ion-label>Auxiliary rotation</ion-label>
+          <ion-toggle (ionChange)='auxRotation($event)'></ion-toggle>
+        </ion-item>
+       
+        <ion-item>
+          <ion-label>Auto Lock</ion-label>
+          <ion-toggle (ionChange)='autoLock($event)'></ion-toggle>
+        </ion-item>
+
+      <div *ngIf='autolock'>
+        <ion-item>
+          <ion-label>Enable Doorsensor</ion-label>
+          <ion-toggle (ionChange)='doorSensor($event)'></ion-toggle>
+        </ion-item>
+        <ion-label style="margin-left: 20px;" >Lock Timing(sec)</ion-label>
+        <ion-item>
+          
+          <ion-range [(ngModel)]='rangevalue' (ionChange)='lockTime($event)' min="0" max="21" color="secondary">
+            <ion-label slot="end">{{magnetString}}</ion-label>
+          </ion-range>
+        </ion-item>
+      </div>
+       
+        <ion-item>
+          <ion-label>Open Direction <span style="color: red; margin-left: 60px;">{{directionString}}</span></ion-label>
+          <ion-toggle (ionChange)='doorDirection($event)'></ion-toggle><br>
+          <!-- <div><a href="#howchoose">How to choose direction</a></div> -->
+        </ion-item>
+      </ion-card-content>
+      <ion-button (click)='funClick("setconfig")' expand='block'>Configure</ion-button>
+      <p style="margin-left: 20px;">Before Configure please make sure to do the following:</p>
+      <ul>
+        <li>The phone is located within 2 meters of the door lock</li>
+        <li>To choose direction
+          <img id='howchoose' #howchoose style="height: 40%; width: 80%;" src="assets/images/open_door.jpg" alt="">
+        </li>
+      </ul>
+    </ion-card>
+  </div>
+
+
+
+
+  <div *ngIf='upgradeCard' class="upgradeBox" >
+    <ion-card class="upgradeCard" style="position: relative;">
+      <ion-card-header color='secondary'>
+        <ion-card-title>Upgrade Lock</ion-card-title>
+        <ion-button (click)='upgradeCard= false; op_Card= true' style="position: absolute; right:10px; top: 8px;">back</ion-button>
+      </ion-card-header>
+      
+      <ion-card-content>
+       <div style="font-size: 20px;">
+        
+        <ul>
+          <p>Before upgrading please make sure to do the following:</p>
+          <li>Turn on the phone Bluetooth</li>
+          <li>Mobile phone network is unblocked</li>
+          <li>The phone is located within 2 meters of the door lock</li>
+        </ul>
+       </div>
+      </ion-card-content>
+        <ion-button (click)='funClick("upgrade")' expand='block'>Upgrade</ion-button>
+    </ion-card>
+  </div>
+
+  <!-- <div *ngIf='infoCard'>
+    <ion-list>
+      <ion-button style="--background: grey" expand="full" (click)="scan()" slot="end">
+        <ion-icon name="Bluetooth"></ion-icon>
+        <p>Refersh</p>
+      </ion-button>
+    </ion-list>
+    
+    <ion-list >  
+      <ion-card style="border-radius: 21px;">
+        <ion-card-content (click)="search(device)" *ngFor="let device of devices" expand="full" style="border-radius: 21px;border: 1px solid rgb(230, 228, 228); text-align: center; display: flex; background: rgba(250, 247, 247, 0.04);">
+
+          <ion-avatar style="border: 1px solid; margin-right: 15px; padding: 10px; background: white;">
+            <div *ngIf='del_lock' (click)='deleetLock(device.id)' class="del_lock"><ion-icon name='trash'></ion-icon></div>
+            <img *ngIf='!del_lock' style="height: 40px; width: 40px; margin: 0 auto;" src="assets/images/wifilock.png" alt="">
+          </ion-avatar>
+         
+          <p><span style="margin-right: 20px; font-size: 20px;">LOCK: &nbsp; &nbsp;{{device.lockSN || 'Unnamed' }}</span><br>
+          <span style="margin-right: 20px;">{{device.lockId}}</span>
+          <span> RSSI: {{device.rssi}}</span></p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  
+  </div> -->
+  <!-- <ion-item>
+    <ion-label>Lock/UnLock</ion-label>
+    <ion-toggle [(ngModel)]="lockvalue"  (ionChange)="onLockClick($event);"></ion-toggle>
+  </ion-item> -->
+</ion-content>
+ 
+<!-- <ion-footer>
+  <ion-toolbar style="text-align: center; --background: #f7f4fae6; color: gray;">
+    <p>{{ statusMessage }}</p>
+  </ion-toolbar>
+</ion-footer> -->
+
+<ion-content *ngIf="infoCard1" style="--background: #f7f4fae6;">
+  <!-- <div *ngIf="infoCard1" style="position: relative; top: 0; left: 0; bottom: 0; right: 0; background-color: rgb(192, 189, 189);"> -->
+    <ion-card >
+      <ion-card-header>
+        <ion-card-title>TEST A LOCK</ion-card-title>
+        <ion-button (click)='infoCard1= false' style="position: absolute; right: 10px; top: 5px; --background: grey;"><ion-icon name="close"></ion-icon></ion-button>
+      </ion-card-header>
+      <ion-item>
+        <textarea name="sninfo" [(ngModel)]='sninfo' id="" placeholder="snInfo" cols="50" rows="10" style="border: 1px solid black;"></textarea>
+      </ion-item>
+      <ion-item>
+        <ion-input name="key" [(ngModel)]='key' placeholder='KEY' style="border: 1px solid;" ></ion-input>
+      </ion-item>
+      <ion-button style="--background: grey;" expand="block" (click)=' infoCard1= false; search("noid");'>proceed</ion-button>
+    </ion-card>
+  <!-- </div> -->
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border">
+  <ion-toolbar color="light" >
+    <ion-avatar >
+      <img src="../../../assets/HomePage/dyfo.png">
+      
+    </ion-avatar>
+  </ion-toolbar>
+</ion-footer> -->
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="light" >
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button *ngIf="lockClick" (click)="funClick('lock')" id={{l.id}} >
+          <ion-icon name="md-lock"></ion-icon>
+          <ion-label>Lock</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button *ngIf="unlockClick" (click)="funClick('unlock')">
+          <ion-icon name="md-unlock"></ion-icon>
+          <ion-label>Unlock</ion-label>
+        </ion-tab-button>
+        
+        <ion-tab-button>
+          <ion-icon src="assets/iconi5/server.svg"></ion-icon>
+          <ion-label>Logs</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="guest">
+          <ion-icon name="md-person-add"></ion-icon>
+          <ion-label>Guest</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  (click)="actionsheet()">
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Setting</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

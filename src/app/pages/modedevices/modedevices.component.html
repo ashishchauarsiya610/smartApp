@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background:rgb(36, 102, 128);">
+    <ion-button (click)='dismiss()' id="btnDrawer" slot="start">
+      <ion-icon name="arrow-back" class="menu-icon" item-start></ion-icon>
+    </ion-button>
+    <ion-title style="width: 100%;color: white;" text-center> {{ modeTitle }} </ion-title>
+    <ion-button *ngIf='dev_data.length !== 0' (click)='delete=!delete; nodelete=!nodelete' id="btnDrawer" slot="end">
+      <ion-icon name="trash"  item-start></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: #d7d8da4a;">
+
+
+      <div id="dev_disp">
+        <div style="width: 100%; text-align: center;" *ngIf='dev_data.length == 0'><h3 style="margin-top: 80px; font-size: large;">No Devices</h3></div>
+        <div *ngIf='dev_data.length !== 0' class="activate"><ion-button expand='block' (click)='activate(modId)'><span>ACTIVATE</span></ion-button></div>
+        <ion-card *ngFor='let d of dev_data'>
+          
+            <div class="toogleBox">
+              <img style="height: 60px; width: 70px;" src="{{d.img}}" alt="">
+              <span>{{d.name}}</span>
+              <ion-toggle *ngIf='nodelete' style="position: absolute; right: 20px;" name='power' slot="end"  checked="{{d.status}}" disabled="true"></ion-toggle>
+              <div class="dimBox" *ngIf="d.dimmer && nodelete" >
+                <ion-range min="0" max="100" value='{{d.dimmer}}' pin color="secondary" id="dimmervalue" disabled="true">
+                </ion-range>
+              </div>
+              <ion-button (click)='del_Mod_device(d.id)' *ngIf='delete' icon-only style="position: absolute; right: 20px; font-size: 20px; --background: transparent;" >
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </div>
+            
+        </ion-card>
+      </div>

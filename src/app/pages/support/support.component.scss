@@ -1,0 +1,52 @@
+.profile-tool{
+    text-align: center;
+    padding: 0px;
+}
+
+.ion-card-profile{
+    margin-top: 50px;
+    background-color: white;
+    overflow: visible;
+    border-radius: 6%;
+    padding-bottom: 28px;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-set{
+    border-radius: 50%;
+    // width: 110%;
+    // height: 100%;
+    // margin-top: -29px;
+    width: 90px;
+    height: 90px;
+    // for dyfo icon
+    // margin-top: -49px;   
+
+     // for dyfo icon
+    margin-top: -45px;   
+    // for omi icon    
+    // margin-top: -59px; 
+    background-color: paleturquoise;
+    border: 2px solid #d9d9d9;
+}
+.support_text{
+    padding-left: 30px;
+    font-size: 13px;
+    
+    
+}
+h2 a{
+    color: black;
+    text-decoration: none;
+}
+ion-item ion-icon{
+    color:#424242;
+}
+.text-support{
+    text-decoration: underline;
+}
+ion-item{
+    // margin-top: 30px;
+    padding-top: 8px;
+}

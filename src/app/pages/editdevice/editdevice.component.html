@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar style="--background: rgb(245, 248, 248);">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">    
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="text-align: center; color: black;text-transform: uppercase;">edit {{d_name}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+      <ion-card style="border-radius: 20px; padding: 10px 8px;">
+      <div class="selectdevice" style="margin-top: 10px;max-height: 100%;">
+        <ion-label>Select Devices Type:</ion-label>
+        <ion-select (ionChange)="checkChecked($event)" [(ngModel)]="d_type"   ok-text="Okay" style="max-height: 100%;"
+          cancel-text="Cancel">
+          <ion-select-option value="Fan">Fan</ion-select-option>
+          <ion-select-option value="Bulb">Bulb</ion-select-option>
+          <ion-select-option value="Tube_Light">TubeLight</ion-select-option>
+          <ion-select-option value="Lamp">Lamp</ion-select-option>
+          <ion-select-option value="Ac">AC</ion-select-option>
+          <ion-select-option value="Geyser">Geyser</ion-select-option>
+          <ion-select-option value="Table_Lamp">Table Lamp</ion-select-option>
+          <ion-select-option value="Chandelier">Chandelier</ion-select-option>
+          <ion-select-option value="Table_Fan">Table Fan</ion-select-option>
+          <ion-select-option value="Curtain">Curtain</ion-select-option>
+          <ion-select-option value="Door_Lock">Door Lock</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-card>
+    <ion-card style="border-radius: 20px; padding: 16px 8px;">
+      <ion-label>Your Device Name:</ion-label>
+      <ion-input id="deviceName" value="{{d_name}}"></ion-input>
+    </ion-card>
+    <ion-card *ngIf="d_isdimmer=='true' " style="border-radius: 20px; padding: 20px 8px;">
+      <ion-label>Min Value:</ion-label>
+      <ion-input id="min" [(ngModel)]="d_min"></ion-input>
+      <ion-label>Max Value:</ion-label>
+      <ion-input id="max" [(ngModel)]="d_max"></ion-input>
+    </ion-card>   
+    <ion-button expand="full" color="light" style="margin: auto 11px;" (click)="submitdevice()">Submit</ion-button>  
+  
+</ion-content>
+

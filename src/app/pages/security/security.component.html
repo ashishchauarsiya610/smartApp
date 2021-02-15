@@ -1,0 +1,29 @@
+<ion-header translucent class="ion-no-border">
+  <ion-toolbar style="--background: #f7f4fae6;">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
+      </ion-buttons>
+    <ion-title style="color: rgba(0, 0, 0, 0.568);" class="ion-text-center">Dyfo Lock</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen style="--background: #d7d8da4a;">
+  <div >
+    <img style="width:100%;" src="assets\icon\1142.jpg">
+  </div>
+  
+  <ion-card id="maincard" *ngFor="let l of lock_response">
+    <ion-list >
+      <ion-item>
+        <ion-avatar slot="start">
+          <img id={{l.id}}  src="{{l.img}}">
+        </ion-avatar>
+        <ion-label style="text-align: center;">
+          <p >&nbsp;{{l.name}}</p>
+          <p >&nbsp;{{l.device_type}}</p>
+        </ion-label>
+        <ion-toggle slot="end" [(ngModel)]="l.status" checked="{{l.status}}"  (ionChange)="changeDyfoLockStatus(l.id)"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

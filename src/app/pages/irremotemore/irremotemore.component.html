@@ -1,0 +1,38 @@
+
+<ion-content style=" --background: #d7d8da4a;">
+  <ion-row style="text-align: center;margin-top: 17px;">
+    <ion-col><ion-button (click)="keyPress('exit_button')" class="exit">exit</ion-button></ion-col>
+    <ion-col><ion-button (click)="keyPress('start_button')" class="play">start</ion-button></ion-col>
+    <ion-col><ion-button (click)="keyPress('stop_button')" class="record">stop</ion-button></ion-col>
+  </ion-row>
+
+  <ion-row style="text-align: center;">
+    <ion-col><ion-button (click)="keyPress('exit_button')" class="stop">back</ion-button></ion-col>
+    <ion-col><ion-button (click)="keyPress('help_button')" class="pause">help</ion-button></ion-col>
+    <ion-col><ion-button (click)="keyPress('forward_button')" class="previous">forward</ion-button></ion-col>
+  </ion-row>
+
+  <ion-row style="text-align: center;">
+    <ion-col><ion-button (click)="keyPress('backward_button')" class="next">backward</ion-button></ion-col>
+    <ion-col ><ion-button (click)="keyPress('mute_button')"class="mute" >vol mute</ion-button></ion-col>
+    <ion-col ><ion-button (click)="keyPress('previous_button')"class="mute" >previous</ion-button></ion-col>
+  </ion-row>
+
+  <ion-row style="text-align: center;">
+    <ion-col><ion-button (click)="keyPress('next_button')" class="next">next</ion-button></ion-col>
+    <ion-col ><ion-button (click)="keyPress('fast_forward_button')"class="mute" >fast forward</ion-button></ion-col>
+    <ion-col ><ion-button (click)="keyPress('fast_backward_button')"class="mute" >fast backward</ion-button></ion-col>
+  </ion-row>
+
+  <ion-row style="text-align: center;">
+    <ion-col><ion-button (click)="keyPress('play_button')" class="next">play</ion-button></ion-col>
+    <ion-col ><ion-button (click)="keyPress('pause_button')"class="mute" >pause</ion-button></ion-col>
+   
+  </ion-row>
+
+ 
+  
+  <ion-row style="text-align: center;margin-top: 18px;">
+    <ion-col size='12' (click)="dismiss()"><ion-icon name="ios-arrow-down" src="assets/iconi5/chevron-down-sharp.svg" style="font-size: 25px;"></ion-icon></ion-col>
+  </ion-row>
+</ion-content>

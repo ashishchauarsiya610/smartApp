@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "856288302738",
+    "firebase_url": "https://myproject-276208.firebaseio.com",
+    "project_id": "myproject-276208",
+    "storage_bucket": "myproject-276208.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856288302738:android:9d46d19ff8b112ae5a784b",
+        "android_client_info": {
+          "package_name": "com.dyfolite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856288302738-sqbe23fetka12cnv903nrj6tf9c6ejbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWrlQ_S5Yu9AP5LOjdi1Emb1R3XVB5xbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856288302738-sqbe23fetka12cnv903nrj6tf9c6ejbp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "856288302738-020vt96foua32c75nbokobsg1o64o17u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dyfolabs.dyfolite"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

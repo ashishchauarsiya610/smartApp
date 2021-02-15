@@ -1,0 +1,34 @@
+<ion-header translucent class="ion-no-border">
+  <ion-toolbar style="--background: #f7f4fae6;">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
+      </ion-buttons>
+    <ion-title style="color: rgba(0, 0, 0, 0.568);" class="ion-text-center">Favourite List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen style="--background: #d7d8da4a;">
+  <div *ngIf="nofav" style="text-align: center;">
+  <p>You don't have any favourite devices yet! Please add one.</p>
+  <ion-button expand="round" class="nofav_button" (click)='add_fav_device()'><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+  </div>
+  <ion-card  *ngFor="let d of getDevices">
+    <ion-item>
+  <ion-avatar slot="start" (click)="deviceclick(d[0].device,d[0].status,d[0].device_name,d[0].description,d[0].id)">
+    <img src="{{d[0].device_type}}">
+  </ion-avatar>
+  <ion-label (click)="deviceclick(d[0].device,d[0].status,d[0].device_name,d[0].description,d[0].id)">
+    <p >{{d[0].description}}</p>  
+    <p>{{d[0].device_name}}</p>  
+  </ion-label>
+  <!-- <ion-label> -->
+    <ion-button  id='ion-btn' (click)="devicestatus($event, d[0].device, d[0].status,d[0].description);" [ngClass]="d[0].status == 'True' ? 'on':'off'" style="float: right; display: inline; font-size: 0px; margin: 5px; --border-radius: 74px; width: 35px; height: 35px; padding: 0;  --background: transparent;">
+      <ion-icon style="font-size: 25px;margin-right: 6px;" name='power' slot="end"></ion-icon>
+    </ion-button>
+  <!-- </ion-label> -->
+    </ion-item>
+  </ion-card>
+
+</ion-content>
+
+  

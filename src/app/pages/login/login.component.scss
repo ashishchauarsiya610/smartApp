@@ -1,0 +1,118 @@
+
+.loginback{
+    // background: url(/assets/icon/sameback.jpg);
+    --background:rgba(219, 219, 219, 0.87);
+    
+}
+ion-card{
+   // --background: rgb(189, 175, 175) !important;
+    --background:rgb(190, 187, 187);
+    border-radius: 0px;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 20px;
+    
+    select{
+        height: 80%;
+        width: 25%;
+        border: none;
+        border-right: 1px solid;
+    }
+    ion-input{
+        text-align: center;
+    }
+}
+.loginform{
+    text-align: center;
+    position: relative;
+    height: 70%;
+}
+#backBtn{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    ion-icon{
+        height: 80%;
+        width: 80%;
+        padding: 5px;
+    }
+}
+.submitBtn{
+    position: relative;
+    // top: -53%;
+    // right: 20px;
+    height: 35px;
+    width: 35px;
+    ion-icon{
+        height: 100%;
+        width: 100%;
+    }
+}
+.loginicon{
+    position: absolute;
+    top: 10%;
+    left: 32%;
+    width: 130px;
+    height: 130px;
+    text-align: center;
+    z-index: 5;
+    img{
+        height: 100%;
+        width: 100%;
+        position: relative;
+        border-radius: 50%;
+        z-index: 2;
+    }
+}
+
+ion-icon{
+    // float: right;
+    // margin-top: -23px;
+    width: 20px;
+    height: 22px;
+    margin-right: 5px;
+    
+
+}
+.person-log{
+    float: left;
+    width: 28px;
+    zoom: normal;
+    height: 22px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.alert-md .alert-message {
+    background-color: red;
+}
+ 
+ .loginicon{
+     position: absolute;
+     top: 10%;
+     text-align: center;
+ }
+ ion-icon{
+     // float: right;
+     // margin-top: -23px;
+    //  width: 20px;
+    //  height: 22px;
+    //  margin-right: 5px;
+ }
+ #loginFooter{
+     height: 15%;
+     width: 100%;
+     text-align: center;
+     font-family: arial,sans-serif;
+     font-size: 12px;
+
+     #forget{
+
+    }
+
+     .separater{
+         margin-left: 10px;
+         margin-right: 10px;
+     }
+ }
+ 
