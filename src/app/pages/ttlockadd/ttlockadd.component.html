@@ -1,19 +1,33 @@
 <ion-header class="ion-no-border">
   <ion-toolbar >
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/securitymodule" ></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center;">
-      TT Lock
+      Add Lock
     </ion-title>
-    <ion-icon name="refresh-circle-outline"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="wifi-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-button expand="full" (click)="scanLock()">scan </ion-button>
-<ion-button expand="full" (click)="addLock()">Add </ion-button>
-<ion-button expand="full" (click)="lockInitialize()">Initialize lock</ion-button>
+  <div style="text-align: center;margin-top: 30px;" *ngIf="scanbtn">
+    <p>The phone need to be within 2 meters of the Smart Lock during the Pairing process.</p>
+    <img src="../../../assets/HomePage/lockScan.jpeg">
+    <h2>Touch any key to Activate the KeyPad</h2>
+    <ion-button  class="btn"  expand="round" (click)="scanLock()">scan </ion-button>
+    <p>Please touch any key to activate the Lock and put it in PAIRING Mode. Please Click above Scan Button...</p>
+  </div>
+<div style="text-align: center;margin-top: 30px;" *ngIf="addbtn"> 
+  <ion-button class="btn" expand="round" (click)="addLock()">Add Lock </ion-button>
+  <!-- <ion-button expand="full" (click)="lockInitialize()">Initialize lock</ion-button> -->
+</div>
+
 <ion-card>
-  {{user.lockData}}
+  <p>{{user.lockData}}</p>
 </ion-card>
 </ion-content>

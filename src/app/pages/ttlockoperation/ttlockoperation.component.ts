@@ -141,7 +141,7 @@ this.user.showToast(JSON.stringify(err.error));
           },
           {  
             text: 'Add IC Card',  
-            icon: 'key-outline',
+            icon: 'card-outline',
             handler: () => {  
               console.log('IC click clicked');  
               this.router.navigateByUrl('/ttlockiclist'); 

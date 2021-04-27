@@ -15,6 +15,7 @@ d_details;
 d_type;
 d_name:string;
 d_id;
+dimmer_id;
 d_dimmer;
 d_isdimmer;
 d_min;
@@ -31,6 +32,7 @@ d_max;
       this.d_type=navParams.get('de_type').replace(/['"]+/g, '');
       this.d_name=navParams.get('de_name').replace(/['"]+/g, '');
       this.d_id=navParams.get('de_id').replace(/['"]+/g, '');
+      this.dimmer_id = navParams.get('de_id').replace(/['"]+/g, '');
       this.d_dimmer=navParams.get('de_dimmer').replace(/['"]+/g, '');
       this.d_isdimmer=navParams.get('de_isdimmer');
       this.d_min=navParams.get('de_min').replace(/['"]+/g, '');
@@ -88,7 +90,7 @@ submitdevice(){
           this.user.showToast("you have to fill both min & max");
         }
         else{
-          this.auth.setMinMax(this.d_id, min, max).subscribe(res => {
+          this.auth.setMinMax(this.dimmer_id, min, max).subscribe(res => {
             console.log("minmax:" + res);          
             this.dismiss(); 
             this.user.showDevice=false;  

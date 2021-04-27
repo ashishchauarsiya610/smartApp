@@ -1,5 +1,7 @@
 <ion-header class="row" class="ion-no-border">
-    <ion-toolbar style="--background: #d7d8da4a;" id="homeback" *ngIf='!user.showDevice' style="--background: url('../../../assets/images/tandthome3.jpg') 0 0/100% 100% no-repeat; ">
+  <!-- assets/images/tandthome3.jpg' -->
+  <!-- <ion-toolbar style="--background: #d7d8da4a;" id="homeback" *ngIf='!user.showDevice' style="--background: url('../../../assets/images/homePage.jpeg') 0 0/100% 100% no-repeat; "> -->
+    <ion-toolbar style="--background: #d7d8da4a;" id="homeback" *ngIf='!user.showDevice' style="--background: url('assets/images/tandthome3.jpg') 0 0/100% 100% no-repeat; ">
         <ion-buttons slot="start" (click)="openMenu()" ion-button menuToggle slot="start" style=" background-color: transparent; color: gray;">
           <ion-menu-button style="color: white;font-size: 2.8em;margin-left: 5px;margin-top: 2px;"></ion-menu-button>
         </ion-buttons>
@@ -38,13 +40,13 @@
 
   <div class="frontscreen container-fluid" style="text-align: center;overflow: hidden;height: 100%;" *ngIf="nodevice">
     <div style="margin-top: 125px;height: 100%;" ion-fixed>
-      <span style="font-size: 20px;">Welcome to T&amp;T</span>
-      <p style="color: #4c4a48;">Start a smarter life with T&amp;T Home Automation </p>
+      <span style="font-size: 20px;">Welcome to DyfoSmart</span>
+      <p style="color: #4c4a48;">Start a smarter life with DyfoSmart Home Automation </p>
       <ion-button expand="round" class="shadow-red" (click)="gotomodulepage()"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
       <h6 style="color: #4c4a48;">add device</h6>
     </div>
    
-    
+      
   </div>
 <!-- ..........TO SHOW ROOMS................... -->
   <ion-grid *ngIf="user.showRoom" style="padding: 5px 0; height: 100%;">
@@ -114,7 +116,7 @@
         <ion-icon   style="font-size: 33px;" name='trash' ></ion-icon>
       </ion-button>
       <div>
-        <span style="text-transform: uppercase;" (click)="showRemote(rem[0].product_name,rem[0].remote,rem[0].pi_id,rem[0].company_name)">{{rem[0].product_name}} <br> ({{rem[0].company_name}})</span>     
+        <span style="text-transform: uppercase;" (click)="showRemote(rem[0].product_name,rem[0].remote,rem[0].pi_id,rem[0].company_name,rem[0].id)">{{rem[0].product_name}} <br> ({{rem[0].company_name}})</span>     
       </div>     
     </ion-card>
   </div>
@@ -409,6 +411,9 @@
       </ion-card>
     </div>
     <!------------- Guest function ended Here  -->
-
-
 </ion-content>
+<ion-fab horizontal="center" vertical="bottom" slot="fixed" style="margin-bottom: 10px;" (click)="clicktoAddModule()">
+  <ion-fab-button color="dark">
+    <ion-icon style="padding: 0px;font-size: 46px;" color="light" name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

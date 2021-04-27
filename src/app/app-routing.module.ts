@@ -72,6 +72,18 @@ import { TticCardaddComponent } from './pages/ttic-cardadd/ttic-cardadd.componen
 import { EnergychartComponent } from './pages/energychart/energychart.component';
 import { DyfolockstatusComponent } from './pages/dyfolockstatus/dyfolockstatus.component';
 import { TtlockgatewayinitComponent } from './pages/ttlockgatewayinit/ttlockgatewayinit.component';
+import { AddTuyaComponent } from './pages/add-tuya/add-tuya.component';
+import { CameraFuncComponent } from './pages/camera-func/camera-func.component';
+import { TuyaShareComponent } from './pages/tuya-share/tuya-share.component';
+import { TuyaMembersComponent } from './pages/tuya-members/tuya-members.component';
+import { QrcodeTuyaComponent } from './pages/qrcode-tuya/qrcode-tuya.component';
+import { TuyaMessageComponent } from './pages/tuya-message/tuya-message.component';
+import { TuyaSmartSceneComponent } from './pages/tuya-smart-scene/tuya-smart-scene.component';
+import { TtlockgatewaylistComponent } from './pages/ttlockgatewaylist/ttlockgatewaylist.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { TtlockgatewayoperationComponent } from './pages/ttlockgatewayoperation/ttlockgatewayoperation.component';
+import { TtlockgatewayuiComponent } from './pages/ttlockgatewayui/ttlockgatewayui.component';
+import { TuyalockComponent } from './pages/tuyalock/tuyalock.component';
 // import { CameraFunctionsComponent } from './pages/camera-functions/camera-functions.component';
 
 
@@ -165,7 +177,11 @@ const routes: Routes = [
   {  path: 'ir-remote/newschedule',  component: GuestComponent,  },
   {  path: 'ir-remote/mainpage',  component: GuestComponent,  },
   {
-    path:'newtab',
+    path:'notification',
+    component: NotificationComponent
+  },
+  {
+    path:'urlpage',
     component: NewTabComponent
   },
   {
@@ -279,6 +295,53 @@ component: SecuritylockComponent
       {
         path:'dyfolockstatus',
         component: DyfolockstatusComponent ,canActivate: [AuthguardGuard]
+      },
+
+      {
+        path:'addDoorbell',
+        component: AddTuyaComponent
+      },
+      {
+        path:'camFunc',
+        component: CameraFuncComponent
+      },
+      {
+        path: 'camFunc/shareTuya',
+        component: TuyaShareComponent,canActivate: [AuthguardGuard]
+      },
+      {
+        path:'tMem',
+        component: TuyaMembersComponent
+      }
+      ,
+      {
+        path:'tuyaQr',
+        component: QrcodeTuyaComponent
+      }
+      ,
+      {
+        path:'camFunc/tMsg',
+        component: TuyaMessageComponent
+      },
+      {
+        path:'smartSce',
+        component: TuyaSmartSceneComponent
+      },     
+      {
+        path:'ttgatewaylist',
+        component: TtlockgatewaylistComponent
+      },
+      {
+        path:'ttgatewayoperation',
+        component: TtlockgatewayoperationComponent
+      },
+      {
+        path:'ttgatewayui',
+        component: TtlockgatewayuiComponent
+      },
+      {
+        path:'tuyalock',
+        component:TuyalockComponent
       },
 
 ];

@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/mcategory" style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;">
@@ -9,8 +9,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="container-fluid showDevice">
-    <h4 style="font-weight: 400;padding-left: 22px;">Running Smart Lock Devices</h4>
+  <div class="container-fluid showDevice divCard">
+    <h4 style="font-weight: 400;padding-left: 22px;">Smart Lock Devices</h4>
     <!-- <ion-card class="devCard" *ngFor="let tt of ttLockdataAll" id='deviceid' (click)="ttLockClick(tt.lockId,tt.lockData,tt.lockMac)">
       <ion-item lines="none">
         <ion-icon style="font-size: 29px;" class="dyfo_lock" name="lock-closed-outline" slot="start"></ion-icon>
@@ -33,18 +33,61 @@
     </ion-list>
   </div>
 
+ 
+
+  <div  class="container-fluid showDevice divCard">
+    <h4 style="margin: 0;padding-left: 22px;">Smart Video Doorbell</h4>
+    <ion-card class="devCard" *ngFor="let d of user.tuyaDevices" id='deviceid'>
+      <ion-item lines="none">
+        <ion-avatar slot="start"  style="font-size: 39px;" class="dyfo_lock">
+        <img src="{{d.icon}}" width="50%" height="50%"alt="" style="float: left; text-align: left;">
+      </ion-avatar>
+        <!-- <ion-toggle slot="end" checked="false" (ionChange)="initDevice(d.id,$event)">
+        </ion-toggle> -->
+        <ion-label><p (click)="goToTuyaSettings(d.name,d.icon)" class="dyfo_lock"
+          style="padding: 0;left: 15px;margin-top: 8px;white-space: nowrap; 
+          width: 100px; font-size: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis; ">{{d.name}}</p></ion-label>
+      </ion-item>
+      <!-- <ion-card-content ><br></ion-card-content> -->
+    </ion-card>
+  </div>
+
+
+  <div  class="container-fluid showDevice divCard">
+    <h4 style="margin: 0;padding-left: 22px;">Gateway Devices</h4>
+    <ion-card class="devCard" *ngFor="let d of user.tuyaDevices" id='deviceid'>
+      <ion-list>
+        <ion-item *ngFor="let tt of gatewaylist13" lines="full" (click)="ttGateWayLockClick(tt.lockId,tt.lockMac,tt.lockName,tt.lockAlias)">
+          <ion-avatar style="width: 60px;height: 60px;" slot="start">
+            <ion-icon name="lock-closed-outline" style="font-size: 34px;padding-top: 10px;"></ion-icon>
+          </ion-avatar>     
+          <ion-label>
+            <h2>{{tt.lockName}}</h2>
+            <p>{{tt.lockId}}</p>  
+            <p>{{tt.lockMac}}</p>      
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+
+  <div  class="container-fluid showDevice divCard">
+    <h4 style="margin: 0;padding-left: 22px;">Smart Lock Type- DLS-2</h4>
   <ion-card id="maincard" *ngFor="let l of lock_response">
     <ion-list >
-      <ion-item > 
+      <ion-item>
         <ion-avatar slot="start">
           <img id={{l.id}}  src="{{l.img}}">
         </ion-avatar>
         <ion-label style="text-align: center;">
-          <p >&nbsp;{{l.name}}-{{l.pi_id}}</p>
+          <p >&nbsp;{{l.name}}</p>
           <p >&nbsp;{{l.device_type}}</p>
         </ion-label>
         <ion-toggle slot="end" [(ngModel)]="l.status" checked="{{l.status}}"  (ionChange)="changeDyfoLockStatus(l.id)"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-card>
+  </div>
 </ion-content>

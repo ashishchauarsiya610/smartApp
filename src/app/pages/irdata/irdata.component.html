@@ -1,6 +1,6 @@
 <!-- <ion-header>
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/ir-remote"  style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;font-size: 15px;text-transform: uppercase;">
@@ -14,7 +14,11 @@
         <ion-back-button defaultHref="/ir-remote" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
       </ion-buttons>
     <ion-title style="color: rgba(0, 0, 0, 0.568);" class="ion-text-center">Tam data collection</ion-title>
-   
+   <ion-buttons slot="end"  (click)="startIRLearning()">
+     <ion-button>
+      <ion-icon slot="icon-only" name='power-outline'></ion-icon>   
+     </ion-button>
+   </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content >

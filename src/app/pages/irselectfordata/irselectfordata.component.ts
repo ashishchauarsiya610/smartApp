@@ -13,111 +13,122 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./irselectfordata.component.scss'],
 })
 export class IrselectfordataComponent implements OnInit {
-  showircopmany=false;
-  showirproduct=true;
+  showircopmany = false;
+  showirproduct = true;
   productid;
   idproduct;
   imgPath;
-  productImg=[];
+  productImg = [];
   ircompanyid;
   idcopmany;
   idcopmany1;
   idcompany2;
-  ircompanyImg=[];
+  ircompanyImg = [];
 
 
   remoteid;
-  remoteid1=[];
+  remoteid1 = [];
   remoteid2;
   remoteid3;
 
-  
+  items: any;
+  searchTerm: any = "";
+  filterTerms = [];
+  filterTermss = [];
 
-  constructor(public auth:AuthService,public remote:AllRemoteComponent,
+
+  constructor(public auth: AuthService, public remote: AllRemoteComponent,
     private router: Router,
     private navCtrl: NavController,
-    public user:UserService
-    
-  ) { 
-   
+    public user: UserService
+
+  ) {
+
   }
   ngOnInit() {
     this.allproduct();
     //this.getIrModule();
+    console.log(this.user.module_piId);
   }
-  allproduct(){
-    this.showircopmany=false;
-    this.showirproduct=true;
-    this.auth.getIRproductApi().subscribe(res=>{
-       this.productid=res;
+  allproduct() {
+    this.showircopmany = false;
+    this.showirproduct = true;
+    this.auth.getIRproductApi().subscribe(res => {
+      this.productid = res;
       //  console.log(this.productid.id)
       //  console.log(this.productid.product_name)
-   
-       for(let i=0;i<this.productid.length;i++){
-         this.productid[i];
-         this.idproduct=this.productid[i].id;
-       let proImg= this.showProductImages(this.idproduct);
-       this.productImg[i]=[{
-         "id":this.idproduct,
-         "path":proImg,
-         "product_name":this.productid[i].product_name
-       }]
-        
-         
-         console.log("product_id"+this.idproduct)
-         console.log(this.productid[i].product_name)
-         
-       }
-       console.log(this.productImg)
+
+      for (let i = 0; i < this.productid.length; i++) {
+        this.productid[i];
+        this.idproduct = this.productid[i].id;
+        let proImg = this.showProductImages(this.idproduct);
+        this.productImg[i] = [{
+          "id": this.idproduct,
+          "path": proImg,
+          "product_name": this.productid[i].product_name
+        }]
+
+        console.log(this.productImg[i])
+        console.log("product_id" + this.idproduct)
+        console.log(this.productid[i].product_name)
+
+      }
+
 
     })
   }
-  allrmotes(id){
-        console.log(id)    
-        this.idcompany2=id;
-        this.showircopmany=true;
-        this.showirproduct=false;
-        this.auth.getIRcompanyApi(id).subscribe(res=>{
-        console.log("allremote"+ JSON.stringify(res))
-        this.ircompanyid=res;
+  allrmotes(id, prodName) {
+    this.user.productName = prodName;
+    console.log('product_id' + id);
+    console.log('prod_name' + this.user.productName);
+    this.idcompany2 = id;
+    this.user.ir_product_id=id;
+    this.showircopmany = true;
+    this.showirproduct = false;
+    this.auth.getIRcompanyApi(id).subscribe(res => {
+      // console.log("allremote"+ JSON.stringify(res))
+      // this.ircompanyid=res;
+      // console.log(this.ircompanyid.company_name)
 
-        for(let i=0;i<this.ircompanyid.length;i++){
-          this.ircompanyid[i];
-          this.idcopmany=this.ircompanyid[i].company_name;
-          this.idcopmany1=this.ircompanyid[i].id;
-        let compImg= this.showCompanyImages(this.idcopmany);
-        this.ircompanyImg[i]=[{
-          "id":this.idcopmany1,
-          "path1":compImg,
-          "company_name":this.idcopmany
-        }]    
-          console.log("company_id"+this.idcopmany1)
-          console.log(this.idcopmany)
-       }
-       console.log(this.ircompanyImg)
+      this.items = res;
+      // this.filterTerms= this.items;
+      //  console.log(this.items);
+      for (let i = 0; i < this.items.length; i++) {
+
+        this.idcopmany = this.items[i].company_name;
+
+        let compImg = this.showCompanyImages(this.idcopmany);
+
+        this.filterTerms[i] = [{
+          "id": this.items[i].id,
+          "path1": compImg,
+          "company_name": this.items[i].company_name,
+        }]
+        this.user.search_prod = this.idcopmany;
+
+      }
+      //  console.log("company_name"+ JSON.stringify(this.filterTerms))
     })
-    
-  
   }
 
-  showRemoteCompany(ir_companyId){
-    this.user.productName=this.idcompany2;
-    this.user.companyName=ir_companyId;
-    console.log(this.user.productName);
-    console.log(this.user.companyName);
-    // if(this.user.productName=='TELEVISION')
-    //     {
-    //      this.user.tvshow=true;
-    //      this.user.acshow=false;
-    //     }
-    //    else if(this.user.productName=="'AC' || 'ac' ")
-    //     {
-    //      this.user.tvshow=false;
-    //      this.user.acshow=true;
-    //     }
-    this.router.navigateByUrl('/irdata'); 
+  filterItem() {
+    this.filterTerms = [];
+    this.filterTermss = this.items.filter(item => item.company_name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
+    console.log(this.filterTermss.length);
+
+    for (let i = 0; i < this.filterTermss.length; i++) {
+      let compImg = this.showCompanyImages(this.filterTermss[i].company_name);
+      this.filterTerms[i] = [{
+        "id": this.filterTermss[i].id,
+        "path1": compImg,
+        "company_name": this.filterTermss[i].company_name,
+      }]
+    }
+
   }
-  showProductImages(id) { 
+
+
+  showProductImages(id) {
     if (id == 1) {
       return this.imgPath = '/assets/devicesname/TELEVISION.jpg'
     }
@@ -139,7 +150,7 @@ export class IrselectfordataComponent implements OnInit {
     if (id == 9) {
       return this.imgPath = '/assets/devicesname/TATASKY.jpeg'
     }
-    
+
     if (id == 10) {
       return this.imgPath = '/assets/devicesname/DTH.jpg'
     }
@@ -150,6 +161,18 @@ export class IrselectfordataComponent implements OnInit {
     console.log(name)
     if (name == "AIRTEL") {
       return this.imgPath = '/assets/companylogo/AIRTEL.PNG'
+    }
+    if (name == "ACTIVA") {
+      return this.imgPath = '/assets/companylogo/activa.jpeg'
+    }
+    if (name == "apple") {
+      return this.imgPath = '/assets/companylogo/APPLE.png'
+    }
+    if (name == "ACT") {
+      return this.imgPath = '/assets/companylogo/act.png'
+    }
+    if (name == "AKAI M1") {
+      return this.imgPath = '/assets/companylogo/MI.png'
     }
     if (name == "Akai") {
       return this.imgPath = '/assets/companylogo/AKAI.png'
@@ -256,7 +279,7 @@ export class IrselectfordataComponent implements OnInit {
     if (name == "KORYO") {
       return this.imgPath = '/assets/companylogo/KORYO.png'
     }
-   if (name == "SAMSUNG") {
+    if (name == "SAMSUNG") {
       return this.imgPath = '/assets/companylogo/SAMSUNG.png'
     }
     if (name == "SAMSUNG1") {
@@ -364,7 +387,7 @@ export class IrselectfordataComponent implements OnInit {
     if (name == "WORLDTECH") {
       return this.imgPath = '/assets/companylogo/WORLDTECH.png'
     }
-  
+
     if (name == "ONIDA") {
       return this.imgPath = '/assets/companylogo/ONIDA.PNG'
     }
@@ -373,7 +396,7 @@ export class IrselectfordataComponent implements OnInit {
     }
 
     if (name == "AUX") {
-      return this.imgPath = '/assets/companylogo/aux.png'
+      return this.imgPath = '/assets/companylogo/AUXCOMPANY.PNG'
     }
     if (name == "AMAZONE BESIS") {
       return this.imgPath = '/assets/companylogo/amazoneBesis.jpg'
@@ -408,7 +431,7 @@ export class IrselectfordataComponent implements OnInit {
     if (name == "MARANTZ") {
       return this.imgPath = '/assets/companylogo/MARANTZ.PNG'
     }
-      //----------  DVD PLAYER 
+    //----------  DVD PLAYER----------------- 
     if (name == "MECOOL") {
       return this.imgPath = '/assets/companylogo/MECOOL.png'
     }
@@ -424,7 +447,7 @@ export class IrselectfordataComponent implements OnInit {
     if (name == "ZIDOO") {
       return this.imgPath = '/assets/companylogo/ZIDOO.PNG'
     }
-    //--------- D2H 
+    //--------- D2H----------- 
     if (name == "TATA sky") {
       return this.imgPath = '/assets/companylogo/TATASKY.PNG'
     }
@@ -452,56 +475,69 @@ export class IrselectfordataComponent implements OnInit {
     if (name == "Arcam") {
       return this.imgPath = '/assets/companylogo/ARCAM.png'
     }
+    if (name == "GENERAL") {
+      return this.imgPath = '/assets/companylogo/AC73.jpeg'
+    }
+    if (name == "IFB") {
+      return this.imgPath = '/assets/companylogo/IFB.png'
+    }
+    if (name == "LLOYD") {
+      return this.imgPath = '/assets/companylogo/LLOYD.jpeg'
+    }
 
   }
-  
-  showRemote(id){
-    if(this.idcompany2==2){
-     // console.log("product"+this.idcompany2)
+
+  showRemote(id, comp_name) {
+    this.user.companyName = id;
+    this.user.remote_company_id=comp_name;
+    console.log('company_name' + this.user.companyName)
+    if (this.idcompany2 == 2) {
+      // console.log("product"+this.idcompany2)
       //console.log("company "+id)
-      this.user.checkForAcRemote=this.idcompany2;
-      this.auth.remoteForAc(this.idcompany2,id).subscribe(res=>{
-        this.remoteid=res;
+      this.user.checkForAcRemote = this.idcompany2;
+      this.auth.remoteForAc(this.idcompany2, id).subscribe(res => {
+        this.remoteid = res;
         console.log(res);
-    for(let i=0;i<this.remoteid.length;i++){
-    this.remoteid2=this.remoteid[i].id;
-    this.user.idremote21[i]={
-     "id": this.remoteid2,
-      "on":this.remoteid[i].power_on_button,
-      "off":this.remoteid[i].power_off_button
-    }
-    //console.log(this.remoteid)
-    this.remote.call();
-    }
-    //console.log("out"+ this.remoteid2)
-    this.router.navigateByUrl('/all-remote');
+        for (let i = 0; i < this.remoteid.length; i++) {
+          this.remoteid2 = this.remoteid[i].id;
+          this.user.idremote21[i] = {
+            "id": this.remoteid2,
+            "on": this.remoteid[i].power_on_button,
+            "off": this.remoteid[i].power_off_button,
+            'name': this.remoteid[i].name
+          }
+          //console.log(this.remoteid)
+          this.remote.call();
+        }
+        //console.log("out"+ this.remoteid2)
+        this.router.navigateByUrl('/irdata');
       })
     }
-    else{
-     // console.log("product"+this.idcompany2)
+    else {
+      // console.log("product"+this.idcompany2)
       //console.log("company "+id)
-      this.user.checkForAcRemote=this.idcompany2;
-    this.auth.getIRCompanyRemoteApi(this.idcompany2,id).subscribe(res=>{
-    // console.log(JSON.stringify(res))
-    this.remoteid=res;
-    console.log(res)
-    for(let i=0;i<this.remoteid.length;i++){
-    this.remoteid2=this.remoteid[i].id;
-    this.user.idremote21[i]={
-     "id": this.remoteid2,
-      "on":this.remoteid[i].power_on_button,
-      "off":this.remoteid[i].power_off_button
-    }
-    this.remote.call();
-    }
-    
-    
-    console.log("out"+ this.remoteid2)
+      this.user.checkForAcRemote = this.idcompany2;
+      this.auth.getIRCompanyRemoteApi(this.idcompany2, id).subscribe(res => {
+        // console.log(JSON.stringify(res))
+        this.remoteid = res;
+        console.log(res)
+        for (let i = 0; i < this.remoteid.length; i++) {
+          this.remoteid2 = this.remoteid[i].id;
+          this.user.idremote21[i] = {
+            "id": this.remoteid2,
+            "on": this.remoteid[i].power_on_button,
+            "off": this.remoteid[i].power_off_button
+          }
+          this.remote.call();
+        }
 
-    this.router.navigateByUrl('/all-remote');
-    })
-  }
+
+        console.log("out" + this.remoteid2)
+
+        this.router.navigateByUrl('/irdata');
+      })
+    }
   }
 
-  
+
 }

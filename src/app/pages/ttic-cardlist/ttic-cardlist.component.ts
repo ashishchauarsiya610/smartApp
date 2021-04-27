@@ -114,7 +114,7 @@ alert(err)
       buttons: [  
         {  
           text: 'Add IC Card',  
-          icon: 'finger-print-outline', 
+          icon: 'card-outline', 
           handler: () => {  
             console.log('add finger clicked');  
             this.router.navigateByUrl('/ttlockicadd');          

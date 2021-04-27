@@ -16,27 +16,40 @@ export class IrdataComponent implements OnInit {
   butt
 ir_number;
 remote_id;
+ir_device_id;
+ir_product_id;
 // tvshow=false;
 // acshow=false;
   constructor(private user: UserService,
     private auth: AuthService,
     private navCtrl: NavController,
     private modalController: ModalController) { 
-      console.log(this.user.productName);
-      console.log(this.user.companyName);
+      console.log("product name:"+ this.user.productName);
+      console.log("company id:"+this.user.companyName);
+      console.log("company name"+this.user.remote_company_id)
+      console.log("ir_device_id:"+ this.user.ir_device_id);
+      console.log('ir_product_id'+ this.user.ir_product_id)
+    this.ir_device_id=this.user.ir_device_id;
+    this.ir_product_id=this.user.ir_product_id;
       let body = {
-        "company_name": this.user.companyName,
-        'product_name': this.user.productName
+        "company_name": this.user.remote_company_id,
+        "product_id": this.ir_product_id,
+        "device_id": this.ir_device_id
       }
      this.user.present('please wait...');
-      this.auth.postIrcompanyproduct(body).subscribe(res=>{
+      this.auth.irStart(body).subscribe(res=>{
         console.log(res);
         this.remote_id=res;
         
         this.user.dismiss();
         console.log(this.remote_id.id);
+        alert("ir data start...");
+        alert(res);
+        alert("res:"+this.remote_id);
       },err=>{
         this.user.dismiss();
+        alert(err);
+        alert("err"+JSON.stringify(err.error));
       })
     }
 
@@ -45,8 +58,10 @@ remote_id;
 
   tvpowerClick(){
     let powerbody={
-        "remote_id": this.remote_id.id,
-       "button_name": "power_on_button_one"
+        
+       "button_name": "power_on",
+       "device_id": this.ir_device_id,
+       "remote_id": this.remote_id,
     }
     this.user.present('loading data...');
     this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -60,8 +75,9 @@ remote_id;
   }
   powerClick(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "power_on_button_one"
+      "button_name": "power_on",
+      "device_id": this.ir_device_id,
+      "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -76,8 +92,9 @@ remote_id;
 
   menuClick(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "menu_button_one"
+      "button_name": "mute_on",
+      "device_id": this.ir_device_id,
+      "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -91,9 +108,10 @@ remote_id;
   }
 
   voiceplus(){
-    let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "volume_up_button_one"
+    let powerbody={    
+       "button_name": "volume_up_button_one",
+       "device_id": this.ir_device_id,
+       "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -108,8 +126,9 @@ remote_id;
 
   voiceminus(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "volume_down_button_one"
+     "button_name": "volume_down_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -124,8 +143,9 @@ remote_id;
 
   channelplus(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "channel_up_button_one"
+     "button_name": "channel_up_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -139,8 +159,9 @@ remote_id;
   }
   channelminus(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "channel_down_button_one"
+     "button_name": "channel_down_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -155,8 +176,9 @@ remote_id;
 
   caretup(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "up_button_one"
+     "button_name": "up_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -171,8 +193,9 @@ remote_id;
 
   caretdown(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "down_button_one"
+     "button_name": "down_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -187,8 +210,9 @@ remote_id;
 
   caretback(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "left_button_one"
+     "button_name": "left_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -203,8 +227,9 @@ remote_id;
 
   caretforward(){
     let powerbody={
-      "remote_id": this.remote_id.id,
-     "button_name": "right_button_one"
+     "button_name": "right_button_one",
+     "device_id": this.ir_device_id,
+     "remote_id": this.remote_id,
   }
   this.user.present('loading data...');
   this.auth.postIrbuttondata(powerbody).subscribe(res=>{
@@ -237,6 +262,31 @@ remote_id;
                       }
     });
     return await modal.present();
+  }
+
+  startIRLearning(){
+    alert("company_name:"+ this.user.companyName)
+    alert("prod:"+ this.ir_product_id);
+    alert("devi:"+ this.ir_device_id);
+    console.log('start learning...')
+    let powerbody=JSON.stringify({
+      "company_name": this.user.remote_company_id,
+      "product_id": this.ir_product_id,
+      "device_id": this.ir_device_id
+  })
+  this.user.present('loading data...');
+  this.auth.irStart(powerbody).subscribe(res=>{
+    console.log(res);
+    this.user.showToast('ir data collection start...');
+    alert(res);
+    alert("start ir"+ JSON.stringify(res))
+    this.user.dismiss();
+  },err=>{
+    this.user.dismiss();
+    this.user.showToast("error called...");
+    alert(err);
+    console.log(err.error)
+  }) 
   }
 
 }

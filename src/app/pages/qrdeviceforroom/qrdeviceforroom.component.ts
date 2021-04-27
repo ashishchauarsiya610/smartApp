@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
+// import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-qrdeviceforroom',
@@ -87,7 +88,7 @@ selectexistroom(roomid){
   console.log("res for get deviceid:"+ this.mySavedDevice);
 
  for (let i = 0; i < this.mySavedDevice.length; i++) {
-  let device = this.mySavedDevice[i].device;
+  let device = this.mySavedDevice[i].id;
   console.log("id_device used during device adding in room:"+ device)
   this.auth.savedChangedRoom(roomid, device).subscribe((res) => {
     this.getRooms = res;
@@ -167,7 +168,7 @@ selectnewroom1(newroomname){
     console.log("new created room_id:"+ this.roomID.id);
     console.log("res2 inside roomcereate api for get deviceid:"+ this.mySavedDevice);
     for (let i = 0; i < this.mySavedDevice.length; i++) {
-      let device = this.mySavedDevice[i].device;
+      let device = this.mySavedDevice[i].id;
       console.log("id_Room used during device adding in room:"+ this.roomID.id);
       console.log("id_Device used during device adding in room:"+ device)
       this.auth.savedChangedRoom(this.roomID.id, device).subscribe((res) => {

@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest ,HttpParams} from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Key } from 'protractor';
 import { DOCUMENT } from '@angular/common';
 import { UserService } from 'src/app/services/user.service';
-//import {Response} from '';
+//import { HttpParams, HttpHeaders } from '@angular/common/http';
+//import {import { HttpParams, HttpHeaders } from '@angular/common/http';Response} from '';
 //import 'rxjs/add/operator/map';
 
 
@@ -19,17 +20,21 @@ export class AuthService {
   // URL = 'http://3.6.190.10:4000/';
   //  URL = 'http://13.127.176.213:4000/';
   // URL = 'https://dyfolite.dyfolabs.com:13000/';
-  //  URL = 'http://13.127.176.213/';
+   
   URL = 'https://dyfolite.dyfolabs.com/';
   // url='https://cors-anywhere.herokuapp.com/https://api.ttlock.com/';
-  url='http://13.127.176.213:82/https://api.ttlock.com/';
+  // url='http://13.127.176.213:82/https://api.ttlock.com/';
+  // url='http://65.1.83.68:82/https://api.ttlock.com/';
+  // URL = 'http://65.1.83.68:4000/';
+  url='http://cors.dyfolabs.com/api.ttlock.com/';
   // url='https://api.ttlock.com/'
 
   isLoggedIn = false;
   token: any;
   constructor(private http: HttpClient, @Inject(DOCUMENT) private _document: Document, public user:UserService) {}
-  
- 
+  //Tuya Variables
+  home_name;
+ //End here
   isAuthenticated():any{
     let token = localStorage.getItem('token')
       if (token)
@@ -399,6 +404,43 @@ saveRemote(remoteId,pi_id,roomId){
     //console.log(body)
     //return this.http.post(this.URL + 'api/ir_blaster/device/', body, { headers: headers });
 }
+// api/ir_learning/start
+irStart(body){
+  // console.log("company_name"+ (body));
+  // console.log("product_id"+ product_id);
+  // console.log('name'+ name);
+  // console.log("device_id"+ device_id)
+  let token = localStorage.getItem('token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // let pr_id=10;
+  // let dd_id=206;
+  // let body = JSON.stringify({
+  //   "company_name": "TATA sky",
+  //   "product_id": pr_id,
+  //   "device_id": dd_id
+  // })
+  return this.http.post(this.URL + 'api/ir_learning/start/', body, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+IrStartButton(){
+ 
+  let token = localStorage.getItem('token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  let body = JSON.stringify({
+    "company_name": "VIDEOCON",
+      "product_id": "10",
+      "name": "VIDEOCON",
+      "device_id": "233"
+  })
+  return this.http.post(this.URL + 'api/ir_learning/learn', body, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
 pressKey(key_id,name,module_id){
   console.log(key_id);
   console.log(name);
@@ -895,6 +937,17 @@ forguestbyRoom(id) {
       }))
     }
 
+    // postIrbuttondata(body){
+    //   console.log(body);
+    //   let token = localStorage.getItem('token');
+    //   var headers = new HttpHeaders();
+    //   headers = headers.append('Content-Type', 'application/json ');
+    //   headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+      
+    //   return this.http.post(this.URL + 'api/remote/add/data/', body, { headers: headers }).pipe(tap(res => {
+    //   }))
+    // }
+
     postIrbuttondata(body){
       console.log(body);
       let token = localStorage.getItem('token');
@@ -902,9 +955,10 @@ forguestbyRoom(id) {
       headers = headers.append('Content-Type', 'application/json ');
       headers = headers.append('Authorization', 'Bearer' + ' ' + token);
       
-      return this.http.post(this.URL + 'api/remote/add/data/', body, { headers: headers }).pipe(tap(res => {
+      return this.http.post(this.URL + 'api/ir_learning/learn/', body, { headers: headers }).pipe(tap(res => {
       }))
     }
+    
 
    adddeviceinfav(body){
       console.log(body);
@@ -983,7 +1037,7 @@ loginTTLock(body){
       console.log(this.data.access_token);
       localStorage.setItem('TTtoken', this.data.access_token);
       let token_get=localStorage.getItem('TTtoken');
-      console.log(token_get);
+      console.log("TTToken:"+token_get);
   })
   )
 } 
@@ -995,6 +1049,21 @@ TTlock_list(body){
     headers1: new HttpHeaders().set('Origin', 'Dyfo'),    
 };
   return this.http.post(this.url + 'v3/lock/list',body, options                   
+  ).pipe(
+    tap((res)=>{
+      
+      console.log(res);
+  })
+  )
+} 
+
+TTlock_Reg(body){
+  console.log(body);
+  let options = {
+    headers: new HttpHeaders().set('contentType','application/x-www-form-urlencoded'), 
+    headers1: new HttpHeaders().set('Origin', 'Dyfo'),    
+};
+  return this.http.post(this.url + 'v3/user/register',body, options                   
   ).pipe(
     tap((res)=>{
       
@@ -1334,12 +1403,26 @@ tTlockIc_delete(body){
   })
   )
 }
+
+tTlock_upload(body){
+  console.log(body); 
+  let options = {
+    headers: new HttpHeaders().set('contentType','application/x-www-form-urlencoded'),  
+    headers1: new HttpHeaders().set('Origin', 'Dyfo'), 
+};
+  return this.http.post(this.url + 'v3/lockRecord/upload',body, options
+  ).pipe(
+    tap((res)=>{
+  })
+  )
+}
+
 //************* IC card Eneded here ******/ 
 
 
 //****************GateWay Started here  */ 
 
-tTlockGateway_init(body){
+tTlockGateway_isInitSuccess(body){
   console.log(body); 
   let options = {
     headers: new HttpHeaders().set('contentType','application/x-www-form-urlencoded'),  
@@ -1518,17 +1601,31 @@ tTlockGateway_gatewayList(body){
   return this.http.post(this.url + 'v3/gateway/listLock',body, options
   ).pipe(
     tap((res)=>{
+      alert("auth:"+JSON.stringify(res));
   })
   )
 }
 
-tTlockGateway_uploadDetails(body){
+tTlockGateway_uploadDetails(body,gateway){
   console.log(body); 
+  //let sendParams=body;
+  const params = new HttpParams({
+       fromObject: {
+        clientId: body.clientId,
+         accessToken: body.accessToken,
+        gatewayId:gateway,
+         modelNum:body.modelNum,
+        hardwareRevision:body.hardwareRevision,
+        firmwareRevision:body.firmwareRevision,
+         networkName:body.networkName,
+        date:body.date,
+      }
+     });
   let options = {
     headers: new HttpHeaders().set('contentType','application/x-www-form-urlencoded'),  
     headers1: new HttpHeaders().set('Origin', 'Dyfo'), 
 };
-  return this.http.post(this.url + 'v3/gateway/uploadDetail',body, options
+  return this.http.post(this.url + 'v3/gateway/uploadDetail',params, options
   ).pipe(
     tap((res)=>{
   })

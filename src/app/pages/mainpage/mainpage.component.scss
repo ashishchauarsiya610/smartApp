@@ -38,7 +38,7 @@ ion-slide.swiper-slide-active #p{
 //    assets/images/homePage.jpeg
 ion-header{
     #homeback{
-    --background: linear-gradient(162deg, rgba(56, 70, 108, .8) 20%, rgba(56, 70, 108, .8) 100%), url('../../../assets/images/homePage.jpeg')top no-repeat;
+    --background: linear-gradient(162deg, rgba(56, 70, 108, .8) 20%, rgba(56, 70, 108, .8) 100%), url('../../../assets/images/homePage.jpeg') 0 0/100% 100% no-repeat;
 }
 }   
    .editdevicecross{

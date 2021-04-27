@@ -51,6 +51,7 @@ export class DevicestatusComponent implements OnInit {
 
   d_on;
   dev_status;
+  device_status;
  getdevicestatus(){
    let device_id=this.user.moodDevice_id;
    console.log("get_device_id" +device_id)
@@ -141,10 +142,13 @@ export class DevicestatusComponent implements OnInit {
 
 }
 
-setDimmer(e) {
+setDimmer(e,d) {
+  console.log(e);
   let setdimmer = (<HTMLInputElement>document.getElementById('dimmervalue')).value;
-  console.log("dimmer value:" + setdimmer)
-  this.auth.putDimmerValueFromApi(e, setdimmer).subscribe(res => {
+  console.log("dimmer value:" + setdimmer);
+  console.log("dimmer id:" + d);
+  this.auth.putDimmerValueFromApi(d, setdimmer).subscribe(res => {
+    console.log('dimmer res'+ res);
    }, err => {this.user.showToast('something went wrong.please try again later or contact with our support team');})
 }
 
@@ -164,7 +168,7 @@ async actionsheet(){
         }  
       },
       {  
-        text: 'wi-fi settings',  
+        text: 'Wi-Fi Reconfiguration',  
         icon: 'wifi',
         cssClass:'alert-message',
         handler: () => {  
@@ -174,7 +178,7 @@ async actionsheet(){
         }  
       },
       {  
-        text: 'Add favourite',  
+        text: 'Add Favourite',  
         icon: 'heart',
         cssClass:'alert-message',
         handler: () => {  
@@ -207,12 +211,14 @@ async actionsheet(){
 }  
 
 async editdeviceclick(){
+  console.log("id"+ JSON.stringify(this.lock_response[0].device));
   console.log("dwe" + JSON.stringify(this.lock_response[0].minimum))
   const modal = await this.modalController.create({
     component: EditdeviceComponent,
     componentProps: { players:  JSON.stringify(this.lock_response[0]),
                       de_type:  JSON.stringify(this.lock_response[0].device_type),
                       de_id:    JSON.stringify(this.lock_response[0].device),
+                      dimmer_id:    JSON.stringify(this.lock_response[0].id),
                       de_name:  JSON.stringify(this.lock_response[0].name),
                       de_dimmer:  JSON.stringify(this.lock_response[0].dimmer),
                       de_isdimmer:  JSON.stringify(this.lock_response[0].is_dimmer),

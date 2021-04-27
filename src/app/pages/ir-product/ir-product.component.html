@@ -11,7 +11,7 @@
   <!-- <div > -->
   <ion-card *ngIf="showirproduct" style="overflow-y: scroll;height:95%" >     
     <section id="devList"> 
-      <div>   
+      <!-- <div>   
        <ion-card style="border-radius: 15px; background-color:#1e66e2;margin: 3% 4%;">
         <ion-list>  
           <ion-item id="select_device" class="select_device"> Choose Your  device 
@@ -19,7 +19,7 @@
           </ion-item>                    
         </ion-list>              
        </ion-card>
-      </div>   
+      </div>    -->
 
     
        <div class="container hey" *ngFor="let id1 of productImg">       
@@ -47,7 +47,7 @@
      </ion-card> 
       
       <!-- api company -->
-      <ion-searchbar placeholder="Search Your Company Here :)" [(ngModel)]="searchTerm" (ionChange)="filterItem()">
+      <ion-searchbar mode="ios" placeholder="Search Your Company Here :)" [(ngModel)]="searchTerm" (ionChange)="filterItem()">
 
       </ion-searchbar>
 

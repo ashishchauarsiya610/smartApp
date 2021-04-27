@@ -3,7 +3,7 @@
     <ion-buttons slot="start" >
       <ion-back-button defaultHref="/mainpage" style="color:rgb(1, 0, 0);"></ion-back-button>
     </ion-buttons>
-    <ion-title style="color: black;">Add Mood Lighting Effect</ion-title>  
+    <ion-title style="color: black;">Mood Lighting</ion-title>  
   </ion-toolbar>
   </ion-header>
   <!-- preview element -->
@@ -13,7 +13,7 @@
 <!-- <div class="mood_div" > -->
   <ion-content class="ion-padding" fullscreen style="--background: #d7d8da4a;">
 
-    <ion-list>
+    <!-- <ion-list>
       <ion-radio-group (click)="selectOne($event)">
         <ion-list-header id="ion-list-here">
           <ion-label>You must choose one of color or mood_type</ion-label>
@@ -28,19 +28,43 @@
           <ion-radio slot="start" color="success" value="moodType"></ion-radio>
         </ion-item>
       </ion-radio-group>
-    </ion-list>
+    </ion-list> -->
 
     <div >
+
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="sendmoodType('Power_on_button')">on</ion-button>
+              <ion-button (click)="sendmoodType('Power_off_button')">Off</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="sendmoodType('channel_up_button')">+</ion-button>
+              <ion-button (click)="sendmoodType('channel_down_button')">-</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="sendmoodType('mute_button')">Flash</ion-button>
+              <ion-button (click)="sendmoodType('menu_button')">Strobe</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="sendmoodType('volume_up_button')">Fade</ion-button>
+              <ion-button (click)="sendmoodType('volume_down_button')">Smooth</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
 <div class="colorpicker" >
-    <canvas id="picker" var="2" width="300" height="300"></canvas>
+    <canvas id="picker" var="2" width="300" height="300" ></canvas>
   </div>
-  <div *ngIf="user.ashishmood" >
+ 
+  <div  >
     <div class="controls" >
         <!-- <div><label>R</label> <input type="text" id="rVal" /></div>
         <div><label>G</label> <input type="text" id="gVal" /></div>
         <div><label>B</label> <input type="text" id="bVal" /></div> -->
         <div><label>RGB</label> <input type="text" disabled  class="preview" /></div>
-        <div><label>SelectedCode</label> <input  type="text" id="hexVal"  /></div>
+        <div><label></label> <input  type="text" id="hexVal" disabled /></div>
         <!-- <div><label>MusicEffect</label> <input type="text" id="hexVal" /></div>
         <div><label>DiscoEffect</label> <input type="text" id="hexVal" /></div>
         <div><label>PartyEffect</label> <input type="text" id="hexVal" /></div>
@@ -83,8 +107,13 @@
         <ion-row>
           <ion-col size="12" style="padding-left: 10%; font-size: 15px; font-family: 'Times New Roman', Times, serif; margin-top: 10px;font-weight: bold;">
             <ion-select placeholder="--Select--" (ionChange)="checkChecked($event)" ok-text="Okay" cancel-text="Cancel" >
-              <ion-select-option value="Disco_Mood">Disco_Mood</ion-select-option>
-              <ion-select-option value="Musical_Mood">Musical_Mood</ion-select-option>
+              <ion-select-option value="Power_on_button">Disco_Mood</ion-select-option>
+              <ion-select-option value="mute_button">Musical_Mood</ion-select-option>
+              <ion-select-option value="channel_up_button">Party_Mood</ion-select-option>
+              <ion-select-option value="Power_off_button">Flash_Mood</ion-select-option>
+              <ion-select-option value="volume_up_button">Strome_Mood</ion-select-option>
+              <ion-select-option value="volume_down_button">Fade_Mood</ion-select-option>
+              <ion-select-option value="menu_button">Smooth_Mood</ion-select-option>
             </ion-select>
            </ion-col> 
           

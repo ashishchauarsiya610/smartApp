@@ -6,7 +6,8 @@ import { NgForm, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-
+declare var CameraCustom;
+declare var TTlockdata;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   public loading;
   phoneLogin = true;
   data;
+  ttpass;
   // loginForm: FormGroup;
   
   formData: FormData = new FormData(); 
@@ -155,8 +157,9 @@ export class LoginComponent implements OnInit {
       this.formData.append('username', userName);  
       localStorage.setItem('passwordforprofile', this.password);
       this.authService.loginUser(this.formData).subscribe((res)=>{ 
-        this.navCtrl.navigateRoot('/mainpage');
         this.getData();
+        this.navCtrl.navigateRoot('/mainpage');
+        
         this.loading.dismiss();
         localStorage.setItem('token',res.token);
         //alert("Congratulations!\n You are lognin successfully.");
@@ -189,43 +192,56 @@ export class LoginComponent implements OnInit {
   console.log(form.value.email);
   console.log(form.value.phone);
   console.log(form.value.password);
-    const params = new HttpParams({
-      fromObject: {
-        username: 'dyfo_'+form.value.email,
-        password: form.value.password,
-        redirect_uri :'https://dyfolabs.com/',
-        grant_type:"password",
-      client_secret: "5c5f94e120022ac4288c648c1e89eb51" , 
-      client_id: '7a614fea8d6f427caa982e9a1aa6afc1',
-      
-      }
-    });
-  
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa('7a614fea8d6f427caa982e9a1aa6afc1' + ':' + '5c5f94e120022ac4288c648c1e89eb51'),
-        'Origin': 'Dyfo'
-      })
-    };
+  let body={password:form.value.password}
+  TTlockdata.encrypt(body,
+    res=>{
+      this.ttpass=res;
+      this.user.ttPassword=this.ttpass;
+      localStorage.setItem("ttPassword",this.ttpass);
+      const params = new HttpParams({
+        fromObject: {
+          username: 'dyfo_'+form.value.email,
+          password: this.ttpass,
+          redirect_uri :'https://dyfolabs.com/',
+          grant_type:"password",
+        client_secret: "5c5f94e120022ac4288c648c1e89eb51" , 
+        client_id: '7a614fea8d6f427caa982e9a1aa6afc1',
+        
+        }
+      });
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa('7a614fea8d6f427caa982e9a1aa6afc1' + ':' + '5c5f94e120022ac4288c648c1e89eb51'),
+          'Origin': 'Dyfo'
+        })
+      };
       this.user.present('wait');
-    this.authService.loginTTLock(params).subscribe(res=>{
-      console.log((res));
-      // this.user.showToast(res);
-      this.data=res;
-      console.log(this.data.access_token);
-      console.log(this.data.refresh_token);
-      // alert(this.data.access_token);
-      this.user.dismiss();
-      this.navCtrl.navigateRoot('/mainpage'); 
-    },error=>{
-      this.navCtrl.navigateRoot('/mainpage'); 
-      console.log(JSON.stringify(error.error));
-    alert(JSON.stringify(error.error));
-      console.log('error');
-      this.user.dismiss();
-    })
-   console.log(params);
+      this.authService.loginTTLock(params).subscribe(res=>{
+        console.log((res));
+        this.user.showToast(res);
+        this.data=res;
+        console.log(this.data.refresh_token);
+        // alert(JSON.stringify(this.data.access_token));
+        this.user.dismiss();
+        this.navCtrl.navigateRoot('/mainpage'); 
+      },error=>{
+        this.navCtrl.navigateRoot('/mainpage'); 
+        console.log(JSON.stringify(error.error));
+      alert(JSON.stringify(error.error));
+        console.log('error');
+        this.user.dismiss();
+      })
+
+    },
+    err=>{}
+    )
+   
+  
+   
+     
+   
  }
 
 username;
@@ -235,16 +251,48 @@ this.prdetail=res;
 this.username=this.prdetail.name;
 console.log(this.username)
 localStorage.setItem('prof', this.username);
-// this.user.username=localStorage.getItem('prof');
-// console.log(this.user.username);
-   // use for loign after change password
+//localStorage.setItem('prof', JSON.stringify(this.prdetail));
+let countrycode = this.prdetail.mobile.slice(0,this.prdetail.mobile.length-10)
+        this.prdetail.mobile = this.prdetail.mobile.substr(this.prdetail.mobile.length-10)
+        this.tuyalogin(countrycode,this.prdetail.mobile,localStorage.getItem('passwordforprofile'),this.prdetail.email);
 },err=>{
+}
+)}
 
+tuyalogin(code,mobile,password,emailId){
+//alert(mobile);
+//let countrycode = mobile.slice(0,mobile.length-10)
+//mobile = mobile.substr(mobile.length-10)
+//alert(mobile+"....."+countrycode)
+let body:any ={'code': code, 'number':null,"password":password,'mailId':emailId}
+//let body:any ={'code': "91", 'number':"9560688398","password":"12345678"}
+CameraCustom.login(body,
+res=>{//alert(JSON.stringify(res));
+// this.show=true;  
+let homeName=this.authService.home_name;
+// let homeName="Pushpendra Home"
+this.loading.dismiss();
+if(homeName != ""){
+  //alert(this.authService.home_name)
+  this.createHome(homeName);
+  this.authService.home_name="";
 }
-)
-             
-     
+},    
+err=>{
+//alert(JSON.stringify(err))
+})
 }
+createHome(homename){
+let body = { homeName : homename, roomList: "room1" }
+CameraCustom.createhome(body,
+res =>{
+ // alert("res"+JSON.stringify(res))
+},
+err =>{
+  //alert("err"+JSON.stringify(err))
+})
+}
+
   }
 
 

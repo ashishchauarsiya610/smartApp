@@ -7,13 +7,18 @@
         <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color:rgb(7, 1, 1);"></ion-back-button>
       </ion-buttons>
     <ion-title style="color: rgba(0, 0, 0, 0.568);" class="ion-text-center">Modes</ion-title>
-    <div class="addmode">
-      <ion-fab horizontal="" vertical="" slot="fixed" (click)="modes =!modes; index=0;">
+    <!-- <div > -->
+      <!-- <ion-fab horizontal="" vertical="" slot="fixed" (click)="modes =!modes; index=0;">
         <ion-fab-button >
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
-    </div>
+      </ion-fab> -->
+      <ion-buttons slot="end">
+        <ion-button (click)="modes =!modes; index=0;" slot="end">
+          <ion-icon style="font-size: 30px;" slot="end" name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <!-- </div> -->
   </ion-toolbar>
 </ion-header>
 <app-side-menu></app-side-menu>

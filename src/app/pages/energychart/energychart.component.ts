@@ -8,6 +8,8 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./energychart.component.scss'],
 })
 export class EnergychartComponent implements OnInit {
+  qrdata: any;
+createCode: any;
   @ViewChild('barChart') barChart;
 
   bars: any;
@@ -44,4 +46,11 @@ backbutton(){
       }
     });
   }
+  public create() {
+    this.createCode =this.qrdata;
+    }
+    
+    public clear() {
+    this.createCode ='';
+    }    
 }

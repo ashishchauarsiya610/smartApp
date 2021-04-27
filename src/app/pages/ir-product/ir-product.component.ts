@@ -486,7 +486,8 @@ export class IrProductComponent implements OnInit {
   }
 
   showRemote(id, comp_name) {
-    this.user.companyName = comp_name;
+    this.user.companyName = id;
+    this.user.remote_company_id=comp_name;
     console.log('company_name' + this.user.companyName)
     if (this.idcompany2 == 2) {
       // console.log("product"+this.idcompany2)

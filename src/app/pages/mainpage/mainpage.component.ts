@@ -3,12 +3,12 @@ import { IonSlides, MenuController, NavController, LoadingController, AlertContr
 import { DevicesComponent } from '../devices/devices.component';
 import { AuthService } from 'src/app/services/auth.service';
 // import { Network } from '@ionic-native/network/ngx';
-import { UserService } from 'src/app/services/user.service';
 // import { computeStackId } from '@ionic/angular/dist/directives/navigation/stack-utils';
 import { NavigationExtras, Router } from '@angular/router';
 import { async } from '@angular/core/testing';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-
+import { UserService } from 'src/app/services/user.service';
+declare var CameraCustom;
 
 @Component({
   selector: 'app-mainpage',
@@ -17,6 +17,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class MainpageComponent implements OnInit {
   profName;
+  fcmtoken;
   @ViewChild('slider', { static: false }) slide: IonSlides;
   sliderOne: any;
   slideOpt = {
@@ -26,6 +27,7 @@ export class MainpageComponent implements OnInit {
   @ViewChild('toggleButton',{ static: false }) toggleButton: ElementRef;
   @ViewChild('menu1',{ static: false }) menu1: ElementRef;
   mySavedDevice = [];
+  prdetail: Object;
   constructor(private menu: MenuController,
               // private network: Network, 
               private device: DevicesComponent, 
@@ -39,6 +41,15 @@ export class MainpageComponent implements OnInit {
                 setTimeout(()=>{
                   this.user.username=localStorage.getItem('prof');
               },3000);
+              this.fcmtoken=localStorage.getItem('token1');
+              // alert('fcm:'+ this.fcmtoken)
+
+              let lat1 = 24.8372745;
+        let lat2 = 24.8372745;
+        let lon1 = 82.2158508;
+        let lon2 = 82.2140105;
+        // document.write(this.distance(lat1, lat2,lon1, lon2) + " K.M");
+                           alert(this.distance(lat1, lat2,lon1, lon2) + " K.M");
   }
 
 
@@ -48,12 +59,22 @@ export class MainpageComponent implements OnInit {
   ngOnInit() {
     this.addRooms();
     this.menu.enable(true);
+    setTimeout(() => {
+      this.getTuyahome();
+    }, 2000);
   }
   ionViewWillEnter() {
     // this.ngOnInit();
     this.addRooms();
+    //this.getUserProfile();
     // this.tTLocklist();
   }
+  //getUserProfile(){ 
+    //this.auth.userProfile().subscribe(res=>{
+     // this.prdetail = res;
+     // this.user.username= this.prdetail.name.split(" ")[0];
+   // })
+  //}
   tvRemote=false;
   myRooms;
   deletedeviceroomid;
@@ -273,12 +294,14 @@ this.user.present('loading devices...')
   backbutton(){
     this.show=false;
   }
-  showRemote(productName,remoteId,pi_id,company_name){
+  showRemote(productName,remoteId,pi_id,company_name,ir_id){
+    console.log(productName);
    // if(productName=="AC")
     this.remoteId=remoteId;
     this.user.productName=productName;
     this.user.companyName=company_name;
     this.user.remoteIdforKeyPress=remoteId;
+    this.user.ir_device_id=ir_id;
     //this.user.remoteId=remoteId;
     // this.tvRemote=true;
     // this.myRooms=false;
@@ -286,14 +309,28 @@ this.user.present('loading devices...')
     if(this.user.productName=='AC'){
       this.user.AC=true;
       this.user.TELEVISION=false;
-     
+     this.navCtrl.navigateRoot('/ir-remote');
     }
     else if(this.user.productName=='TELEVISION'){
       this.user.AC=false;
       this.user.TELEVISION=true;
+     this.navCtrl.navigateRoot('/ir-remote');
+    }
+
+    else if(this.user.productName=="Mood Lighting"){
+      console.log(this.user.productName);
+      // this.user.AC=false;
+      // this.user.TELEVISION=true;
+      // this.user.room1=false;
+      // this.user.editRoom1=false;
+      // this.user.ashishmood=true;
+      
+      this.navCtrl.navigateRoot('/mood');
      
     }
-    this.navCtrl.navigateRoot('/ir-remote');
+    // showRemote
+    // this.navCtrl.navigateRoot('/ir-remote');
+    // this.navCtrl.navigateRoot('/mood');
     this.user.moduleIdForKey=pi_id;
     
     
@@ -620,6 +657,7 @@ refresh_room(){
   getAllRemote(res){
   //  this.auth.getAllSavedRemoteForRoom(h).subscribe(res=>{
      this.val=res;
+     console.log("IR"+JSON.stringify(this.val));
      this.value=[];
      for(let i=0;i<this.val.length;i++){
           if(this.val[i].remote==null){
@@ -772,8 +810,8 @@ sendRoomName(data) {
       return this.imgPath = 'assets/icon/dth.png'
     }
     else{
-      // return this.imgPath = 'assets/HomePage/dyfo.png'
-      return this.imgPath = 'assets/icon/tandt.png'
+      return this.imgPath = 'assets/HomePage/dyfo.png'
+      // return this.imgPath = 'assets/icon/tandt.png'
       // return this.imgPath = 'assets/icon/smartx.png'
     }
   }
@@ -1009,4 +1047,82 @@ deletedevicefromrum(){
           }
         
          }
+         getTuyahome(){
+          
+          CameraCustom.home("body",
+          res=>{
+            // alert("tuya"+res);
+            let temp = res.substring(6)
+            this.user.homeId=temp;
+         
+            this.getTuyaDevices();
+       
+            }, err=>{
+              // alert(err)
+            })
+        }
+        getTuyaDevices(){
+          //alert("fdcghgj")
+          CameraCustom.devicelist("body",
+          res=>{
+            this.user.tuyaDevices = res;
+            //      alert("abcd"+JSON.stringify(this.user.tuyaDevices))
+           //this.user.showToast("Loaded Tuya")
+            }, err=>{
+          //alert("2,,,,"+JSON.stringify(err))
+            })
+        }
+        initDevice(id,ev){
+         // alert(id)
+          let body = {id: id}
+          if(ev.currentTarget.checked){
+          CameraCustom.initDevice(body,
+          res=>{
+             //this.bitmap=res;
+             //this.createdCode=res;
+            //alert(JSON.stringify(res)) 
+         },
+          err=>{
+          // alert(JSON.stringify(err))
+          // alert("4 error")
+          })
+        }
+        }
+        goToTuyaSettings(name,icon){
+         // alert(name)
+          this.user.tuyaDeviceName=name;
+          this.user.tuyaDeviceIcon=icon;
+          this.navCtrl.navigateRoot('/camFunc')
+        }
+
+        clicktoAddModule(){
+          this.navCtrl.navigateRoot('/mcategory');  
+        }
+
+
+        distance(lat1,lat2, lon1, lon2){          
+   
+        
+        lon1 =  lon1 * Math.PI / 180;
+        lon2 = lon2 * Math.PI / 180;
+        lat1 = lat1 * Math.PI / 180;
+        lat2 = lat2 * Math.PI / 180;
+
+        let dlon = lon2 - lon1;
+        let dlat = lat2 - lat1;
+        let a = Math.pow(Math.sin(dlat / 2), 2)
+                 + Math.cos(lat1) * Math.cos(lat2)
+                 * Math.pow(Math.sin(dlon / 2),2);
+               
+        let c = 2 * Math.asin(Math.sqrt(a));
+   
+        // Radius of earth in kilometers. Use 3956
+        // for miles
+        let r = 6371;
+   
+        // calculate the result
+        return(c * r);
+        
+        }
+       
 }

@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
+
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+
+declare var google;
 
 @Component({
   selector: 'app-addschedules',
   templateUrl: './addschedules.component.html',
   styleUrls: ['./addschedules.component.scss'],
 })
+
 export class AddschedulesComponent implements OnInit {
  
   button1=true;
@@ -28,11 +34,37 @@ export class AddschedulesComponent implements OnInit {
   tstatus: boolean = false;
   editScheduledDevice=false;
 
+   // Readable Address
+   address: string;
+   flower:boolean=true;
+   special:boolean=false;
+ 
+   // Location coordinates
+   latitude: number;
+   longitude: number;
+   accuracy: number;
+
+     //Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
+
 
   constructor(public user: UserService,
               public auth: AuthService,
               private navCtrl: NavController,
-              ) { }
+              private geolocation: Geolocation,
+              private nativeGeocoder: NativeGeocoder,
+              public platform: Platform
+              ) 
+              { 
+                // this.getGeolocation();
+                this.platform.ready().then(()=>{
+                  this.getDistanceFromLatLonInKm();
+                  this.getGeolocation();
+                })
+              }
 
   ngOnInit() {
     this.getAllScheduledDevides();
@@ -233,9 +265,98 @@ export class AddschedulesComponent implements OnInit {
     }
   }
 
+
+
+  //Get current coordinates of device
+  getGeolocation() {
+    console.log('latitude call..');
+    this.geolocation.getCurrentPosition().then((resp) => {
+
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      this.accuracy = resp.coords.accuracy;
+     console.log("lati:"+ this.latitude);
+     console.log("long"+ this.longitude)
+
+      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+
+    }).catch((error) => {
+      alert('Error getting location' + JSON.stringify(error));
+      console.log('erroen')
+    });
+  }
+
+  //geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+      .then((result: NativeGeocoderResult[]) => {
+        this.address = this.generateAddress(result[0]);
+        alert("current Address:"+ this.address);
+        this.getDistanceFromLatLonInKm();
+      })
+      .catch((error: any) => {
+        alert('Error getting location' + JSON.stringify(error));
+        this.getDistanceFromLatLonInKm();
+      });
+  }
+
+  //Return Comma saperated address
+  generateAddress(addressObj) {
+    let obj = [];
+    let address = "";
+    for (let key in addressObj) {
+      obj.push(addressObj[key]);
+    }
+    obj.reverse();
+    for (let val in obj) {
+      if (obj[val].length)
+        address += obj[val] + ', ';
+    }
+    return address.slice(0, -2);
+  }
+
+  deg2rad;
+  getDistanceFromLatLonInKm() {
+    alert('distance call..');
+    this.calculateDistance();
+    var gps1= new google.maps.LatLng(28.495556906988707, 76.987022);
+    var gps2= new google.maps.LatLng(28.480029271636003,77.10198369236969);
+    var distanceinMetre= google.maps.geometry.spherical.computeDistancebetween(gps1,gps2);
+    alert("dd"+ distanceinMetre);
+    alert(this.latitude);
+    alert(this.longitude)
+    // var lat1=this.latitude;
+    // var lon1=this.longitude;
+    // var lat2:any= this.latitude;
+    // var lon2:any= this.longitude;
+    // var R = 6371; // Radius of the earth in km 
+    // var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+    // var dLon = this.deg2rad(lon2-lon1); 
+    // var a = 
+    //   Math.sin(dLat/2) * Math.sin(dLat/2) +
+    //   Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+    //   Math.sin(dLon/2) * Math.sin(dLon/2)
+    //   ; 
+    // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    // var d = R * c; // Distance in km
+    
+    // return d.toFixed(2);
+    
+  }
   backbutton(){
     this.user.showDevice=false;
     this.user.showRoom=true;
   }
-  
+
+lat1:any=28.495556906988707;
+lat2:any=28.480029271636003;
+long1:any=76.987022;
+long2:any=77.10198369236969;
+  calculateDistance(){
+    let p = 0.017453292519943295;    // Math.PI / 180
+    let c = Math.cos;
+    let a = 0.5 - c((this.lat1-this.lat2) * p) / 2 + c(this.lat2 * p) *c((this.lat1) * p) * (1 - c(((this.long1- this.long2) * p))) / 2;
+    let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+    return dis;
+  }
 }

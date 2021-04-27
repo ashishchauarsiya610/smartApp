@@ -38,3 +38,135 @@
  .row{
     display: flex;
 }
+
+
+ion-toolbar{
+    --background: #F3F1F2;
+      --ion-text-color: #222428;;
+      color: #222428;;
+      ion-button{
+        ion-back-button{
+        //   color: #946DE2;
+        }
+        
+      }
+      ion-title{
+        color: #222428;;
+      }
+      ion-icon{
+        color: #222428;;
+      }  
+  }
+  ion-label{
+    h2{
+      a{
+        color: black;
+      }
+    }
+  }
+  ion-fab-button{
+    ion-icon{
+      color: white;
+    }
+  }
+  ion-button{
+    .button{
+    //   --background: #946DE2;
+      color: white;
+      opacity: 999;
+    }
+   
+  }
+  ion-content{
+    --background: #F3F1F2;
+    // --background: #030102;
+  }
+  ion-footer{
+    ion-avatar{
+      img{
+        background: white;
+      }
+    }
+  }
+  
+  .my-custom-modal-css .modal-wrapper {
+      height: 70%;
+      top: 30%;
+      position: absolute; 
+      display: block;  
+      
+      border-radius: 21px;
+   }
+  
+   .row{
+      display: flex;
+  }
+  .my-custom-class{
+      --background: white;
+      color: #946DE2;;
+        button.alertButton{
+          color: #946DE2;
+        }
+     }
+  
+     .md,
+     .ios,
+     .wp {
+      .my-custom-class {
+          --background: white;
+          color: #946DE2;;
+         > div {
+          
+           color: #946DE2;
+           margin-bottom: 10px;
+         }
+         .alert-message{
+          --background: #FFFFFF;
+          color: #946DE2;;
+         }
+       }
+       
+     }
+     .md,
+     .ios,
+     .wp {
+      .my-custom-class1 {
+          --background: white;
+          color: #ffffff;
+         > div {
+          
+           color: #ffffff;
+           margin-bottom: 10px;
+         }
+         .alert-message1{
+          --background: #FFFFFF;
+          color: #946DE2;;
+         }
+       }
+       
+     }
+     .alert-head{
+         color: #946DE2;
+     }
+     .action-sheet-icon.sc-ion-action-sheet-md {
+      padding-bottom: 4px;
+      margin-left: 0;
+      margin-right: 32px;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: #946DE2;
+      font-size: 24px;
+  }
+  
+  .card-Popup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90,90,90,0.8);
+    z-index: 9999;
+  }
+  .icon_color{
+    color: #946DE2;
+  }

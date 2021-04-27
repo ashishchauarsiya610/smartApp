@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;">
@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content style="--background: #f7f4fae6;">
-  <div >
+  <div>
   <ion-card *ngFor="let dmodule of devicemodule" (click)="clickDeviceModule(dmodule.pi_id,dmodule.name)">
     <ion-item detail> 
   <ion-avatar slot="start">
@@ -66,17 +66,9 @@
   </ion-item>
 </ion-list>
 </ion-card>
-<!-- <div *ngIf="user.module_qrbutton">
-  <ion-button expand="full" color="light" style="margin: auto 11px;" (click)="addnewModule()">Add New Module <ion-icon slot="end" name="arrow-dropright"></ion-icon> </ion-button>
-</div>
-<div *ngIf="user.lock_qrbutton">
-  <ion-button expand="full" color="light" style="margin: auto 11px;" (click)="locksetup()">Add New Lock <ion-icon slot="end" name="arrow-dropright"></ion-icon> </ion-button>
-</div> -->
-
-
 <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-  <ion-fab-button color="success">
-    <ion-icon name="wifi"></ion-icon>
+  <ion-fab-button color="dark">
+    <ion-icon name="add-outline"></ion-icon>
   </ion-fab-button>
 
   <ion-fab-list side="top">
@@ -86,21 +78,21 @@
       <ion-label style=" margin-top: 0px;">Wi-Fi Setting</ion-label>
     </ion-item>
   <!-- </ion-fab-list> -->
-    <ion-fab-list side="top">
+    <!-- <ion-fab-list side="top">
       <ion-item (click)="gotoirproductpage()"
       style="position: absolute; margin: auto; border: 1px solid; right: 20px; border-radius: 30px; height: 38px;">
       <ion-icon style=" margin-top: 0px;" slot="start" name="aperture"></ion-icon>
       <ion-label style=" margin-top: 0px;">Tam Learning</ion-label>
     </ion-item>
-    </ion-fab-list>
+    </ion-fab-list> -->
 
-    <ion-fab-list side="bottom">
+    <!-- <ion-fab-list side="bottom">
       <ion-item (click)="gotodyfolistlist()"
       style="position: absolute; margin: auto; border: 1px solid; right: 55px; border-radius: 30px; height: 38px;">
       <ion-icon style=" margin-top: 0px;padding-right: 20px;padding-bottom: 10px;"  src="assets/iconi5/lock-closed.svg"></ion-icon>
       <ion-label style=" margin-top: 0px;">Dyfo lock</ion-label>
     </ion-item>
-    </ion-fab-list>
+    </ion-fab-list> -->
 
    
     

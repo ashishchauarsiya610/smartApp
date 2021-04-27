@@ -21,6 +21,7 @@ export class MoodComponent implements OnInit {
     moodroomroomID;
     moodroomname;
 
+    colorcode1:any;
 
   constructor(public user: UserService,
               public auth: AuthService,
@@ -52,8 +53,9 @@ export class MoodComponent implements OnInit {
     }
   }
 
-
-
+  
+  colorcode;
+  ac;
   colorpick1(){
 
     
@@ -84,6 +86,7 @@ export class MoodComponent implements OnInit {
             break;
     }
     image.src = imageSrc;
+    var self=this;
     $('#picker').mousemove(function(e) { // mouse move handler
         if (bCanPreview) {
             // get coordinates of current position
@@ -103,16 +106,167 @@ export class MoodComponent implements OnInit {
             $('#rgbVal').val(pixel[0]+','+pixel[1]+','+pixel[2]);
             var dColor = pixel[2] + 256 * pixel[1] + 65536 * pixel[0];
             $('#hexVal').val('#' + ('0000' + dColor.toString(16)).substr(-6));
+            var abc= $('#hexVal').val('#' + ('0000' + dColor.toString(16)).substr(-6));
+            console.log(dColor);
+            
+           
         }
+        var colorcode = (<HTMLInputElement>document.querySelector('#hexVal')).value;
+        console.log(colorcode);
+        if(colorcode=="#0154a4" || colorcode=="#3276b5" || colorcode=="#85acd3" || colorcode=="#cedeed" || colorcode=="#eaf1f7"){
+          console.log("blue");
+          self.user.present('');
+          let btnValue="up_button";
+          self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+            self.user.dismiss();
+          },err=>{
+            self.user.dismiss()
+          }) 
+              }
+          else if(colorcode=="#ed1b24" || colorcode=="#ef444a" || colorcode=="#f69195" || colorcode=="#fbd3d4" || colorcode=="#fdedee" || colorcode=="#f04950"){
+                console.log("red");
+                // self.bluecall();
+                self.user.present('');
+                let btnValue="down_button";
+                self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                  self.user.dismiss();
+                },err=>{
+                  self.user.dismiss()
+                }) 
+                    }
+          else if(colorcode=="#6b439b" || colorcode=="#8869ad" || colorcode=="#b7a5cd" || colorcode=="#e3daeb" || colorcode=="#f3f0f7"){
+                      console.log("purple");
+                      self.user.present('');
+                      let btnValue="left_button";
+                      self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                        self.user.dismiss();
+                      },err=>{
+                        self.user.dismiss()
+                      }) 
+                          }
+          else if(colorcode=="#a64499" || colorcode=="#b868ad" || colorcode=="#d3a4ce" || colorcode=="#eddbeb" || colorcode=="f770f7"){
+                            console.log("violet purple");
+                            self.user.present('');
+                            let btnValue="right_button";
+                            self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                              self.user.dismiss();
+                            },err=>{
+                              self.user.dismiss()
+                            }) 
+                                }
+          else if(colorcode=="#e44097" || colorcode=="#e966ac" || colorcode=="#f1a3cd" || colorcode=="#fad9ea" || colorcode=="#fcaff6"){
+                                  console.log("vivid pink");
+                                  self.user.present('');
+                                  let btnValue="select_button";
+                                  self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                    self.user.dismiss();
+                                  },err=>{
+                                    self.user.dismiss()
+                                  }) 
+                                  
+                                      }
+          else if(colorcode=="#f37020" || colorcode=="#f58d4e" || colorcode=="#f9bb94" || colorcode=="#fde3d4" || colorcode=="#fef3ed"){
+                                        console.log("bright orange");
+                                        self.user.present('');
+                                        let btnValue="exit_button";
+                                        self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                          self.user.dismiss();
+                                        },err=>{
+                                          self.user.dismiss()
+                                        }) 
+                                       
+                                            }
+          else if(colorcode=="#f78f1e" || colorcode=="#f9a544b" || colorcode=="#fbc994" || colorcode=="#fde8d3" || colorcode=="#f3f5ee"){
+                                              console.log("orange");
+                                              self.user.present('');
+                                              let btnValue="play_button";
+                                              self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                self.user.dismiss();
+                                              },err=>{
+                                                self.user.dismiss()
+                                              }) 
+                                           
+                                                  }
+          else if(colorcode=="#f78f1e" || colorcode=="#f9a54b" || colorcode=="#fbc994" || colorcode=="#fde8d3" || colorcode=="#fef5ee"){
+                                                    console.log("amber");
+                                                    self.user.present('');
+                                              let btnValue="pause_button";
+                                              self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                self.user.dismiss();
+                                              },err=>{
+                                                self.user.dismiss()
+                                              }) 
+                                                        }
+
+          else if(colorcode=="#fef200" || colorcode=="#fff533" || colorcode=="#fef984" || colorcode=="#fffded" || colorcode=="#ffeea9"){
+                                                          console.log("yellow");
+                                                          self.user.present('');
+                                                          let btnValue="record_button";
+                                                          self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                            self.user.dismiss();
+                                                          },err=>{
+                                                            self.user.dismiss()
+                                                          }) 
+                                                       
+                                                              }
+          else if(colorcode=="#8dfc07" || colorcode=="#a3fd39" || colorcode=="#c8fd87" || colorcode=="#e9ffd0" || colorcode=="#f6ffec"){
+                                                                console.log("electric indigo");
+                                                                self.user.present('');
+                                                                let btnValue="previous_button";
+                                                                self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                                  self.user.dismiss();
+                                                                },err=>{
+                                                                  self.user.dismiss()
+                                                                }) 
+                                                             
+                                                                    }
+          else if(colorcode=="#00a88f" || colorcode=="#33b8a5" || colorcode=="#84d4c9" || colorcode=="#ceeeed" || colorcode=="#ecf8f6"){
+                                                                      console.log("persian green");
+                                                                      self.user.present('');
+                                                                      let btnValue="next_button";
+                                                                      self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                                        self.user.dismiss();
+                                                                      },err=>{
+                                                                        self.user.dismiss()
+                                                                      }) 
+                                                                   
+                                                                          }
+          else if(colorcode=="#0092ce" || colorcode=="#33a7d8" || colorcode=="#85acd3" || colorcode=="#cedeed" || colorcode=="#e9f0f6"){
+                                                                            console.log("pacfic blue");
+                                                                            self.user.present('');
+                                                                            let btnValue="fast_forward_button";
+                                                                            self.auth.pressKey(self.user.remoteIdforKeyPress,btnValue,self.user.moduleIdForKey).subscribe(res=>{
+                                                                              self.user.dismiss();
+                                                                            },err=>{
+                                                                              self.user.dismiss()
+                                                                            }) 
+                                                                         
+                                                                                }
+
+        // this.colorcode1=colorcode;
     });
+   
+    this
     $('#picker').click(function(e) { // click event handler
         bCanPreview = !bCanPreview;
+        
     });
     $('.preview').click(function(e) { // preview click
         $('.colorpicker').fadeToggle("slow", "linear");
         bCanPreview = true;
     });
+    
+   
 }
+// bluecall(){
+//        this.user.present('');
+//           let btnValue="up_button";
+//           this.auth.pressKey(this.user.remoteIdforKeyPress,btnValue,this.user.moduleIdForKey).subscribe(res=>{
+//             this.user.dismiss();
+//           },err=>{
+//             this.user.dismiss()
+//           }) 
+// }
 
 checkChecked(e) {
     this.dType = e.currentTarget.value;
@@ -125,14 +279,32 @@ checkChecked(e) {
     // },err=>{console.log(err.error)})
   }
 
-  sendmoodType(){
-    this.user.moodtype;
-    console.log(this.user.moodtype)
-    console.log(this.user.moodDevice_id)
-     this.auth.putMoodTypeFromApi(this.user.moodDevice_id,this.user.moodtype).subscribe(res=>{
-        console.log(res)
-        this.navCtrl.navigateRoot('/mainpage');
-    },err=>{console.log(err.error)})
+  keyPress(btnValue){
+    console.log(this.user.moduleIdForKey);
+    this.user.present('');
+   this.auth.pressKey(this.user.remoteIdforKeyPress,btnValue,this.user.moduleIdForKey).subscribe(res=>{
+     this.user.dismiss();
+   },err=>{
+     this.user.dismiss();
+   })
+  }
+  btnValue;
+  sendmoodType(btnValue){
+    // this.btnValue=this.user.moodtype;
+    console.log(btnValue);
+    // console.log(this.user.moodtype)
+    // console.log(this.user.moodDevice_id)
+    //  this.auth.putMoodTypeFromApi(this.user.moodDevice_id,this.user.moodtype).subscribe(res=>{
+    //     console.log(res)
+    //     this.navCtrl.navigateRoot('/mainpage');
+    // },err=>{console.log(err.error)})
+    console.log(this.user.moduleIdForKey);
+    this.user.present('');
+    this.auth.pressKey(this.user.remoteIdforKeyPress,btnValue,this.user.moduleIdForKey).subscribe(res=>{
+      this.user.dismiss();
+    },err=>{
+      this.user.dismiss()
+    })
   }
 
   sendmoodcolor(){

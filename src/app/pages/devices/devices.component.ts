@@ -71,6 +71,8 @@ export class DevicesComponent implements OnInit {
    console.log(("devicepage_pi_id for getting device in that module: "+module__pi_id));
    if(this.user.dd_name=='Ir_Blaster'){
     this.auth.saveRemote(this.user.remote_iid,this.user.module_piId,roomid).subscribe(res=>{
+      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
       this.navCtrl.navigateRoot('/mainpage');
       this.user.dismiss();
     },err=>{
@@ -82,13 +84,16 @@ export class DevicesComponent implements OnInit {
    else if(this.user.dd_name=='Mood_Lighting'){
     this.auth.postmooddevice(roomid,this.user.moodDevice_id).subscribe(res=>{
       console.log('mood' + res);
+      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
       this.navCtrl.navigateRoot('/mainpage');
       this.user.dismiss();
        },err=>{
          this.user.showToast('Device already added in room.');
-         
+         this.viewCtrl.dismiss();
+         this.viewCtrl.dismiss();
          this.navCtrl.navigateRoot('/mainpage');
-         this.dismiss();
+        //  this.dismiss();
          this.user.dismiss();
        })
    }
@@ -100,22 +105,25 @@ export class DevicesComponent implements OnInit {
     console.log("res for get deviceid:"+ this.mySavedDevice);
 
    for (let i = 0; i < this.mySavedDevice.length; i++) {
-    let device = this.mySavedDevice[i].device;
+    let device = this.mySavedDevice[i].id;
     console.log("id_device used during device adding in room:"+ device)
     this.auth.savedChangedRoom(roomid, device).subscribe((res) => {
       this.getRooms = res;
-      
+      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
       this.navCtrl.navigateRoot('/mainpage');  
-      this.dismiss();
+      // this.dismiss();
       this.user.dismiss();
       console.log("added devices in existing room:" + JSON.stringify(this.getRooms))
         
     }, err => {
+      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
       this.user.showToast('Device already added in room.');
       // alert("Device already added in room");
-      
+     
       this.navCtrl.navigateRoot('/mainpage'); 
-      this.dismiss();
+      // this.dismiss();
       this.user.dismiss();
       // alert(err.device)
     })
@@ -140,18 +148,22 @@ export class DevicesComponent implements OnInit {
         this.room_iid = res; 
         console.log("id_Room used during ir adding in room:"+ this.room_iid.id);
         this.auth.saveRemote(this.user.remote_iid,this.user.module_piId,this.room_iid.id).subscribe(res=>{
+          this.viewCtrl.dismiss();
+          this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
-          this.dismiss();
+          // this.dismiss();
           this.user.dismiss();
         },err=>{
           this.user.showToast("something went wrong.please try again later.");
-          this.dismiss();
+          this.viewCtrl.dismiss();
+         this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           this.user.dismiss();
         })
       },err=>{
         this.user.showToast("something went wrong.please try again later.");
-        this.dismiss();
+        this.viewCtrl.dismiss();
+         this.viewCtrl.dismiss();
         this.navCtrl.navigateRoot('/mainpage');
         this.user.dismiss();
       })
@@ -163,18 +175,21 @@ export class DevicesComponent implements OnInit {
         console.log("id_Room used during ir adding in room:"+ this.room_iid.id);
         this.auth.postmooddevice(this.room_iid,this.user.moodDevice_id).subscribe(res=>{
        console.log('mood' + res);
-          this.dismiss();
+       this.viewCtrl.dismiss();
+       this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           this.user.dismiss();
         },err=>{
           this.user.showToast('Device already added in room.');
-          this.dismiss();
+          this.viewCtrl.dismiss();
+         this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           this.user.dismiss();
         })
       },err=>{
         this.user.showToast("something went wrong.please try again later.");
-          this.dismiss();
+        this.viewCtrl.dismiss();
+        this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           this.user.dismiss();
       })
@@ -198,14 +213,15 @@ export class DevicesComponent implements OnInit {
         this.auth.savedChangedRoom(this.roomID.id, device).subscribe((res) => {
           this.getRooms = res;
           console.log("added devices in new created room:" + JSON.stringify(this.getRooms));
-          this.dismiss();
-          
+          this.viewCtrl.dismiss();
+          this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           this.user.dismiss();
         }, err => {
           // alert("Device already added in room.");
           this.user.showToast('Device already added in room.');
-          this.dismiss();
+          this.viewCtrl.dismiss();
+          this.viewCtrl.dismiss();
           this.navCtrl.navigateRoot('/mainpage');
           
           this.user.dismiss();
@@ -213,13 +229,15 @@ export class DevicesComponent implements OnInit {
         })
       }
     },err=>{
-      this.dismiss();
+      this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
       this.navCtrl.navigateRoot('/mainpage');
       this.user.dismiss();
       console.log("room creation error")
     });
     },err=>{this.user.showToast("something went wrong.please try again later.");
-     this.dismiss();
+    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
      this.navCtrl.navigateRoot('/mainpage');
      this.user.dismiss();
     }) 

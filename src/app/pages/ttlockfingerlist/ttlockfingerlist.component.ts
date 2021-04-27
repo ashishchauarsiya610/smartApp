@@ -31,7 +31,7 @@ fingerdata;
     this.pluginclick();
   }
 ionViewWillEnter(){
-
+this. pluginclick();
 }
 
 
@@ -143,6 +143,9 @@ alert(err)
     });  
     await actionSheet.present();  
   }  
+
+
+  
   clearFinger(){
     // clearFingerPrint
     let body={

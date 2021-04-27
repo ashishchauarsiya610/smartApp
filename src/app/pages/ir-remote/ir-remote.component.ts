@@ -335,11 +335,13 @@ remoteac=false;
     buttons: [  
       {  
         text: 'Tam data Learning',  
-        icon: 'md-add-circle',
+        icon: 'tv-outline',
         handler: () => {  
           console.log('Tam remore');  
           this.user.productName;
           this.user.companyName;
+          this.user.ir_device_id;
+          console.log("id_device_id:"+this.user.ir_device_id);
           this.router.navigateByUrl('/irdatacolletion'); 
         }  
       },

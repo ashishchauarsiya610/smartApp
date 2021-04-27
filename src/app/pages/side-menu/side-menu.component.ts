@@ -70,6 +70,12 @@ export class SideMenuComponent implements OnInit {
       url: '/support',
       icon  : "help-circle"
     },
+    { 
+      title: 'gatewaylist',
+      url: '/urlpage',
+      icon  : "help-circle"
+    },
+    
     
    ];
 

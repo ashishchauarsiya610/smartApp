@@ -42,12 +42,15 @@ export class WifiSettingsComponent implements OnInit {
   moduleName;
   module;
   wifiSwitching=false;
-  wifi=true;
+  wifi=false;
   ngOnInit() {
      this.getModules();
   }
   openMenu(){
     this.menu.enable(true);   
+  }
+  ionViewWillEnter(){
+    this.select(event);
   }
   select(e){
     let val=e.currentTarget.value;
@@ -66,14 +69,16 @@ export class WifiSettingsComponent implements OnInit {
   }
     async presentAlertConfirm() {
       const alert = await this.alertController.create({
-        header: 'Why Switch Wifi?',
-        message: 'Your selected home wifi network is not working or during configuration of module you have not entered correct wifi name or password'+
+        cssClass: 'my-custom-class',
+        // header: 'Why Switch Wifi?',
+        message: '<h2>Why Switch Wifi?</h2>'+'<br>'+'Your selected home wifi network is not working or during configuration of module you have not entered correct wifi name or password'+
         '<h3>Instructions for switch wifi </h3>'+
         '<ol><li>Go to wifi setting of mobile and connect to that module that you wish to switch</li>'+
         '<li>Once the mobile is connected to the module network,select that module on the screen</li></ol>',
         buttons: [
           {
             text: 'Okay',
+            cssClass: 'alertButton',
             handler: () => {
               console.log('Confirm Okay');
             }

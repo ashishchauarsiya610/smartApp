@@ -40,6 +40,9 @@ import { ModulenameComponent } from './pages/modulename/modulename.component';
 // import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ModedevicesComponent } from './pages/modedevices/modedevices.component';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 import { FaqComponent } from './pages/faq/faq.component';
 import {MoodComponent} from './pages/mood/mood.component'
 import { BtconnectionComponent } from './pages/btconnection/btconnection.component';
@@ -104,6 +107,22 @@ import { TticCardlistComponent } from './pages/ttic-cardlist/ttic-cardlist.compo
 import { EnergychartComponent } from './pages/energychart/energychart.component';
 import { DyfolockstatusComponent } from './pages/dyfolockstatus/dyfolockstatus.component';
 import { TtlockgatewayinitComponent } from './pages/ttlockgatewayinit/ttlockgatewayinit.component';
+import { CameraFuncComponent } from './pages/camera-func/camera-func.component';
+import { AddTuyaComponent } from './pages/add-tuya/add-tuya.component';
+import { QrcodeTuyaComponent } from './pages/qrcode-tuya/qrcode-tuya.component';
+import { TuyaMembersComponent } from './pages/tuya-members/tuya-members.component';
+import { TuyaMessageComponent } from './pages/tuya-message/tuya-message.component';
+import { TuyaShareComponent } from './pages/tuya-share/tuya-share.component';
+import { TuyaSmartSceneComponent } from './pages/tuya-smart-scene/tuya-smart-scene.component';
+import { TuyaMessageSettingsComponent } from './pages/tuya-message-settings/tuya-message-settings.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { TtlockgatewaylistComponent } from './pages/ttlockgatewaylist/ttlockgatewaylist.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { TtlockgatewayoperationComponent } from './pages/ttlockgatewayoperation/ttlockgatewayoperation.component';
+import { TtlockgatewayuiComponent } from './pages/ttlockgatewayui/ttlockgatewayui.component';
+import { TuyalockComponent } from './pages/tuyalock/tuyalock.component';
+// import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -179,7 +198,20 @@ import { TtlockgatewayinitComponent } from './pages/ttlockgatewayinit/ttlockgate
                 TticCardlistComponent,
                 EnergychartComponent,
                 DyfolockstatusComponent,
-                TtlockgatewayinitComponent
+                TtlockgatewayinitComponent,
+                CameraFuncComponent,
+                AddTuyaComponent,
+                QrcodeTuyaComponent,
+                TuyaMembersComponent,
+                TuyaMessageComponent,
+                TuyaShareComponent,
+                TuyaSmartSceneComponent,
+                TuyaMessageSettingsComponent,
+                TtlockgatewaylistComponent,
+                NotificationComponent,
+                TtlockgatewayoperationComponent,
+                TtlockgatewayuiComponent,
+                TuyalockComponent,
                 
                 
 
@@ -195,9 +227,9 @@ import { TtlockgatewayinitComponent } from './pages/ttlockgatewayinit/ttlockgate
     IonicModule.forRoot(),
     // IonicStorageModule.forRoot(),
     AppRoutingModule,
-    // NgxQRCodeModule,
+    NgxQRCodeModule,
     NgOtpInputModule,
-    
+  
     //IonicStorageModule.forRoot()
    // InAppBrowser,
   
@@ -210,7 +242,9 @@ import { TtlockgatewayinitComponent } from './pages/ttlockgatewayinit/ttlockgate
     SplashScreen,
     MoodComponent,
     AndroidPermissions,
-    
+    Geolocation,
+    NativeGeocoder,
+    // FCM,
    // SpinnerDialog,
     { provide: RouteReuseStrategy,
        useClass: IonicRouteStrategy 

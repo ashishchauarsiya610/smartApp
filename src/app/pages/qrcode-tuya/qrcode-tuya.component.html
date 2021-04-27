@@ -1,0 +1,51 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/securitymodule" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      QR Code 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Select 2.4 Ghz Wi-Fi Network and enter password</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    It will generate QR Code. Then Scan this QR Code with doorbell camera
+  </ion-card-content>
+
+  <ion-button (click)="getwifidetail()" expand="block">Add Wifi</ion-button>
+</ion-card>
+  <ion-card *ngIf="createCode" style="position: fixed; top: 10%;" class="container">
+    <ion-item>
+      <p>SCAN QR BY DOORBELL CAMERA</p>
+      <ion-icon (click)="createdCode=!createdCode" style="height: 30px; border: 1px solid;" slot="end" name="trash"></ion-icon>
+    </ion-item>
+    <!-- <ngx-qrcode 
+    [elementType]="elementType"
+    [errorCorrectionLevel]="correctionLevel"
+    [value]="createdCode"
+    [width]="420"
+    cssClass="coolQRCode"></ngx-qrcode> -->
+    <!-- <ion-card *ngIf="createCode" class="qrCard"> -->
+      <ngx-qrcode [value]="createCode" id="qr" [width]="420"></ngx-qrcode>
+       <ion-card-content>
+       Your QR Code : {{createCode}}
+       </ion-card-content>
+      <!-- </ion-card> -->
+    <ion-item>
+      <ion-label>Check if you heard a beep sound</ion-label>
+      <ion-checkbox color="primary" checked="false" (ionChange)="navigateToHome($event)" slot="start"></ion-checkbox>
+    </ion-item> 
+</ion-card>
+
+<!-- <ion-input type="text" placeholder="your qr text" [(ngModel)]="createdCode"></ion-input> -->
+<!-- <ion-button full color="secondary" (click)="create()">Generate</ion-button> -->
+<!-- <ion-button full color="secondary" (click)="clear()">Clear</ion-button> -->
+
+
+</ion-content>

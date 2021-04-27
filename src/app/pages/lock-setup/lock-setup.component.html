@@ -1,6 +1,6 @@
 <ion-header *ngIf='lockTypeShow'>
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start" >
       <ion-back-button defaultHref="/mainpage" (click)="backbutton()" style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;">
@@ -12,7 +12,7 @@
 
 <ion-header *ngIf='lockqrscan'>
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-button (click)="stopScan()" style="color: black;"><ion-icon name='arrow-back'></ion-icon></ion-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;">

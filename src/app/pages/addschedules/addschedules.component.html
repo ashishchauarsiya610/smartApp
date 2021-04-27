@@ -8,6 +8,12 @@
     </ion-buttons>
     <ion-title *ngIf="button1" style="text-align: center; color: rgb(71, 71, 71);">Scheduled Device</ion-title>
     <ion-title *ngIf="button2" style="text-align: center; color: rgb(71, 71, 71);">Select Device</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="getGeolocation()">
+        <ion-icon name="location-outline" style="font-size: 30px;margin-right: 10px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   </ion-header>
 
@@ -53,17 +59,18 @@
     <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;"> 
     <ion-card-content > 
     <div class="editashishdevice" >
-    <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editSchedulerDevice=!editSchedulerDevice"></ion-icon>
+      <ion-icon slot="end" name="close-circle-outline" class="crossIcon" (click)="editSchedulerDevice=!editSchedulerDevice"></ion-icon>
+    <!-- <ion-icon name="ios-close-outline"  class="editdevicecross" (click)="editSchedulerDevice=!editSchedulerDevice"></ion-icon> -->
+  </div>
     <h2 id="textdevice">Update Scheduler Timing details</h2> 
-    </div>
     <div >
     <ion-item>
       <ion-label>Start Time</ion-label>
-          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
+          <ion-datetime display-format="YYYY-MM-DDTHH:mm" picker-format="YYYY-MM-DDTHH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>End Time</ion-label>
-          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
+          <ion-datetime display-format="YYYY-MM-DDTHH:mm" picker-format="YYYY-MM-DDTHH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Daily</ion-label>
@@ -82,17 +89,19 @@
     <ion-card style="position: relative; border-radius: 21px; background-color: white;top: 10%;"> 
     <ion-card-content > 
     <div class="editashishdevice" >
-    <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editScheduledDevice=!editScheduledDevice"></ion-icon>
-    <h2 id="textdevice">Schedule Device </h2> 
+      <ion-icon slot="" class="crossIcon" name="close-circle-outline" (click)="editScheduledDevice=!editScheduledDevice"></ion-icon>
+    <!-- <ion-icon ios="ios-close" md="md-close" class="editdevicecross" (click)="editScheduledDevice=!editScheduledDevice"></ion-icon> -->
     </div>
+    <h2 id="textdevice">Schedule Device </h2> 
+    
     <div >
     <ion-item>
       <ion-label>Start Time</ion-label>
-          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
+          <ion-datetime display-format="YYYY-MM-DDTHH:mm" picker-format="YYYY-MM-DDTHH:mm" [(ngModel)] = "startdate" >{{startdate}}</ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>End Time</ion-label>
-          <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
+          <ion-datetime display-format="YYYY-MM-DDTHH:mm" picker-format="YYYY-MM-DDTHH:mm" [(ngModel)] = "enddate" >{{enddate}}</ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Daily</ion-label>

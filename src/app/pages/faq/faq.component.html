@@ -4,8 +4,8 @@
       <ion-back-button defaultHref="/mcategory" (click)="backbutton()" ></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Hardware Sync</ion-title>
-    <ion-buttons slot="end">
-      <ion-icon (click)="addDevice1()" name="add-circle-outline" slot="end" style="font-size: 30px;margin-right: 10px;"></ion-icon>
+    <ion-buttons slot="end" (click)="addDevice()">
+      <ion-icon  name="add-outline" slot="end" style="font-size: 30px;margin-right: 10px;"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -63,20 +63,21 @@
   <ion-list *ngFor="let data of results1">
     <ion-item *ngIf="data.SSID!=''" (click)="wificheck(data.SSID)" detail>
       <ion-avatar slot="start" *ngIf="data.SSID.match('DYFO')">
-        <!-- <img src="../../../assets/HomePage/dyfo.png"> -->
+        <img src="../../../assets/HomePage/dyfo.png">
         <!-- <img class="profile-set" src="assets/HomePage/sara.jpg"> -->
         <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->
         <!-- <img src="../../../assets/HomePage/smartx.jpg"> -->
+        
         <!-- <img src="../../../assets/HomePage/kent.jpeg" /> -->
-        <img  src="../../../assets/HomePage/tandt.jpg">
+        <!-- <img  src="../../../assets/HomePage/tandt.jpg"> -->
       </ion-avatar>
       <ion-avatar slot="start" *ngIf="data.SSID.match('dyfo')">
-        <!-- <img src="../../../assets/HomePage/dyfo.png"> -->
+        <img src="../../../assets/HomePage/dyfo.png">
         <!-- <img class="profile-set" src="assets/HomePage/sara.jpg"> -->
         <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->
         <!-- <img src="../../../assets/HomePage/smartx.jpg"> -->
         <!-- <img src="../../../assets/HomePage/kent.jpeg" /> -->
-        <img  src="../../../assets/HomePage/tandt.jpg">
+        <!-- <img  src="../../../assets/HomePage/tandt.jpg"> -->
       </ion-avatar>
       <ion-avatar slot="start" *ngIf="data.SSID.match('M-300')">
         <img src="../../../assets/product_image/doorlock.png">

@@ -1,0 +1,17 @@
+.red-theme {
+
+    ion-content {
+     background: #ed213a; 
+    background: -webkit-linear-gradient(to right, #ed213a, #93291e); 
+    background: linear-gradient(to right, #ed213a, #93291e);
+    -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+      --color: white;
+    }
+    ion-back-button{
+      --color: red;
+      color: red;
+    }
+  
+  }

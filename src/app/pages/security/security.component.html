@@ -21,6 +21,7 @@
         <ion-label style="text-align: center;">
           <p >&nbsp;{{l.name}}</p>
           <p >&nbsp;{{l.device_type}}</p>
+          <!-- <p>img-{{l.img}}</p> -->
         </ion-label>
         <ion-toggle slot="end" [(ngModel)]="l.status" checked="{{l.status}}"  (ionChange)="changeDyfoLockStatus(l.id)"></ion-toggle>
       </ion-item>

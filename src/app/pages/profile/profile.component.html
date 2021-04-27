@@ -1,6 +1,6 @@
 <!-- <ion-header >
   <ion-toolbar style="--background: #f7f4fae6;height: 70px;">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/mainpage" style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;text-transform: uppercase;padding-top: 9px;font-size: 17px;">
@@ -19,7 +19,7 @@
   </ion-toolbar>
 </ion-header>
   
-  <ion-content fullscreen fullscreen style="--background: #d7d8da4a;">
+  <ion-content fullscreen fullscreen style="background: #d7d8da4a;">
     <ion-avatar style="margin: auto;
     margin-top: 25px;
     width: 65px;
@@ -89,7 +89,16 @@
         <ion-label ><p>Guest List</p></ion-label> 
         <ion-icon name="person-outline" ></ion-icon>       
       </ion-item>
-
+      <button ion-button full icon-left (click)="user.cycleTheme()">
+        <ion-icon name="color-palette"></ion-icon>
+        Change Theme
+      </button>
+      
+      
+      <button ion-button full icon-left (click)="user.setTheme('day')">
+        <ion-icon name="color-palette"></ion-icon>
+        Change DAY
+      </button>
 
       <div class="otpEnter" *ngIf='otpenter'>
         <ion-card style="border-radius: 21px;top: 15%;">
@@ -108,15 +117,15 @@
         </ion-card>
       </div>
 
-   
+
   </ion-content>
 
   <ion-footer class="ion-no-border">
     <ion-toolbar style="--background: #f7f4fae6;">
       <ion-avatar style="margin: auto;">
-        <!-- <img  src="../../../assets/HomePage/dyfo.png"> -->
+        <img  src="../../../assets/HomePage/dyfo.png">
         <!-- <img src="../../../assets/HomePage/smartx.png"> -->
-        <img  src="../../../assets/HomePage/tandt.jpg">
+        <!-- <img  src="../../../assets/HomePage/tandt.jpg"> -->
         <!-- <img class="profile-set" src="assets/HomePage/sara_white.jpg"> -->
         <!-- <img  src="../../../assets/dyfo.png"> -->
         <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->

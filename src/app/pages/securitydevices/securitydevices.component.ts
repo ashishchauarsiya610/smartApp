@@ -46,8 +46,12 @@ export class SecuritydevicesComponent implements OnInit {
     this.navCtrl.navigateRoot('/ttlockadd');
   }
   addTTlockGateway(){
-    this.navCtrl.navigateRoot('/ttlockgatewayinit');
+    this.navCtrl.navigateRoot('/ttgatewayui');
   }
-
-  
+  addTuyadoorBell(){
+    this.navCtrl.navigateRoot('/addDoorbell');
+  }
+  addTuyadoorLock(){
+    this.navCtrl.navigateRoot('/tuyalock');
+  }
 }

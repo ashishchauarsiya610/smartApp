@@ -1,0 +1,52 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/securitymodule" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      Security Devices
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Reset the Device First</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Power on the device and make sure the indicator is flashing rapidly or prompt tone is heard
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>STEP:01</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Power on the device
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>STEP:02</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Press and hold the Reset Button for 5 seconds. Camera will start the resetting process
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>STEP:03</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      The indicator will flash rapidly when the camera is reset
+    </ion-card-content>
+    <ion-card-content>
+      <ion-item>
+      <ion-label>Check when indicator is flashing quickly</ion-label>
+    <ion-checkbox color="primary" checked="false" (ionChange)="navigateNext($event)" slot="start"></ion-checkbox>
+  </ion-item>
+</ion-card-content>
+  </ion-card>
+</ion-content>

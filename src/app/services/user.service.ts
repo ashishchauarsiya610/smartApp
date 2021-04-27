@@ -1,15 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 // import { Network } from '@ionic-native/network/ngx';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController, DomController } from '@ionic/angular';
 import { BehaviorSubject,Subject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
+interface Theme {
+    name: string;
+    styles: ThemeStyle[];
+  }
+  
+  interface ThemeStyle {
+    themeVariable: string;
+    value: string;
+  }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
     
-
+    private themes: Theme[] = [];
+    private currentTheme: number = 0;
+  
    todayArr
    productName;
    companyName;
@@ -18,6 +30,8 @@ export class UserService {
    moduleIdForKey;
    remoteId;
    remoteIdforKeyPress;
+   ir_device_id;
+   ir_product_id;
   
    room1=false;
    checkForAcRemote;
@@ -65,6 +79,7 @@ export class UserService {
     user_mail;
     otp_div=false;
     enter_newpass=false;
+    remote_company_id;
 
     // *******TTTLock declaraion 
     lockData: any;
@@ -78,8 +93,23 @@ export class UserService {
     ttkeyId;
     ttlockkeyname;
     ttkeypass;
-// **********  TTlOck declaration ended 
 
+    gatewaylockid;
+    gatewaylockMac;
+    gatewaylockName;
+// **********  TTlOck declaration ended 
+//tuya variables
+tuyaDeviceName;
+tuyaDeviceIcon;
+tuyaDevices;
+homeId;
+memberList;
+messages;
+memberId;
+//End here
+
+//******** TTUser login and password ******* */ 
+    ttPassword;
     
 
 
@@ -87,10 +117,189 @@ export class UserService {
   constructor(
             //  public network: Network,
              public toast:ToastController,
-             public loadingController: LoadingController
+             public loadingController: LoadingController,
+             private domCtrl: DomController, @Inject(DOCUMENT) private document
              ) {
-    
+      
+                this.themes = [
+                    {
+                      name: 'light',
+                      styles: [
+                        { themeVariable: '--ion-color-primary', value: '#f8383a'},
+                        { themeVariable: '--ion-color-primary-rgb', value: '248,56,58'},
+                        { themeVariable: '--ion-color-primary-contrast', value: '#ffffff'},
+                        { themeVariable: '--ion-color-primary-contrast-rgb', value: '255,255,255'},
+                        { themeVariable: '--ion-color-primary-shade', value: '#da3133'},
+                        { themeVariable: '--ion-color-primary-tint', value: '#f94c4e'},
+                        { themeVariable: '--ion-item-ios-background-color', value: '#ffffff'},
+                        { themeVariable: '--ion-item-md-background-color', value: '#ffffff'},
+                        { themeVariable: '--ion-tabbar-background-color', value: '#fff'},
+                        { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#000000'},
+                        { themeVariable: '--ion-tabbar-md-text-color-active', value: '#000000'},
+                        { themeVariable: '--ion-background-color', value: '#f94c4e'}
+                      ]
+                    },
+                    {
+                      name: 'night',
+                      styles: [
+                        { themeVariable: '--ion-color-primary', value: '#222428'},
+                        { themeVariable: '--ion-color-primary-rgb', value: '34,34,34'},
+                        { themeVariable: '--ion-color-primary-contrast', value: '#ffffff'},
+                        { themeVariable: '--ion-color-primary-contrast-rgb', value: '255,255,255'},
+                        { themeVariable: '--ion-color-primary-shade', value: '#1e2023'},
+                        { themeVariable: '--ion-color-primary-tint', value: '#383a3e'},
+                        { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                        { themeVariable: '--ion-item-md-background-color', value: '#717171'},
+                        { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                        { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                        { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                        { themeVariable: '--ion-background-color', value: '#383838'}
+                      ]
+                    },
+                    {
+                        name: 'day',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#f4f5f8'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '244, 245, 248'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+                      {
+                        name: 'blue',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#6495ED'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '244, 245, 248'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+                      {
+                        name: 'darkSalmon',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#FFA07A'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '255, 160, 122'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+
+                      {
+                        name: 'vista_blue',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#A9DFBF'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '169, 223, 191'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+
+                      {
+                        name: 'blue',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#5363FD'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '83, 99, 253'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+                      {
+                        name: 'hoki',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#687C82'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '104, 124, 130'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+                      {
+                        name: 'powder_blue',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#687C82'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '104, 124, 130'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#383838'}
+                        ]
+                      },
+                      {
+                        name: 'medium_purple',
+                        styles: [
+                          { themeVariable: '--ion-color-primary', value: '#9370DB'},
+                          { themeVariable: '--ion-color-primary-rgb', value: '147, 112, 219'},
+                          { themeVariable: '--ion-color-primary-contrast', value: '#000000'},
+                          { themeVariable: '--ion-color-primary-contrast-rgb', value: '0,0,0'},
+                          { themeVariable: '--ion-color-primary-shade', value: '#d7d8da'},
+                          { themeVariable: '--ion-color-primary-tint', value: '#f5f6f9'},
+                          { themeVariable: '--ion-item-ios-background-color', value: '#717171'},
+                          { themeVariable: '--ion-item-md-background-color', value: '#f4f5f8'},
+                          { themeVariable: '--ion-tabbar-background-color', value: '#222428'},
+                          { themeVariable: '--ion-tabbar-ios-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-tabbar-md-text-color-active', value: '#ffffff'},
+                          { themeVariable: '--ion-background-color', value: '#9370DB'},
+                          { themeVariable: '--ion-text-color', value: '#fff'},
+                          { themeVariable: '--ion-button-color', value: '#9370DB'},
+                          { themeVariable: '--ion-back-button-color', value: '#9370DB'},
+                        ]
+                      }
+                  ]
   }
+  
              isLoading = false;
            
              async present( msg ) {
@@ -126,6 +335,34 @@ export class UserService {
     });
     toast.present();
   }
+
+
+  cycleTheme(): void {
+
+    if(this.themes.length > this.currentTheme + 1){
+      this.currentTheme++;
+    } else {
+      this.currentTheme = 0;
+    }
+
+    // this.setTheme(this.themes[this.currentTheme].name);
+    this.setTheme("medium_purple");
+
+  }
+
+  setTheme(name): void {
+    console.log(name);
+      let theme = this.themes.find(theme => theme.name === name);
+  
+      this.domCtrl.write(() => {
+  
+        theme.styles.forEach(style => {
+          document.documentElement.style.setProperty(style.themeVariable, style.value);
+        });
+  
+      });
+  
+    }
 
   public rooms = [{
     // name: 'Living_Room', imgPath: 'assets/icon/living_room.jpg', id: 1

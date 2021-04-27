@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar style="--background: rgb(245, 248, 248); ">
-    <ion-buttons slot="start" style="position:absolute">
+    <ion-buttons slot="start" >
       <ion-back-button defaultHref="/mcategory" style="color: black;"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center; color: black;">
@@ -62,7 +62,7 @@
         <img src="../../../assets/product_image/doorlock.png">
       </ion-avatar>
       <ion-label>
-        <p>Lock SmartLock-3</p>
+        <p>SmartLock-3</p>
       </ion-label>
     </ion-item>
   </ion-card>
@@ -77,16 +77,38 @@
       </ion-label>
     </ion-item>
   </ion-card>
-  
 
+  <ion-card >
+    <ion-item  detail (click)="addTuyadoorBell()">
+      <ion-avatar slot="start">
+        <img src="../../../assets/product_image/doorlock.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Camera Door Bell</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card >
+    <ion-item  detail (click)="addTuyadoorLock()">
+      <ion-avatar slot="start">
+        <img src="../../../assets/product_image/doorlock.png">
+      </ion-avatar>
+      <ion-label>
+        <p>SmartLock-4</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  
+  
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <ion-toolbar color="light" >
     <ion-avatar >
-      <!-- <img  src="../../../assets/HomePage/dyfo.png"> -->
+      <img  src="../../../assets/HomePage/dyfo.png">
       <!-- <img src="../../../assets/HomePage/smartx.png"> -->
-      <img  src="../../../assets/HomePage/tandt.jpg">
+      <!-- <img  src="../../../assets/HomePage/tandt.jpg"> -->
        <!-- <img  src="../../../assets/dyfo.png"> -->
       <!-- <img class="profile-set" src="assets/HomePage/sara.jpg"> -->
       <!-- <img src="assets/HomePage/wonder.png" alt="wondersolutions"> -->

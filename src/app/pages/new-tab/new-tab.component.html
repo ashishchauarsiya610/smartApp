@@ -10,7 +10,15 @@
   </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-button (click)="disable()" >Switch To Home Network</ion-button>
+    <div>
+      <p>First click Configure hardware button</p>
+      <ion-button style="--background: #C0C0C0;" expand="full" (click)="enableUrl()">Configure Hardware</ion-button>
+    </div>
+    <div>
+      <p>After Configuration hardware , you have switch home network.please click below button</p>
+      <ion-button style="--background: #C0C0C0;" expand="full" (click)="disable()">Home Wi-Fi</ion-button>
+    </div>
+   
     <ion-list  *ngFor="let data of results1">
       <ion-item *ngIf="show" (click)="wificheck(data.SSID)" detail>
          <ion-label>
@@ -18,5 +26,9 @@
         </ion-label>
       </ion-item>
     </ion-list>
-    <ion-button (click)="room()" > After Switching Network Add Device in Room</ion-button>
+    <div>
+      <p>After Configuration home Wi-Fi , Please select Next</p>
+      <ion-button style="--background: #C0C0C0;" expand="full" (click)="room()">Next </ion-button>
+    </div>
+    
   </ion-content>

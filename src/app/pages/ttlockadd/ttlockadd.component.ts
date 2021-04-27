@@ -11,7 +11,8 @@ declare var TTlockdata;
   styleUrls: ['./ttlockadd.component.scss'],
 })
 export class TtlockaddComponent implements OnInit {
-
+  scanbtn=true;
+  addbtn=false;
   constructor(private user: UserService,
     private authService: AuthService,
     private navCtrl: NavController,
@@ -27,7 +28,10 @@ export class TtlockaddComponent implements OnInit {
 
       TTlockdata.lockscan("scan",
       res=>{
-        // alert(res)
+        alert(res);
+        this.scanbtn=false;
+        this.addbtn=true;
+        
       },
       err=>{
         alert(err)

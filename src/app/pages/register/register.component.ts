@@ -4,7 +4,7 @@ import { NgForm, FormGroup } from '@angular/forms';
 import { async } from '@angular/core/testing';
 import { ToastController, LoadingController, AlertController, NavController, Platform } from '@ionic/angular';
 import { FormBuilder, Validators } from "@angular/forms";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 // import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+declare var CameraCustom;
+declare var TTlockdata;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
   step4 = false;
   cameraon = false;
   currentImage: any;
+  ttencryptPass
   // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
 // cameraPreviewOpts: CameraPreviewOptions = {
 //       x: 0,
@@ -289,7 +291,7 @@ export class RegisterComponent implements OnInit {
   registered = false;
   async submit(){  
     this.formData = new FormData();
-    this.formData.append("username", this.registrationForm.value.email);
+    this.formData.append("username", this.registrationForm.value.email.split('@')[0]);
     this.formData.append("name", this.registrationForm.value.name);
     this.formData.append("email", this.registrationForm.value.email);
     this.formData.append("mobile", this.stdcode.slice(1).split(" ")[0].replace(/\s/g,'')+this.registrationForm.value.phone);
@@ -316,8 +318,17 @@ export class RegisterComponent implements OnInit {
           this.step4= true;
           $('.step3').removeClass('active')
           $('.step4').addClass('active')
-          
-          setTimeout(()=>this.loginAfterReg(this.formData),2000);
+          this.getOtp()
+
+          let tuyaotp = prompt("Security OTP:", "");
+          if (tuyaotp == null || tuyaotp == "") {
+            
+          } else {
+            this.tuyareg(tuyaotp);
+            // this.ttlock_regApi();
+            setTimeout(()=>this.loginAfterReg(this.formData),2000);
+          }
+          //setTimeout(()=>this.loginAfterReg(this.formData),2000);
           // alert('OTP submited successfully. Congratulations, your registration has been completed successfully.');
           // this.router.navigateByUrl('/mainpage'); 
         },
@@ -389,6 +400,12 @@ loginAfterReg(formData){
     let prdetail: any =res;
       localStorage.setItem('prof', JSON.stringify(prdetail));
       this.authService.getProfileImg()
+     // let homeName = prompt("HOME NAME:", "");
+      //if (homeName == null || homeName == "") {
+        this.authService.home_name= prdetail.name.toUpperCase()+" HOME"
+      //} else {
+       // this.authService.home_name= homeName
+     // }
   //  console.log("profile res"+ this.prdetail.username);
  },
  err=>{
@@ -413,7 +430,7 @@ stdcode = '+91       India'
 regData: any;
 step1data(){
   this.regData={
-    "username": this.registrationForm.value.email,
+    "username": this.registrationForm.value.email.split('@')[0],
     "name": this.registrationForm.value.name,
     "email": this.registrationForm.value.email,
     "mobile": this.stdcode.slice(1).split(" ")[0].replace(/\s/g,'')+this.registrationForm.value.phone,
@@ -632,5 +649,78 @@ resetOrientation(srcBase64, srcOrientation, callback) {
 
   img.src = srcBase64;
 }
+getOtp(){
+  let code = this.stdcode.slice(1).split(" ")[0].replace(/\s/g,'');
+  let mobile = this.registrationForm.value.phone;
+  let body:any ={'code': code, 'number': mobile}
+  CameraCustom.getOtp(body,
+   res=>{alert(JSON.stringify(res));
+    // alert("1 success");
 
+  },
+   err=>{
+    alert(JSON.stringify(err))
+   })
+}
+tuyareg(otp){
+  let code = this.stdcode.slice(1).split(" ")[0].replace(/\s/g,'');
+  let mobile = this.registrationForm.value.phone;
+ let val=otp;
+ let password= this.registrationForm.value.password;
+ let body:any ={'code': code, 'number':mobile,"password":password,"otp":val}
+ CameraCustom.reg(body,
+  res=>{alert(JSON.stringify(res));
+   // this.show=true;  
+ },
+  err=>{
+   alert(JSON.stringify(err))
+  })
+}
+
+
+ttlock_regApi(){
+  var d= new Date();
+    var n = d.getTime();
+    var x=n;
+    let body={
+      'password':this.registrationForm.value.password
+    }
+    TTlockdata.encryptpass(body,
+      res=>{
+        this.ttencryptPass=res;
+      },
+      err=>{})
+    console.log("currentTime:"+n);
+  let TTtoken = localStorage.getItem('TTtoken');
+  const params = new HttpParams({
+    fromObject: {
+      clientId: '7a614fea8d6f427caa982e9a1aa6afc1',
+      clientSecret: '5c5f94e120022ac4288c648c1e89eb51',
+      username: this.registrationForm.value.email.split('@')[0],
+      password: this.ttencryptPass,
+      date:JSON.stringify(x),
+    }
+  });
+
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'Basic ' + btoa('7a614fea8d6f427caa982e9a1aa6afc1' + ':' + '5c5f94e120022ac4288c648c1e89eb51'),
+
+    })
+  };
+    this.user.present('wait..');
+  this.authService.TTlock_Reg(params).subscribe(res=>{
+    this.user.dismiss();
+    // alert("fingerRes:"+ JSON.stringify(res));
+    // this.navCtrl.navigateRoot('/ttlockfingerlist'); 
+   
+    // this.user.showToast(JSON.stringify(res));
+  },error=>{
+    console.log(JSON.stringify(error.error));
+    this.user.dismiss();
+    console.log('error');
+  })
+}
 }
