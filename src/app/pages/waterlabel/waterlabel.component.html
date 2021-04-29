@@ -1,0 +1,135 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start" style="position:absolute">
+      <ion-back-button defaultHref="/securitymodule" ></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      Water Label
+    </ion-title>
+    <ion-toggle color="dark" slot="end" [(ngModel)]="wLabel" (ionChange)="waterCheck($event)"></ion-toggle>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div *ngIf="waterlabel">
+
+    <div>
+      <p>Switched OFF automatically at <strong>9:30</strong> pm</p>
+    </div>
+    
+    <div id="banner">
+      <div class="fill">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 200" xml:space="preserve">
+           <path fill="rgba(230, 249, 255,0.1)" id="waveShape" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+              c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+              c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z"/>
+          </svg>
+      </div>
+      </div>
+
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <p>Last updated 35 min ago</p>
+            </ion-col>
+            <ion-col size="4" class="refresh"><p>Refresh&nbsp;&nbsp;<ion-icon name="sync-outline"></ion-icon></p></ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-card>
+  </div >
+  
+
+  <div *ngIf="settingslabel">
+    <ion-card>
+      <ion-list>
+        <ion-radio-group value="low">
+          <ion-list-header>
+            <ion-label>Try to fill tank</ion-label>
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-label>When Water label is low</ion-label>
+            <ion-radio slot="start" value="low"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>When munciple supply available</ion-label>
+            <ion-radio slot="start" value="munciple"></ion-radio>
+          </ion-item>
+      
+    
+        </ion-radio-group>
+      </ion-list>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label>Always maintan water at</ion-label>
+        <ion-select placeholder="50%">
+          <ion-select-option value="f">50%</ion-select-option>
+          <ion-select-option value="m">60%</ion-select-option>
+          <ion-select-option value="f">70%</ion-select-option>
+          <ion-select-option value="m">80%</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <p style="text-align: end;font-size: 12px;margin-right: 5px;">Minimum water label you wish to maintain</p>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>Stop pump when water is at</ion-label>
+        <ion-select placeholder="50%">
+          <ion-select-option value="f">50%</ion-select-option>
+          <ion-select-option value="m">60%</ion-select-option>
+          <ion-select-option value="f">70%</ion-select-option>
+          <ion-select-option value="m">80%</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <p style="text-align: end;font-size: 12px;margin-right: 5px;">Minimum water label you wish to maintain</p>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>Stop pump if there is no water after</ion-label>
+        <ion-select placeholder="50%">
+          <ion-select-option value="f">50%</ion-select-option>
+          <ion-select-option value="m">60%</ion-select-option>
+          <ion-select-option value="f">70%</ion-select-option>
+          <ion-select-option value="m">80%</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <p style="text-align: end;font-size: 12px;margin-right: 5px;">Minimum water label you wish to maintain</p>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>Retry pumping after</ion-label>
+        <ion-select placeholder="50%">
+          <ion-select-option value="f">50%</ion-select-option>
+          <ion-select-option value="m">60%</ion-select-option>
+          <ion-select-option value="f">70%</ion-select-option>
+          <ion-select-option value="m">80%</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <p style="text-align: end;font-size: 12px;margin-right: 5px;">Minimum water label you wish to maintain</p>
+
+    <ion-button expand="full">save settings</ion-button>
+  </div>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="wateLabelSelect()" class="ionTab">
+        <ion-icon name="contrast-outline"></ion-icon>
+        <ion-label>Water Label</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="settingsSelect()">
+        <ion-icon name="cog-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

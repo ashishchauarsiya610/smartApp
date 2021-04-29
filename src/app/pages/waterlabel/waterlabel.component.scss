@@ -1,0 +1,51 @@
+.refresh ,.ionTab{
+    background: #b6b9b9;
+    color: white;
+    border-radius: 10px;
+}
+ion-card{
+    border-radius: 10px;
+}
+ion-label{
+    font-size: 12px;
+    min-width: 74%;
+}
+ion-select{
+    font-size: 12px;
+}
+
+
+#banner {
+    width: 180px;
+    height: 300px;
+    border-radius:10%;
+    border:2px solid black;
+    background: #000;
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+}
+#banner .fill {
+    animation-name: fillAction;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(.2, .6, .8, .4);
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+#banner #waveShape {
+    animation-name: waveAction;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 0.5s;
+    width:190px;
+    height: 0px;
+    fill: #04ACFF;
+}
+@keyframes fillAction {
+    0% {
+        transform: translate(0, 180px);
+    }
+    100% {
+        transform: translate(0, -5px);
+    }
+}

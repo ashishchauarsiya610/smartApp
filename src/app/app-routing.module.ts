@@ -84,6 +84,7 @@ import { NotificationComponent } from './pages/notification/notification.compone
 import { TtlockgatewayoperationComponent } from './pages/ttlockgatewayoperation/ttlockgatewayoperation.component';
 import { TtlockgatewayuiComponent } from './pages/ttlockgatewayui/ttlockgatewayui.component';
 import { TuyalockComponent } from './pages/tuyalock/tuyalock.component';
+import { WaterlabelComponent } from './pages/waterlabel/waterlabel.component';
 // import { CameraFunctionsComponent } from './pages/camera-functions/camera-functions.component';
 
 
@@ -342,6 +343,10 @@ component: SecuritylockComponent
       {
         path:'tuyalock',
         component:TuyalockComponent
+      },
+      {
+        path:'waterlabel',
+        component:WaterlabelComponent
       },
 
 ];

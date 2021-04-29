@@ -122,6 +122,7 @@ import { NotificationComponent } from './pages/notification/notification.compone
 import { TtlockgatewayoperationComponent } from './pages/ttlockgatewayoperation/ttlockgatewayoperation.component';
 import { TtlockgatewayuiComponent } from './pages/ttlockgatewayui/ttlockgatewayui.component';
 import { TuyalockComponent } from './pages/tuyalock/tuyalock.component';
+import { WaterlabelComponent } from './pages/waterlabel/waterlabel.component';
 // import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
@@ -212,6 +213,7 @@ import { TuyalockComponent } from './pages/tuyalock/tuyalock.component';
                 TtlockgatewayoperationComponent,
                 TtlockgatewayuiComponent,
                 TuyalockComponent,
+                WaterlabelComponent,
                 
                 
 
